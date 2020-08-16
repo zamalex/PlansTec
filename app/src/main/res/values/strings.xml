@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">PlansTech</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="subscription">Subscription</string>
+    <string name="request">consultation</string>
+    <string name="articles">Articles</string>
+    <string name="candshops">Courses / workshops</string>
+    <string name="user_reviews">User reviews</string>
+    <string name="stats">Statistics</string>
+    <string name="view_all">View all</string>
+    <string name="main">Main</string>
+    <string name="favs">My favorites</string>
+    <string name="about">About us</string>
+    <string name="plan">Plan / subscribe</string>
+    <string name="consults">Consulting</string>
+    <string name="successsh">PlansTec success partners</string>
+    <string name="terms">Terms and conditions</string>
+    <string name="happy">Glad to serve you</string>
+    <string name="follow">Follow us</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="create_account">Create account</string>
+    <string name="join">join now</string>
+    <string name="save_changes">Save Changes</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

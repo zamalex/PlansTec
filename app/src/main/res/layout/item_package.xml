@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:background="@color/white"
+    android:backgroundTint="@color/white"
+    android:foregroundTint="@color/white"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="15dp"
+    app:strokeColor="#96B9FF"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#96B9FF"
+            app:layout_constraintBottom_toBottomOf="@+id/p_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/p_name" />
+
+        <TextView
+            android:id="@+id/p_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="الباقة التشخيصية"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/p_details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="هي بداية مراحل معالم المستقبل ولها مهمتان، وتتم في خلال 5 أيام، تقديم سلسلة من المراحل لمعرفة الاهداف والمهارات بخطط مدروسة ومتابعة وتطوير، تقديم سلسلة من المراحل لمعرفة الاهداف والمهارات، بخطط مدروسة ومتابعة وتطوير"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/p_price"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="#B7E85A"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="مجانية"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/p_name"
+            app:layout_constraintEnd_toStartOf="@+id/radioButton"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/p_name"
+            app:layout_constraintTop_toTopOf="@+id/p_name"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
+
+

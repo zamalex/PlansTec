@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PlansTech</string>
+
+    <string name="subscription">الاشتراك</string>
+    <string name="request">طلب استشارة</string>
+    <string name="articles">مقالات</string>
+    <string name="candshops">دورات / ورش عمل</string>
+    <string name="user_reviews">آراء وانطباعات المستخدمين</string>
+    <string name="stats">إحصائيات</string>
+    <string name="view_all">عرض الكل</string>
+    <string name="main">الرئيسية</string>
+    <string name="favs">مفضلاتي</string>
+    <string name="about">عن التطبيق</string>
+    <string name="plan">الخطة / الاشتراك</string>
+    <string name="consults">الاستشارات</string>
+    <string name="successsh">شركاء نجاح PlansTec</string>
+    <string name="terms">الشروط والأحكام</string>
+    <string name="happy">نسعد بخدمتكم</string>
+    <string name="follow">تابعونا</string>
+    <string name="create_account">إنشاء حساب</string>
+    <string name="join">اشترك الان</string>
+    <string name="save_changes">حفظ التعديلات</string>
+</resources>

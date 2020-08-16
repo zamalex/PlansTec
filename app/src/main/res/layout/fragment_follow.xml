@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back"
+    tools:context=".follow.FollowFragment">
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/tajwalbold"
+        android:backgroundTint="@color/white"
+        android:padding="15dp"
+        android:text="المملكة العربية السعودية، الرياض"
+        android:textColor="@color/black"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/place"
+        app:iconGravity="start"
+        app:iconTint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/tajwalbold"
+
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/white"
+        android:padding="15dp"
+        android:text="تويتر"
+        android:textColor="@color/black"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/twitter"
+        app:iconGravity="start"
+        app:iconTint="@null"
+        app:layout_constraintEnd_toStartOf="@+id/button7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/white"
+        android:padding="15dp"
+        android:fontFamily="@font/tajwalbold"
+
+        android:text="يوتيوب"
+        android:textColor="@color/black"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/youtube"
+        app:iconGravity="start"
+        app:iconTint="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/button4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button4"
+        app:layout_constraintTop_toTopOf="@+id/button4" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button9"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/white"
+        android:padding="15dp"
+        android:text="موقعنا"
+        android:textColor="@color/black"
+        android:fontFamily="@font/tajwalbold"
+
+        app:cornerRadius="10dp"
+        app:icon="@drawable/website"
+        app:iconGravity="start"
+        app:iconTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/button4"
+        app:layout_constraintStart_toStartOf="@+id/button4"
+        app:layout_constraintTop_toBottomOf="@+id/button4"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

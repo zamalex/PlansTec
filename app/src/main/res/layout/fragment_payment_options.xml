@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back"
+    android:orientation="vertical"
+    android:padding="8dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+
+    tools:context=".payment.PaymentOptionsFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/back"
+        android:orientation="vertical"
+        android:padding="8dp"
+        tools:context=".payment.PaymentOptionsFragment">
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bank_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/tajwalbold"
+            android:text="تحويل بنكي"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/bank"
+            app:iconTint="@color/black"
+
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/online_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/tajwalbold"
+            android:text="دفع أونلاين"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/online"
+            app:iconTint="@color/black"
+
+            />
+
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

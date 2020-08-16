@@ -1,0 +1,50 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/text_views</item>
+
+
+    </style>
+
+
+    <style name="text_views">
+        <item name="android:fontFamily">@font/tajwal</item>
+    </style>
+
+    <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/tajwalbold</item>
+    </style>
+
+
+    <style name="DialogTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorAccent">#96B9FF</item>
+    </style>
+
+
+    <style name="CmtpViewTheme">
+        <item name="cmtpTextFrameDrawable">@drawable/cmtp_bg_frame</item>
+        <item name="cmtpTextColor">#000000</item>
+        <item name="cmtpTextSize">15sp</item>
+
+    </style>
+
+
+
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet</item>
+    </style>
+</resources>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back"
+    tools:context=".terms.TermsFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="بيان"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:lineSpacingExtra="2dp"
+            android:text="نُرحِّب بِجَميع مُستَخدِمِي “منصة وتطبيق PlansTec” أفراداً وشركاتً، ونتمنَّى لهُم الاستِفادة الكاملة من مُحتوياتِه وخَدَماتِه، وهي منصة تقدم خدمات تطويرية استشارية تدريبية ولا تتدخل بأي شكل من الاشكال في انتاج او تصنيع او اعداد منتجات. وندعوكم لقِراءة شُروط الخدمة الخاصَّة بِنا، والتي تُعَد بِمَثابِة مَرجِع يَتِمُّ الاعتِمَاد عليه لقُبول الاشتِراكات أو إيقافها؛ لهذا نشجِّع الجميع على قِراءة ما سَيَرِد في الشروط والاحكام وبعناية قبل استعمَال المنصة والتطبيق. باستعمالكم لمنصة وتطبيق PlansTec وضَغطِكُم على زرِّ التسجِيل فَأنتُم تُوافِقُون على كل ما سَيَرِد ضِمن هذهِ الصفحة دُون قيدٍ أو شرط، وفِي حَالَة عَدَم مُوافَقَتِك، فيُرجَى عدم التسجيل في المنصة."
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="شروط وأحكام عامة"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:lineSpacingExtra="2dp"
+
+            android:text="التزام جميع مستخدمي “منصة وتطبيق PlansTec” باحترام الردود أثناءَ تبادل المهام والمراحل وكتابة الأسئلة والاستفسارات، ولا يجوز إهانة أي شخص - في أيّ حال كان – على أساس الدين أو الأفكار أو العرق أو الجنس أو الجنسية. تُمنَع جميع النقاشات المُخالفة للأخلاق العامَّة كما هو منصوص عليه في الأحكام والقوانين السّارية والجاري العمل بها في البُلدان التي سيُنشَر بها أو مِنهَا هذا المُحتَوى ، وسيتم إيقاف أي مُستَخدِم يضع تعليقات تحتوي على إيحاءات إباحية أو تحفّز على العنف أو الإرهاب او النزعات الطائفيَّة والدينيَّة والقبليَّة. لا يُسمَح بإرسال أية ملفّات أو وصلات خارجية تحتوي على فيروسات أو شفرات خبيثة بهدف إتلاف المِنَصَّة أو أجهزة المستخدمين، وسيتم توقيف أي مستخدم يقوم بذلك، وسيتم ملاحقته قانونياً وفق القوانين والأحكام السّارية"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="التسجيل في منصة وتطبيق PlansTec"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+
+            android:lineSpacingExtra="2dp"
+            android:text="التسجيل في المِنَصَّة مُتَاح للعُمُوم بشكلٍ مجَّاني، في حين أنَّه من المُمكِن أن تتواجد
+            بعض المُحتَويَات التي لا يُمكِن الولوج إليها إلَّا من قِبَل المستخدمين ذوي الاشتراكات المدفوعة. تصريح المُستخدِم بأنَّ المعلُومات التي أدلى بها أثناءَ التسجيل هي معلومات حقيقيَّة وكاملة ودقيقة. ويفضل للفئة العمرية من 16 سنة إلى 18 أن تستخدم الباقات بإشراف مباشر من أحد الوالدين أو المعلم مع مراعاة عدم التأثير عليهم في اختيار إجابات بعينها وتنفيذ المهام كي لا تتأثر مصداقية المراحل والبرامج يُمنَع انتِحَال صفة شخصيات أخرى، أو تسجيل الذكور بأسماء الإناث أو العكس، كما يُمنع الادِّعَاء بتَمثِيل شركات أو مؤسَّسات أو جمعيَّات أو هيئات، حكوميّة كانت أم خاصَّة، وذلك دون تقديم وثيقة رسميَّة تدُل على ذلك
+             أنتم مُلزَمُون بالتَبلِيغ عن أيِّ حِساب ثَبُت لَكُم أنَّ مُستخدمه يَنتَحِل صِفَتَكُم، وذلك عن طريق التواصل مَعَنا بواسطة صفحة اتَّصل بنا أو من خلال البريد الإلكتروني، وسندرس مُحتَوى التَبلِيغ وذلك للبت بِهِ خِلال أقصر فترة زمنيّة ممكنة. لدينا الحق في عدم قُبول تسجيل أي مُستَخدِم ثَبُتَ لنا مخالفَتُه لأحد الأحكام الواردة في هذه الصفحة. لا يُمكِن قُبُول التسجيل إلَّا بَعدَ التفعيل النهائي للعضويَّة، وذلك عن طريق الضغط على الرّابط الذي سيُرسَل من قِبَلِنَا إلى بريدِكُم الإلكتروني. المستخدم هو المسؤول الوحيد على حسابة داخل “منصة وتطبيق PlansTec” ويلتزم بعدم تسليم بياناته الخاصة وبيانات دخوله لأي شخص آخر، ولا تتحمل المنصة والتطبيق أي مسؤولية تجاه أي شخص عن أي خسارة أو أضرار قد تنشأ بسبب فشلك في حماية كلمة المرور الخاصة بك أو أي معلومات أخرى متعلقة بحسابك الشخصي. في حال الشك بوجود عمليات مشبوهة في حسابك الشخصي يرجى إخطارنا بالاتصال بنا فورا من خلال أي وسيلة "
+            android:textColor="@color/black" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="المعلومات والمحتوى المرئي المقدم"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:lineSpacingExtra="2dp"
+
+            android:text="يَلتَزِم الفريق الاستشاري والتدريبي لدينا بتَقدِيم مُحتَوى راقٍ وخاضعٍ للشُرُوط العِلميَّة وحُقُوق المِلكيَّة الفكريَّة، كما يَلتَزِمُون بتقديم معلُومَات صَحيحة ومَوثُوقَة وذَلِكَ لِضَمَان فائِدِة المُتدرِّبين والمستفيدين. يتكون برنامج معالم المستقبل في منصة PlansTec مجموعة من الاسئلة والتي يتم الإجابة عليها كاملة من قِبل المستخدم ،ويتحمل المسؤولية الكاملة لمصداقية إجابته على كل سؤال ؛ لأن ذلك مرتبطٌ بصدق وثبات التحليل ويسهل العمل على استخدام المهام المتوافقة مع العميل. لا يُمكِنُنا بأيِّ حالٍ من الأحوال – كإدارة للمنصة – أن نَضمَنَ دِقَّة المعلومات المُقدَّمَة عبرَ مِنَصَّتِنَا ومَدَى صِحَّتِهَا في حال كانت الخدمات المقدمة (برامح تدريبيه من جهات خارجية كشركاء للمنصة ويُمكِن للمُستَخدِمِين التبليغ عن أيَّة دورة تتضمَّن على معلُومات غير صحيحة.) أما فيما يتعلق بالمعلومات التي تختص بخدمات الخطط الاستراتيجية وباقات المهام والمراحل والاستشارات فإننا نلتزم بأن المعلومات تحت عناية ومتابعة ادارة المنصة. نسعى جاهدين أن يكون المحتوى يتناسب مع اهتمامات واهداف المستخدمين، كما لا نَضَمَن استمرار المحتوى المُتوفِّر"
+            android:textColor="@color/black" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="الملكيَّة الفكريَّة (للمنصة)"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:lineSpacingExtra="2dp"
+
+            android:text="تَتبَع جميع مُحتويات “منصة وتطبيق PlansTec” مِن نُصُوص وشِعَارات وتَسجِيلَات وتَصَامِيم ومَواد مَرئِيَّة وفكريَّة إلى الملكيِّة الفِكريَّة “لمنصة وتطبيق PlansTec” ولا يجوز استخدامها في مواقع أو مِنَصَّات أُخرى. إنَّ جَميع المَواد المَنشورَة ضِمنَ برامج وخدمات والخطط الاستراتيجية الاستشارية والدورَات المُقدَّمة في “منصة وتطبيق PlansTec” هي مواد محميَّة تحتَ قوانين ومُعاهَدات حُقوق النشر والتأليف المَنصُوص عَلَيها مَحليَّاً. تُتاح جَميع مُحتَويَات البرامج والخدمات المرسلة للمستخدمين من “منصة وتطبيق PlansTec” سواء أكانت نُصُوص او صُور او فيديو للمستخدمين وذلك للاستعمال الشخصي فقط وضمن هذه الخدمات فحسب. يُمكِن استِخدام جِزء مِن مُحتَوَيات البرامج والخدمات للترويج للمِنَصَّة ولَفت انتباه أفرادٍ آخرين لِمُحتَوى المِنَصَّة. يَجِب الإِشَارَة إلى “منصة وتطبيق PlansTec” في حَال استِخدَام أي جزء مِن مُحتَويات المِنَصَّة للاستخدام الشخصي"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="الملكيَّة الفكريَّة (للمستفيد / المستخدم)"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:lineSpacingExtra="2dp"
+
+            android:text="تلتزم “منصة وتطبيق PlansTec” بالسرية التامة لجميع محتويات المستخدمين وخططهم ومراحلهم المدروسة التي يقدمها الفريق الاستشاري في “منصة وتطبيق PlansTec” ولا يحق للمنصة بنشرها او عرضها بأي شكل من الاشكال بل يتم ارسالها خاص للمستخدم نفسه، وفي حال رغبت المنصة بإظهار الإنجازات فسيتم أخذ الموافقة من قبل المستخدم  موافقة خطيه جميع الحقوق والإنجازات والمهام والخطوات محفوظة للمستخدم نفسه  علماً بأن كل مستخدم يملك حسابه الوحيد يلتزم المستخدم بالحفاظ على معلومات حسابه ولا يحق له الافشاء بها أبداً.. وفي حال تبيّن ذلك فيحق للمنصة إيقاف حسابه ويتحمل المستخدم كامل المسؤولية والاضرار بذلك"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="سلة الطلبات"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:lineSpacingExtra="2dp"
+
+            android:text="نحتفظ بالحق التام بخصوص تحديد عدد الخدمات او البرامج أو للطلب الواحد في “سلة الطلبات”. ويتم تطبيق نظام تحديد الطلبات على الخدمات التي تم طلبها من نفس الحساب للمستفيد"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="تفاصيل الخدمات، والأسعار"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:lineSpacingExtra="2dp"
+
+            android:text="في سعينا الدائم والحثيث لتقديم معلومات دقيقة وشاملة عن خدماتنا ( مثل توفر الخدمة والأسعار ومواصفات الخدمات والصور التوضيحية والخصائص الفنية) و تقديم معلومات شاملة عن الخدمات، قد تصادفنا بعض الأخطاء المطبعية. يتم مراعاة أقصى حدود الدقة في عرض ألوان الخدمات في “منصة وتطبيق PlansTec” ، ولكن ما تراه من ألوان ظاهرة في المنصة او التطبيق يعتمد بشكل أساسي على إعدادات شاشتك وهذا يقع خارج نطاق صلاحيتنا حيث لا يمكننا التأكد بشكل جازم من إعدادات الألوان المعتمدة في شاشتك. توفير المعلومات التفصيلية عن الأسعار على “منصة وتطبيق PlansTec”. ويمكن لفريق المنصة او التطبيق تزويدك بأسعار الخدمات بشكل منفرد أو معرفة التكلفة الإجمالية للخدمة كاملاً. في حال تم طلب وإصدار الفاتورة لخدمة وكان السعر غير صحيح أو كانت المعلومات غير صحيحة لورود خطأ في تسجيل السعر الصحيح أو معلومات الخدمات فيحق للموقع الإلكتروني في هذه الحالة إما أن يتواصل معك لتوضيح هذا الخطأ وكيفية التعامل معه . إننا نسعى جاهدين لنقدم لكم أفضل الخدمات والبرامج ، وعليه فإن الخدمات والأسعار هي عرضة للتغيير بدون إنذار مسبق"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="الطلب والاستلام"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+
+            android:lineSpacingExtra="2dp"
+            android:text="عند قيامك باختيار طلب من قائمة برامجنا وخدماتنا المتوفرة في “منصة وتطبيق PlansTec”، فأنت تستطيع تقديم طلبك بالضغط على زر تنفيذ الطلب"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="الدفع"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+
+            android:lineSpacingExtra="2dp"
+            android:text="يقدم “منصة وتطبيق PlansTec” إمكانية شراء الخدمات عن طريق الموقع (أونلاين – تحويل بنكي) ودفع المبلغ المطلوب عن طريق الانترنت وفقاً لخدمة الطلبات المتاحة بالمملكة العربية السعودية ، إن جميع عمليات التحويل النقدي والدفع بما فيها التراخيص والاستحقاقات المالية يجب أن تكون بالريال السعودي. لعمليات الدفع من خلال الانترنت (أونلاين) : نقبل الدفع عن طريق التحويل لحسابات مؤسسة معالم المستقبل للاستشارات الإدارية (والموضحة في الفواتير المرسلة لكم او عند إتمام عملية تنفيذ الطلب) وعن طريق نظام سداد للمدفوعات (مدى) وفي حالة الدفع عن طريق الانترنت (أونلاين) سيستلم العميل إشعارا على الشاشة فور قبول عملية الدفع. لا نتحمل أي مسؤولية لو تم رفض عملية الدفع أو تعليق بالنظام التابع للبنك مالم يصلنا اشعار باستلام المبلغ. إجراؤكَ لعملية الدفع هو اعتماد منك في عمليات السداد الإلكتروني بخصم قيمة الخدمة المشترك بها من رصيد بطاقتك الائتمانية أو بطاقة مدى، ولا يتم استرجاع المبلغ إطلاقا بعد إجراء عملية الدفع لأي سبب كان. كل عملية دفع يقابلها عملية واحدة لإجراء المقياس حيث لا يمكن استخدام اسم المستخدم إلا مرة واحدة. نحن لا نقوم بتخزين معلومات بطاقاتك البنكية على “منصة وتطبيق PlansTec”. إن جميع المعلومات والتفاصيل التي تقوم بإدخالها من خلال بوابة الدفع الإلكترونية يتم تشفيرها بغرض الحماية الأمنية، ويتم أيضا تشفير المراسلات المتداولة من و إلى موقع مقدم الخدمة. لا نقوم بتقديم أي من معلومات الدفع التي تمت عن طريق الموقع إلى شركات أخرى أو جهات فردية إلا إذا تم طلبها من قبل جهة رسمية قانونية. تتم معالجة هذه المعلومات من قبل مأمور الدفع لدينا"
+            android:textColor="@color/black" />
+
+
+    </LinearLayout>
+
+</ScrollView>
