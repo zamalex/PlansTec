@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.main.MainActivity
@@ -16,12 +17,18 @@ import kotlinx.android.synthetic.main.fragment_fav.view.*
 class FavFragment : Fragment() {
     lateinit var v:View
 
+    lateinit var viewModel: FavViewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
 
         v = inflater.inflate(R.layout.fragment_fav, container, false)
         // Inflate the layout for this fragment
+
+
+        viewModel = ViewModelProvider(this).get(FavViewModel::class.java)
+
 
 
 

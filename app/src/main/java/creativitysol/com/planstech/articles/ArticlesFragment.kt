@@ -18,12 +18,12 @@ import kotlinx.android.synthetic.main.fragment_articles.view.rv_articles_full
 /**
  * A simple [Fragment] subclass.
  */
-class ArticlesFragment : Fragment() ,
+class ArticlesFragment : Fragment(),
     ArticleListener {
     lateinit var v: View
 
     lateinit var viewModel: ArticlesViewModel
-    lateinit var adapter:ArticleFullRV
+    lateinit var adapter: ArticleFullRV
 
 
     override fun onCreateView(
@@ -31,34 +31,40 @@ class ArticlesFragment : Fragment() ,
         savedInstanceState: Bundle?
     ): View? {
 
-        v=inflater.inflate(R.layout.fragment_articles, container, false)
+        v = inflater.inflate(R.layout.fragment_articles, container, false)
 
         viewModel = ViewModelProvider(this).get(ArticlesViewModel::class.java)
 
+
+        (requireActivity() as MainActivity).showProgress(true)
+
         viewModel.getArticles()
 
-        adapter= ArticleFullRV(
+        adapter = ArticleFullRV(
             requireActivity(),
             this@ArticlesFragment
         )
 
         v.rv_articles_full.apply {
-            layoutManager = StaggeredGridLayoutManager(2,
-                LinearLayoutManager.VERTICAL).apply {
-                reverseLayout=false
+            layoutManager = StaggeredGridLayoutManager(
+                2,
+                LinearLayoutManager.VERTICAL
+            ).apply {
+                reverseLayout = false
             }
 
-            adapter= this@ArticlesFragment.adapter
+            adapter = this@ArticlesFragment.adapter
 
         }
 
 
         viewModel.articles.observe(requireActivity(), Observer {
+            if (isAdded) {
+                (requireActivity() as MainActivity).showProgress(false)
 
-            adapter.setArtiocles(it)
+                adapter.setArtiocles(it)
+            }
         })
-
-
 
 
         // Inflate the layout for this fragment
@@ -67,12 +73,12 @@ class ArticlesFragment : Fragment() ,
 
     override fun onArticleClick(id: String) {
 
-        var arg:Bundle = Bundle().apply {
-            putString("id",id)
+        var arg: Bundle = Bundle().apply {
+            putString("id", id)
         }
 
         (activity as MainActivity).fragmentStack.push(
-            SingleArticleFragment().apply { arguments=arg }
+            SingleArticleFragment().apply { arguments = arg }
         )
 
     }

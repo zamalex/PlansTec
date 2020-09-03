@@ -28,10 +28,14 @@ class PartnersFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(PartnersViewModel::class.java)
 
+        (requireActivity() as MainActivity).showProgress(true)
+
         viewModel.getPartners()
 
 
         viewModel.result.observe(requireActivity(), Observer {
+            (requireActivity() as MainActivity).showProgress(false)
+
             v.partners_rv.apply {
                 layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
                 adapter = PartnersFullRV(

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "794042183249",
+    "firebase_url": "https://plans-test-3aec6.firebaseio.com",
+    "project_id": "plans-test-3aec6",
+    "storage_bucket": "plans-test-3aec6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794042183249:android:670fc398eedb3311b91270",
+        "android_client_info": {
+          "package_name": "creativitysol.com.planstech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "794042183249-7rcip331tta7nua87q1udntipr5baj8o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "creativitysol.com.planstech",
+            "certificate_hash": "0fabbec44bceffbd512ae102eb7c62d6594a289c"
+          }
+        },
+        {
+          "client_id": "794042183249-9id3s14a51k87nad5m7usco8ijs0dl3p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhG4OuKQp-ZDsbDPY8YL9EN5RPE-1inX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "794042183249-9id3s14a51k87nad5m7usco8ijs0dl3p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -17,6 +17,7 @@ import com.mobsandgeeks.saripaar.annotation.Email
 import com.mobsandgeeks.saripaar.annotation.NotEmpty
 import com.mobsandgeeks.saripaar.annotation.Password
 import creativitysol.com.planstech.R
+import creativitysol.com.planstech.home.HomeFragment
 import creativitysol.com.planstech.password.SendCodeFragment
 import creativitysol.com.planstech.main.MainActivity
 import io.paperdb.Paper
@@ -72,15 +73,23 @@ class LoginFragment : Fragment() {
                 jsonObject.addProperty("email",log_mail.text.toString())
                 jsonObject.addProperty("password",log_pass.text.toString())
 
+                (requireActivity() as MainActivity).showProgress(true)
+
                 viewModel.login(jsonObject)
             }
         })
 
 
         viewModel.result.observe(requireActivity(), Observer {
+            (requireActivity() as MainActivity).showProgress(false)
+            Toast.makeText(requireActivity(), it.message, Toast.LENGTH_LONG).show()
 
-            if (it!=null&&!it.accessToken.isEmpty()){
-                Paper.book().write("login", it);
+            if (it!=null&&!it.data.token.isEmpty()){
+                Paper.book().write("login", it)
+
+                (requireActivity() as MainActivity).fragmentStack.replace(HomeFragment())
+
+
 
             }
 

@@ -33,6 +33,8 @@ class OpinionsFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(ReviewsViewModel::class.java)
 
+        (requireActivity() as MainActivity).showProgress(true)
+
         viewModel.getReviews()
 
 
@@ -45,6 +47,8 @@ class OpinionsFragment : Fragment() {
         }
 
         viewModel.reviews.observe(requireActivity(), Observer {
+            (requireActivity() as MainActivity).showProgress(false)
+
             adappter.setReviews(it)
         })
 

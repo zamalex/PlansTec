@@ -1,23 +1,26 @@
 package creativitysol.com.planstech.coursedetails
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ImageView.ScaleType
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.dynamiclinks.ktx.navigationInfoParameters
+import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
+import com.google.firebase.dynamiclinks.ktx.socialMetaTagParameters
+import com.google.firebase.ktx.Firebase
 import com.smarteist.autoimageslider.SliderAnimations
-import com.squareup.picasso.Picasso
+import creativitysol.com.planstech.BuildConfig
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.databinding.FragmentSingleCourseBinding
 import creativitysol.com.planstech.main.MainActivity
-import kotlinx.android.synthetic.main.fragment_single_course.*
 import kotlinx.android.synthetic.main.fragment_single_course.view.*
 
 
@@ -29,7 +32,7 @@ class SingleCourseFragment : Fragment() {
     lateinit var binding: FragmentSingleCourseBinding
 
 
-    lateinit var v:View
+    lateinit var v: View
 
     lateinit var viewModel: TrainingViewModel
 
@@ -39,43 +42,54 @@ class SingleCourseFragment : Fragment() {
     ): View? {
 
 
-
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_single_course, container, false)
+            inflater, R.layout.fragment_single_course, container, false
+        )
 
         v = binding.root
 
-        binding.lifecycleOwner=this
+
+        binding.lifecycleOwner = this
 
         viewModel = ViewModelProvider(this).get(TrainingViewModel::class.java)
 
 
         binding.model = viewModel.course
 
-        if (arguments!=null)
-        viewModel.getcourse(arguments!!.getString("id")!!)
-        // Inflate the layout for this fragment
+        if (arguments != null) {
+            (requireActivity() as MainActivity).showProgress(true)
 
+
+            viewModel.getcourse(arguments!!.getString("id")!!)
+
+        }
+        // Inflate the layout for this fragment
 
         viewModel.course.observe(requireActivity(), Observer {
 
-            (activity as MainActivity).setTitle(it.data.title)
+            if (isAdded) {
+                (requireActivity() as MainActivity).showProgress(false)
 
-            var aray:ArrayList<String> = ArrayList()
+                (activity as MainActivity).setTitle(it.data.title)
 
-            for (i in 0 until it.data.imagesGallary.size){
-                aray.add(it.data.imagesGallary[i].image)
+                var aray: ArrayList<String> = ArrayList()
+
+                for (i in 0 until it.data.imagesGallary.size) {
+                    aray.add(it.data.imagesGallary[i].image)
+                }
+
+                var adapter: SliderAdapterExample = SliderAdapterExample(requireActivity())
+                v.flipper_layout.setSliderAdapter(adapter)
+                adapter.renewItems(aray)
+
+                v.flipper_layout.startAutoCycle();
+                v.flipper_layout.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+                v.flipper_layout.setIndicatorSelectedColor(Color.WHITE);
+                v.flipper_layout.setIndicatorUnselectedColor(Color.GRAY);
+
+
+
             }
-
-            var adapter:SliderAdapterExample = SliderAdapterExample(requireActivity())
-            v.flipper_layout.setSliderAdapter(adapter)
-            adapter.renewItems(aray)
-
-            v.flipper_layout.startAutoCycle();
-            v.flipper_layout.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-            v.flipper_layout.setIndicatorSelectedColor(Color.WHITE);
-            v.flipper_layout.setIndicatorUnselectedColor(Color.GRAY);
-
 
 
         })

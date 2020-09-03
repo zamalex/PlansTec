@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import creativitysol.com.planstech.main.MainActivity
 import creativitysol.com.planstech.R
+import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.register.RegisterFragment
+import creativitysol.com.planstech.register.model.RegisterModel
+import io.paperdb.Paper
 import kotlinx.android.synthetic.main.fragment_about.view.*
 
 /**
@@ -22,6 +25,13 @@ class AboutFragment : Fragment() {
     ): View? {
 
         v= inflater.inflate(R.layout.fragment_about, container, false)
+
+        var login: LoginModel = Paper.book().read("login", LoginModel())
+
+        if (login.data.token.isEmpty())
+            v.create.visibility = View.VISIBLE
+        else
+            v.create.visibility = View.INVISIBLE
 
         v.create.setOnClickListener {
             (activity as MainActivity).fragmentStack.push(

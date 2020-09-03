@@ -3,6 +3,7 @@ package creativitysol.com.planstech.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
 import creativitysol.com.planstech.R
 import java.util.*
 
@@ -16,6 +17,9 @@ class SplashScreenActivity : AppCompatActivity() {
 
 
         timer = Timer()
+
+
+
 
         timer.schedule(object :TimerTask(){
             override fun run() {

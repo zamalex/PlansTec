@@ -95,15 +95,20 @@ class RegisterFragment : Fragment() {
                 jsonObject.addProperty("district",reg_loc.text.toString())
                 jsonObject.addProperty("confirm_password",reg_pass.text.toString())
 
+                (requireActivity() as MainActivity).showProgress(true)
+
                 viewModel.register(jsonObject)
             }
         })
 
         viewModel.result.observe(requireActivity(), Observer {
+            (requireActivity() as MainActivity).showProgress(false)
+
             if (it.statusCode==200){
                 Toast.makeText(requireActivity(), "success", Toast.LENGTH_LONG).show()
 
                 Paper.book().write("user", it);
+                (requireActivity() as MainActivity).fragmentStack.replace(LoginFragment())
             }
             else
                 Toast.makeText(requireActivity(), it.msg, Toast.LENGTH_LONG).show()

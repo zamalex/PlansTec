@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import creativitysol.com.planstech.ChatRVAdapter
 import creativitysol.com.planstech.R
 import kotlinx.android.synthetic.main.fragment_cons_chat.view.*
 
@@ -32,7 +31,9 @@ class ConsChatFragment : Fragment() {
         v.chat_rv.apply {
             layoutManager = LinearLayoutManager(requireActivity())
             adapter =
-                ChatRVAdapter(requireActivity())
+                ChatRVAdapter(
+                    requireActivity()
+                )
         }
         // Inflate the layout for this fragment
         return v

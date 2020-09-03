@@ -34,6 +34,8 @@ class CoursesFragment : Fragment(),
 
         viewModel = ViewModelProvider(this).get(CourseViewModel::class.java)
 
+        (requireActivity() as MainActivity).showProgress(true)
+
         viewModel.getArticles()
 
         adapter = CoursesFullRV(requireActivity(),this)
@@ -46,7 +48,13 @@ class CoursesFragment : Fragment(),
         }
 
         viewModel.trainings.observe(requireActivity(), Observer {
+            if (isAdded){
+                (requireActivity() as MainActivity).showProgress(false)
+
                 adapter.setList(it)
+
+            }
+
 
         })
 

@@ -61,8 +61,8 @@ class GladToServeFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(ContactViewModel::class.java)
 
-        if (!log.accessToken.isEmpty())
-            viewModel.getServices("Bearer " + log.accessToken)
+       // if (!log.data.token.isEmpty())
+            viewModel.getServices("Bearer " + log.data.token)
 
 
         sname = v.findViewById(R.id.sname)
@@ -99,9 +99,11 @@ class GladToServeFragment : Fragment() {
                 jsonObject.addProperty("mobile", sphone.text.toString())
                 jsonObject.addProperty("message", smsg.text.toString())
 
-                if (!log.accessToken.isEmpty())
-                    viewModel.send(jsonObject, "Bearer " + log.accessToken)
+                if (!log.data.token.isEmpty()) {
+                    (requireActivity() as MainActivity).showProgress(true)
 
+                    viewModel.send(jsonObject, "Bearer " + log.data.token)
+                }
             }
         })
 
@@ -126,6 +128,8 @@ class GladToServeFragment : Fragment() {
 
 
         viewModel.services.observe(requireActivity(), Observer {
+            (requireActivity() as MainActivity).showProgress(false)
+
             if (it.statusCode == 200){
                 services = it
 

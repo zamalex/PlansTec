@@ -112,6 +112,21 @@
             android:layout_gravity="end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/logout"
+            android:background="@color/back"
+            android:backgroundTint="@color/back"
+            app:icon="@drawable/out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            app:iconGravity="start"
+            app:iconTint="@color/black"
+            android:textStyle="bold"
+            android:fontFamily="@font/tajwalmedium"
+            android:textColor="@color/black"
+            android:text="@string/logout"
+            />
      </LinearLayout>
 
    </com.google.android.material.navigation.NavigationView>

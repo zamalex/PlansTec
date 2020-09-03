@@ -42,14 +42,21 @@ class SingleArticleFragment : Fragment() {
         binding.model=viewModel.article
 
 
-        if (arguments != null)
+        if (arguments != null) {
+            (requireActivity() as MainActivity).showProgress(true)
             viewModel.getArticle(arguments!!.getString("id")!!)
-
+        }
         viewModel.article.observe(requireActivity(), Observer {
-            if (it!!.data.image!=null&&!it!!.data.image.isEmpty())
-                Picasso.get().load(it!!.data.image).fit().centerCrop().into(v.a_img)
-            if (it.data!=null&&it.data.title!= null)
-            (activity as MainActivity).setTitle(it.data.title)
+
+
+            if (isAdded){
+                (requireActivity() as MainActivity).showProgress(false)
+
+                if (it!!.data.image!=null&&!it!!.data.image.isEmpty())
+                    Picasso.get().load(it!!.data.image).fit().centerCrop().into(v.a_img)
+                if (it.data!=null&&it.data.title!= null)
+                    (activity as MainActivity).setTitle(it.data.title)
+            }
 
 
 

@@ -43,16 +43,23 @@ class PackagesFragment : Fragment(), TRVAdapter.radioClick {
 
         viewModel = ViewModelProvider(this).get(PlanViewModel::class.java)
 
-        if (!log.accessToken.isEmpty())
-            viewModel.getTrainings("Bearer " + log.accessToken)
+        if (!log.data.token.isEmpty()) {
+            (requireActivity() as MainActivity).showProgress(true)
 
+            viewModel.getTrainings("Bearer " + log.data.token)
+        }
 
         viewModel.plans.observe(requireActivity(), Observer {
-            adapter = TRVAdapter(requireActivity(), this, it)
+            if (isAdded){
 
-            v.trv.apply {
-                adapter = this@PackagesFragment.adapter
-                layoutManager = LinearLayoutManager(requireActivity())
+                (requireActivity() as MainActivity).showProgress(false)
+
+                adapter = TRVAdapter(requireActivity(), this, it)
+
+                v.trv.apply {
+                    adapter = this@PackagesFragment.adapter
+                    layoutManager = LinearLayoutManager(requireActivity())
+                }
             }
 
         })

@@ -38,17 +38,20 @@ interface ApiService {
     fun getAllReviews(): Call<ReviewsModel>
 
     @GET("auth/plans")
-    fun getPlans(@Header("Authorization") bearerToken: String ): Call<PlanModel>
+    fun getPlans(@Header("Authorization") bearerToken: String): Call<PlanModel>
 
     @GET("auth/chats")
-    fun getChats(@Header("Authorization") bearerToken: String ): Call<ResponseBody>
+    fun getChats(@Header("Authorization") bearerToken: String): Call<ResponseBody>
 
     @POST("auth/send_message")
-    fun sendChat(@Header("Authorization") bearerToken: String ,@Body jsonObject: JsonObject): Call<ResponseBody>
+    fun sendChat(
+        @Header("Authorization") bearerToken: String,
+        @Body jsonObject: JsonObject
+    ): Call<ResponseBody>
 
 
     @GET("auth/article_desc/{id}")
-    fun getArticle(@Path("id") id:String): Call<SingleArticle>
+    fun getArticle(@Path("id") id: String): Call<SingleArticle>
 
     @GET("auth/partners")
     fun getPartners(): Call<PartnerModel>
@@ -57,18 +60,36 @@ interface ApiService {
     fun getStats(): Call<StatModel>
 
     @GET("auth/training_desc/{id}")
-    fun getTraining(@Path("id") id:String): Call<SingleCourse>
+    fun getTraining(@Path("id") id: String): Call<SingleCourse>
 
     @GET("auth/services_types")
     fun getServices(@Header("Authorization") bearerToken: String): Call<Services>
 
 
+    @GET("auth/my_favorites_trainings/{type}")
+    fun getFavs(
+        @Header("Authorization") bearerToken: String,
+        @Path("type") type: String
+    ): Call<ResponseBody>
+
+
+    @POST("auth/add_to_my_favorites_trainings")
+    fun addFav(
+        @Header("Authorization") bearerToken: String,
+        @Body body: JsonObject
+    ): Call<ResponseBody>
+
+
+
     @POST("auth/register")
-    fun register(@Body body:JsonObject): Call<RegisterModel>
+    fun register(@Body body: JsonObject): Call<RegisterModel>
 
     @POST("auth/login")
-    fun login(@Body body:JsonObject): Call<LoginModel>
+    fun login(@Body body: JsonObject): Call<LoginModel>
 
     @POST("auth/leave_messages")
-    fun leaveMessage(@Body body:JsonObject,@Header("Authorization") bearerToken: String): Call<ResponseBody>
+    fun leaveMessage(
+        @Body body: JsonObject,
+        @Header("Authorization") bearerToken: String
+    ): Call<ResponseBody>
 }

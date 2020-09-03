@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import creativitysol.com.planstech.R
 
 
-class MenuRV(val context: Context, val list: ArrayList<String>,val clicker: mainClick) :
+class MenuRV(val context: Context, val list: ArrayList<String>,val clicker: mainClick,val isLogged:Boolean) :
     RecyclerView.Adapter<MenuRV.Holder>() {
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {

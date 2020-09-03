@@ -8,6 +8,7 @@
     android:gravity="start"
     android:textAlignment="viewStart"
     android:textStyle="bold"
+    android:textColor="@color/black"
     android:id="@+id/menu_txt"
-    android:textColor="@color/black" />
+     />
 

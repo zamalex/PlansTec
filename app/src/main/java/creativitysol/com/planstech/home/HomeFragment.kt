@@ -19,6 +19,7 @@ import creativitysol.com.planstech.courses.CourseListener
 import creativitysol.com.planstech.courses.CoursesFragment
 import creativitysol.com.planstech.home.model.ArticlesModel
 import creativitysol.com.planstech.home.model.TrainingModel
+import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.main.MainActivity
 import creativitysol.com.planstech.opinions.OpinionsFragment
 import creativitysol.com.planstech.opinions.OpinionsRV
@@ -35,14 +36,20 @@ class HomeFragment : Fragment(),
 
     lateinit var viewModel: HomeViewModel
 
-     var v: View?=null
+    var v: View? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        if (v==null){
+        if (v == null) {
             v = inflater.inflate(R.layout.fragment_home, container, false)
+            var login: LoginModel = Paper.book().read("login", LoginModel())
+
+            if (!login.data.token.isEmpty()){
+                (requireActivity() as MainActivity).setLogMenu()
+            }
+
             viewModel =
                 ViewModelProvider(this).get(HomeViewModel::class.java)
 
@@ -52,26 +59,29 @@ class HomeFragment : Fragment(),
             viewModel.getStats()
 
 
-            var user:RegisterModel = Paper.book().read("user",RegisterModel())
+            var user: RegisterModel = Paper.book().read("user", RegisterModel())
 
-            if (user!=null)
-                Toast.makeText(requireActivity(),user.data.name,Toast.LENGTH_LONG).show()
+
 
             viewModel.trainings.observe(requireActivity(), object : Observer<TrainingModel> {
                 override fun onChanged(t: TrainingModel?) {
-                    v!!.rv_courses.apply {
-                        layoutManager =
-                            LinearLayoutManager(
+
+                    if (isAdded) {
+                        v!!.rv_courses.apply {
+                            layoutManager =
+                                LinearLayoutManager(
+                                    requireActivity(),
+                                    LinearLayoutManager.HORIZONTAL,
+                                    false
+                                )
+                            adapter = CoursesRV(
                                 requireActivity(),
-                                LinearLayoutManager.HORIZONTAL,
-                                false
+                                this@HomeFragment,
+                                t!!
                             )
-                        adapter = CoursesRV(
-                            requireActivity(),
-                            this@HomeFragment,
-                            t!!
-                        )
+                        }
                     }
+
                 }
             })
 
@@ -79,18 +89,20 @@ class HomeFragment : Fragment(),
 
             viewModel.articles.observe(requireActivity(), object : Observer<ArticlesModel> {
                 override fun onChanged(t: ArticlesModel?) {
-                    v!!.rv_articles.apply {
-                        layoutManager =
-                            LinearLayoutManager(
+                    if (isAdded) {
+                        v!!.rv_articles.apply {
+                            layoutManager =
+                                LinearLayoutManager(
+                                    requireActivity(),
+                                    LinearLayoutManager.HORIZONTAL,
+                                    false
+                                )
+                            adapter = ArticlesRV(
                                 requireActivity(),
-                                LinearLayoutManager.HORIZONTAL,
-                                false
+                                this@HomeFragment,
+                                t!!
                             )
-                        adapter = ArticlesRV(
-                            requireActivity(),
-                            this@HomeFragment,
-                            t!!
-                        )
+                        }
                     }
                 }
             })
@@ -98,22 +110,31 @@ class HomeFragment : Fragment(),
 
 
             viewModel.reviews.observe(requireActivity(), Observer {
-                v!!.rv_opinions.apply {
-                    layoutManager =
-                        LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-                    adapter =
-                        OpinionsRV(requireActivity()).apply { setReviews(it) }
+                if (isAdded) {
+                    v!!.rv_opinions.apply {
+                        layoutManager =
+                            LinearLayoutManager(
+                                requireActivity(),
+                                LinearLayoutManager.HORIZONTAL,
+                                false
+                            )
+                        adapter =
+                            OpinionsRV(requireActivity()).apply { setReviews(it) }
 
 
+                    }
                 }
             })
 
 
 
             viewModel.stats.observe(requireActivity(), Observer {
-                v!!.sclents.text = it.data.clientsCount.toString()+"\nعميل"
-                v!!.scourses.text = it.data.courcesCount.toString()+"\nدورة"
-                v!!.splans.text = it.data.plansCount.toString()+"\nخطة"
+                if (isAdded) {
+                    v!!.sclents.text = it.data.clientsCount.toString() + "\nعميل"
+                    v!!.scourses.text = it.data.courcesCount.toString() + "\nدورة"
+                    v!!.splans.text = it.data.plansCount.toString() + "\nخطة"
+                }
+
             })
 
 
@@ -159,14 +180,13 @@ class HomeFragment : Fragment(),
 
     override fun onCourseClick(id: String) {
 
-        var arg:Bundle = Bundle().apply {
-            putString("id",id)
+        var arg: Bundle = Bundle().apply {
+            putString("id", id)
         }
 
         (activity as MainActivity).fragmentStack.push(
-            SingleCourseFragment().apply { arguments=arg }
+            SingleCourseFragment().apply { arguments = arg }
         )
-
 
 
     }
