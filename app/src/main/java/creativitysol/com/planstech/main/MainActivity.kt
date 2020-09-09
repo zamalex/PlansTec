@@ -2,12 +2,9 @@ package creativitysol.com.planstech.main
 
 import android.content.Intent
 import android.content.res.Configuration
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -15,8 +12,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.dynamiclinks.ktx.dynamicLinks
-import com.google.firebase.ktx.Firebase
 import creativitysol.com.planstech.*
 import creativitysol.com.planstech.about.AboutFragment
 import creativitysol.com.planstech.conschat.ConsChatFragment
@@ -30,7 +25,6 @@ import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.notifications.NotificationsFragment
 import creativitysol.com.planstech.packages.PackagesFragment
 import creativitysol.com.planstech.partners.PartnersFragment
-import creativitysol.com.planstech.register.model.RegisterModel
 import creativitysol.com.planstech.terms.TermsFragment
 import dmax.dialog.SpotsDialog
 import io.paperdb.Paper
@@ -168,7 +162,7 @@ class MainActivity : AppCompatActivity(),
         }
 
 
-        not.setOnClickListener {
+        img_notifications.setOnClickListener {
             fragmentStack.push(NotificationsFragment())
         }
     }
@@ -207,9 +201,9 @@ class MainActivity : AppCompatActivity(),
 
     fun showNot(boolean: Boolean) {
         if (boolean)
-            not.visibility = View.VISIBLE
+            img_notifications.visibility = View.VISIBLE
         else
-            not.visibility = View.INVISIBLE
+            img_notifications.visibility = View.INVISIBLE
 
     }
 
