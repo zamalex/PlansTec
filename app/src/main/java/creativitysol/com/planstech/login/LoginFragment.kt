@@ -14,11 +14,10 @@ import com.google.gson.JsonObject
 import com.mobsandgeeks.saripaar.ValidationError
 import com.mobsandgeeks.saripaar.Validator
 import com.mobsandgeeks.saripaar.annotation.Email
-import com.mobsandgeeks.saripaar.annotation.NotEmpty
 import com.mobsandgeeks.saripaar.annotation.Password
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.home.HomeFragment
-import creativitysol.com.planstech.password.SendCodeFragment
+import creativitysol.com.planstech.password.presentation.ForgotPasswordFragment
 import creativitysol.com.planstech.main.MainActivity
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.fragment_login.view.*
@@ -95,7 +94,7 @@ class LoginFragment : Fragment() {
 
         })
         v.go_forgot.setOnClickListener {
-            (activity as MainActivity).fragmentStack.push(SendCodeFragment())
+            (activity as MainActivity).fragmentStack.push(ForgotPasswordFragment())
         }
 
         v.login_btn.setOnClickListener {

@@ -80,7 +80,6 @@ interface ApiService {
     ): Call<ResponseBody>
 
 
-
     @POST("auth/register")
     fun register(@Body body: JsonObject): Call<RegisterModel>
 

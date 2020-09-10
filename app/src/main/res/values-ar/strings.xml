@@ -22,4 +22,7 @@
     <string name="join">اشترك الان</string>
     <string name="save_changes">حفظ التعديلات</string>
     <string name="logout">تسجيل خروج</string>
+    <string name="no_interet_connection">لا يوجد اتصال بالانترنت</string>
+    <string name="general_issue">خطأ الاتصال بالسيرفر, حاول مجددا مرة اخري</string>
+    <string name="email_text">تحديث كلمة المرور للبريد الالكتروني\n %s</string>
 </resources>

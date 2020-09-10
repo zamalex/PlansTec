@@ -25,6 +25,9 @@
     <string name="save_changes">Save Changes</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="logout">Logout</string>
+    <string name="no_interet_connection">No Internet Connection</string>
+    <string name="general_issue">Internal Server Error, Try again later</string>
+    <string name="email_text">Update password for email\n %s</string>
 </resources>
