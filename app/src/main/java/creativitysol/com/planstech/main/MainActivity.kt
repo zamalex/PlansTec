@@ -22,7 +22,7 @@ import creativitysol.com.planstech.gladtoserve.GladToServeFragment
 import creativitysol.com.planstech.helpers.FragmentStack
 import creativitysol.com.planstech.home.HomeFragment
 import creativitysol.com.planstech.login.model.LoginModel
-import creativitysol.com.planstech.notifications.NotificationsFragment
+import creativitysol.com.planstech.notifications.presentation.NotificationsFragment
 import creativitysol.com.planstech.packages.PackagesFragment
 import creativitysol.com.planstech.partners.PartnersFragment
 import creativitysol.com.planstech.terms.TermsFragment

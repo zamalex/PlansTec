@@ -14,7 +14,9 @@ import creativitysol.com.planstech.favorites.presentation.adapter.ArticlesAdapte
 import creativitysol.com.planstech.favorites.presentation.viewmodel.ListFavouritesViewModel
 import creativitysol.com.planstech.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_articles.view.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.net.UnknownHostException
 
 class FavouritesArticlesFragment : Fragment() {
     lateinit var v: View
@@ -45,7 +47,10 @@ class FavouritesArticlesFragment : Fragment() {
 
         listFavouritesViewModel.error.observe(viewLifecycleOwner, {
             (requireActivity() as MainActivity).showProgress(false)
-            Snackbar.make(v.rv_articles_full, it.localizedMessage, Snackbar.LENGTH_SHORT)
+            val errorMessage = if (it is UnknownHostException)
+                getString(R.string.no_interet_connection)
+            else getString(R.string.general_issue)
+            Snackbar.make(v.rv_articles_full, errorMessage, Snackbar.LENGTH_SHORT)
                 .show()
         })
         return v
