@@ -5,7 +5,7 @@ import creativitysol.com.planstech.base.Executors
 import creativitysol.com.planstech.base.UseCase
 import creativitysol.com.planstech.password.data.model.GenericPasswordResult
 import creativitysol.com.planstech.password.data.model.ResetPasswordBody
-import creativitysol.com.planstech.password.repository.ResetPasswordRepo
+import creativitysol.com.planstech.password.data.repository.ResetPasswordRepo
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 class ResetPasswordUseCase(
@@ -26,7 +26,7 @@ class ResetPasswordUseCase(
     }
 
     override fun flushResources() {
-        if (compositeDisposable.isDisposed)
+        if (!compositeDisposable.isDisposed)
             compositeDisposable.dispose()
     }
 

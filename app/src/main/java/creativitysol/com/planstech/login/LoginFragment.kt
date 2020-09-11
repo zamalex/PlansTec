@@ -1,12 +1,12 @@
 package creativitysol.com.planstech.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
@@ -17,8 +17,8 @@ import com.mobsandgeeks.saripaar.annotation.Email
 import com.mobsandgeeks.saripaar.annotation.Password
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.home.HomeFragment
-import creativitysol.com.planstech.password.presentation.ForgotPasswordFragment
 import creativitysol.com.planstech.main.MainActivity
+import creativitysol.com.planstech.password.presentation.ForgotPasswordFragment
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.fragment_login.view.*
 
@@ -27,10 +27,10 @@ import kotlinx.android.synthetic.main.fragment_login.view.*
  */
 class LoginFragment : Fragment() {
 
-    lateinit var v:View
+    lateinit var v: View
+
     @Email(message = "enter valid email address")
     lateinit var log_mail: TextInputEditText
-
 
 
     @Password(message = "enter valid input")
@@ -69,8 +69,8 @@ class LoginFragment : Fragment() {
             override fun onValidationSucceeded() {
                 //Toast.makeText(requireActivity(), "success", Toast.LENGTH_LONG).show()
                 var jsonObject = JsonObject()
-                jsonObject.addProperty("email",log_mail.text.toString())
-                jsonObject.addProperty("password",log_pass.text.toString())
+                jsonObject.addProperty("email", log_mail.text.toString())
+                jsonObject.addProperty("password", log_pass.text.toString())
 
                 (requireActivity() as MainActivity).showProgress(true)
 
@@ -80,18 +80,15 @@ class LoginFragment : Fragment() {
 
 
         viewModel.result.observe(requireActivity(), Observer {
-            (requireActivity() as MainActivity).showProgress(false)
-            Toast.makeText(requireActivity(), it.message, Toast.LENGTH_LONG).show()
+            if (isAdded) {
+                (requireActivity() as MainActivity).showProgress(false)
+                Toast.makeText(requireActivity(), it.message, Toast.LENGTH_LONG).show()
 
-            if (it!=null&&!it.data.token.isEmpty()){
-                Paper.book().write("login", it)
-
-                (requireActivity() as MainActivity).fragmentStack.replace(HomeFragment())
-
-
-
+                if (it != null && !it.data.token.isEmpty()) {
+                    Paper.book().write("login", it)
+                    (requireActivity() as MainActivity).fragmentStack.replace(HomeFragment())
+                }
             }
-
         })
         v.go_forgot.setOnClickListener {
             (activity as MainActivity).fragmentStack.push(ForgotPasswordFragment())
@@ -103,6 +100,7 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         return v
     }
+
     override fun onStart() {
         super.onStart()
         (activity as MainActivity).setTitle("تسجيل دخول")

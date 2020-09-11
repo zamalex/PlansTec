@@ -1,4 +1,4 @@
-package creativitysol.com.planstech.password.repository
+package creativitysol.com.planstech.password.data.repository
 
 import creativitysol.com.planstech.password.data.datasource.network.ResetPasswordAPI
 import creativitysol.com.planstech.password.data.model.GenericPasswordResult

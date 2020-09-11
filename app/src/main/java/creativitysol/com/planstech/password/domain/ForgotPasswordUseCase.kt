@@ -3,10 +3,8 @@ package creativitysol.com.planstech.password.domain
 import androidx.lifecycle.MutableLiveData
 import creativitysol.com.planstech.base.Executors
 import creativitysol.com.planstech.base.UseCase
-import creativitysol.com.planstech.password.repository.ForgotPasswordRepo
+import creativitysol.com.planstech.password.data.repository.ForgotPasswordRepo
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import java.lang.Exception
-import java.net.UnknownHostException
 
 class ForgotPasswordUseCase(
     private val executors: Executors,
@@ -26,7 +24,7 @@ class ForgotPasswordUseCase(
     }
 
     override fun flushResources() {
-        if(compositeDisposable.isDisposed)
+        if(!compositeDisposable.isDisposed)
             compositeDisposable.dispose()
     }
 

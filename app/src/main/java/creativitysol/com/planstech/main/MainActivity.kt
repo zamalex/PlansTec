@@ -16,7 +16,7 @@ import creativitysol.com.planstech.*
 import creativitysol.com.planstech.about.AboutFragment
 import creativitysol.com.planstech.conschat.ConsChatFragment
 import creativitysol.com.planstech.courses.CoursesFragment
-import creativitysol.com.planstech.favorites.FavFragment
+import creativitysol.com.planstech.favorites.presentation.FavouritesFragment
 import creativitysol.com.planstech.follow.FollowFragment
 import creativitysol.com.planstech.gladtoserve.GladToServeFragment
 import creativitysol.com.planstech.helpers.FragmentStack
@@ -212,7 +212,7 @@ class MainActivity : AppCompatActivity(),
 
             when (position) {
                 0 -> fragmentStack.replace(HomeFragment())
-                1 -> fragmentStack.push(FavFragment())
+                1 -> fragmentStack.push(FavouritesFragment())
                 2 -> fragmentStack.push(PackagesFragment())
                 3 -> fragmentStack.push(ConsChatFragment())
                 4 -> fragmentStack.push(CoursesFragment())
@@ -224,7 +224,7 @@ class MainActivity : AppCompatActivity(),
         } else {
             when (position) {
                 0 -> fragmentStack.replace(HomeFragment())
-                1 -> fragmentStack.push(FavFragment())
+                1 -> fragmentStack.push(FavouritesFragment())
                 2 -> fragmentStack.push(AboutFragment())
                 3 -> fragmentStack.push(PackagesFragment())
                 4 -> fragmentStack.push(ConsChatFragment())

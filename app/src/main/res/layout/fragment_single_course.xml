@@ -63,13 +63,13 @@
             android:text="اشترك الان"
             android:textStyle="bold"
             app:cornerRadius="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView10"
+            app:layout_constraintEnd_toStartOf="@+id/img_add_remove_fav"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/flipper_layout" />
 
         <ImageView
-            android:id="@+id/imageView10"
+            android:id="@+id/img_add_remove_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -100,7 +100,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageView10"
+            app:layout_constraintStart_toEndOf="@+id/img_add_remove_fav"
             app:layout_constraintTop_toTopOf="@+id/button"
             app:layout_constraintVertical_bias="1.0" />
 

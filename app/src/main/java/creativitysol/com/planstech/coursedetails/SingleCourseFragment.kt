@@ -1,8 +1,6 @@
 package creativitysol.com.planstech.coursedetails
 
-import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,17 +9,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.dynamiclinks.ktx.dynamicLinks
-import com.google.firebase.dynamiclinks.ktx.navigationInfoParameters
-import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
-import com.google.firebase.dynamiclinks.ktx.socialMetaTagParameters
-import com.google.firebase.ktx.Firebase
+import com.google.android.material.snackbar.Snackbar
 import com.smarteist.autoimageslider.SliderAnimations
-import creativitysol.com.planstech.BuildConfig
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.databinding.FragmentSingleCourseBinding
+import creativitysol.com.planstech.favorites.data.model.TrainingBody
+import creativitysol.com.planstech.favorites.presentation.viewmodel.AddToFavouritesViewModel
 import creativitysol.com.planstech.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_single_course.view.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 /**
@@ -30,11 +26,11 @@ import kotlinx.android.synthetic.main.fragment_single_course.view.*
 class SingleCourseFragment : Fragment() {
 
     lateinit var binding: FragmentSingleCourseBinding
-
-
     lateinit var v: View
-
     lateinit var viewModel: TrainingViewModel
+
+    private lateinit var trainingId: String
+    private val addToFavouritesViewModel by viewModel<AddToFavouritesViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,12 +54,11 @@ class SingleCourseFragment : Fragment() {
 
         if (arguments != null) {
             (requireActivity() as MainActivity).showProgress(true)
-
-
-            viewModel.getcourse(arguments!!.getString("id")!!)
-
+            arguments!!.getString("id").let {
+                viewModel.getcourse(it!!)
+                trainingId = it
+            }
         }
-        // Inflate the layout for this fragment
 
         viewModel.course.observe(requireActivity(), Observer {
 
@@ -84,15 +79,30 @@ class SingleCourseFragment : Fragment() {
 
                 v.flipper_layout.startAutoCycle();
                 v.flipper_layout.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-                v.flipper_layout.setIndicatorSelectedColor(Color.WHITE);
-                v.flipper_layout.setIndicatorUnselectedColor(Color.GRAY);
-
-
-
+                v.flipper_layout.indicatorSelectedColor = Color.WHITE;
+                v.flipper_layout.indicatorUnselectedColor = Color.GRAY;
             }
-
-
         })
+
+        v.img_add_remove_fav.setOnClickListener {
+            addToFavouritesViewModel.addToFavourites(
+                TrainingBody(
+                    type = "training",
+                    userId = 50, trainingId = trainingId.toInt()
+                )
+            )
+        }
+        addToFavouritesViewModel.trainingResults.observe(viewLifecycleOwner, {
+            Snackbar.make(v.img_add_remove_fav, it.message, Snackbar.LENGTH_SHORT).show()
+            if (it.data.isNullOrEmpty())
+                v.img_add_remove_fav.setImageResource(R.drawable.unsaved)
+            else v.img_add_remove_fav.setImageResource(R.drawable.saved)
+        })
+
+        addToFavouritesViewModel.error.observe(viewLifecycleOwner, {
+            Snackbar.make(v.img_add_remove_fav, it.localizedMessage, Snackbar.LENGTH_SHORT).show()
+        })
+
 
         return v
     }
