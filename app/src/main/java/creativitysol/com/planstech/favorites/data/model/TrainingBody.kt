@@ -4,8 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class TrainingBody(
     val type: String,
-    @SerializedName("user_id")
-    val userId: Int,
     @SerializedName("training_id")
     val trainingId: Int
 )

@@ -87,8 +87,7 @@ class SingleCourseFragment : Fragment() {
         v.img_add_remove_fav.setOnClickListener {
             addToFavouritesViewModel.addToFavourites(
                 TrainingBody(
-                    type = "training",
-                    userId = 50, trainingId = trainingId.toInt()
+                    type = "training", trainingId = trainingId.toInt()
                 )
             )
         }
