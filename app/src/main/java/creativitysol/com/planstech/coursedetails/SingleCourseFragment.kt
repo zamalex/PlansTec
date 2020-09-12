@@ -93,7 +93,7 @@ class SingleCourseFragment : Fragment() {
         }
         addToFavouritesViewModel.trainingResults.observe(viewLifecycleOwner, {
             Snackbar.make(v.img_add_remove_fav, it.message, Snackbar.LENGTH_SHORT).show()
-            if (it.data.isNullOrEmpty())
+            if (it.data.isAdded == 0)
                 v.img_add_remove_fav.setImageResource(R.drawable.unsaved)
             else v.img_add_remove_fav.setImageResource(R.drawable.saved)
         })

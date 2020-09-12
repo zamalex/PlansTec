@@ -3,8 +3,8 @@ package creativitysol.com.planstech.favorites.domain
 import androidx.lifecycle.MutableLiveData
 import creativitysol.com.planstech.base.Executors
 import creativitysol.com.planstech.base.UseCase
+import creativitysol.com.planstech.favorites.data.model.AddToFav
 import creativitysol.com.planstech.favorites.data.model.TrainingBody
-import creativitysol.com.planstech.favorites.data.model.TrainingResult
 import creativitysol.com.planstech.favorites.data.repository.AddToFavouriteRepo
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
@@ -19,7 +19,7 @@ class AddToFavouritesUseCase(
             addToFavouriteRepo.addToFavourite(trainingBody = value)
                 .subscribeOn(executors.getIOThread())
                 .subscribe({
-                    if (it!=null)
+                    if (it != null)
                         result.postValue(it)
                 }, {
                     error.postValue(it)
@@ -32,6 +32,6 @@ class AddToFavouritesUseCase(
             compositeDisposable.dispose()
     }
 
-    val result = MutableLiveData<TrainingResult>()
+    val result = MutableLiveData<AddToFav>()
     val error = MutableLiveData<Throwable>()
 }

@@ -36,3 +36,15 @@ data class Data(
     val numSeats: String? = null,
     val price: String? = null
 )
+
+data class AddToFavData(
+    @SerializedName("add_fav")
+    val isAdded: Int
+)
+
+data class AddToFav(
+    val data: AddToFavData,
+    @SerializedName("status_code")
+    val statusCode: Int,
+    val message: String
+)
