@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back"
+    android:orientation="vertical"
+    tools:context=".consultation_request_questions.presentation.ConsultationRequestFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="نشاط المشروع:"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black" />
+
+        <RadioGroup
+            android:id="@+id/rg_project_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd1"
+                android:checked="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:text="نشاط تجاري وخدمي"
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:text="نشاط صناعي"
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:text="نشاط سياحي"
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:text="نشاط تجاري"
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:text="نشاط عقاري"
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:text="مقاولات عامة"
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="8dp"
+            android:background="@color/grey" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="نبذة عن المشروع:"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edt_notes"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/edit_border" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="8dp"
+            android:background="@color/grey" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="هل المشروع؟"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black" />
+
+        <RadioGroup
+            android:id="@+id/rg_project_is"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd10"
+                android:checked="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:text="جديد (مجرد فكرة)"
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:text="تحت التأسيس والانشاء"
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd30"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:text="مشروع قائم حاليا"
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="8dp"
+            android:background="@color/grey" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="هل تملك رأس المال؟"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black" />
+
+        <RadioGroup
+            android:id="@+id/rg_project_have_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:checked="true"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:text="نعم، كم رأس المال؟"
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:text="لا، كيف سيتم توفيره؟"
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/edt_money_answer"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/edit_border" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="8dp"
+            android:background="@color/grey" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="طريقة الاستشارة"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black" />
+
+        <RadioGroup
+            android:id="@+id/rg_consult_method"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd111"
+                android:checked="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:text="حضوريا (داخل مدينة الرياض)"
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd211"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:text="عن بعد"
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+
+
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="8dp"
+            android:background="@color/grey" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="نوع طلب الاستشارة:"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black" />
+
+        <RadioGroup
+            android:id="@+id/rg_consult_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd110"
+                android:checked="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:text="استشارة فقط"
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd210"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:padding="10dp"
+                android:text="استشارة مع دراسة الجدوى الاستراتيجية"
+
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd2105"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:padding="10dp"
+                android:text="استشارة مع دراسة الجدوى الاستراتيجية وتطويرها لمدة 6 شهور"
+                android:textAlignment="viewStart"
+
+                android:textColor="@drawable/textcolor_selector" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rd2106"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/tst"
+                android:buttonTint="@color/buttontint_selectorcolor"
+                android:fontFamily="@font/tajwal"
+                android:padding="10dp"
+                android:text="استشارة مع دراسة الجدوى الاستراتيجية وتطويرها لمدة 12 شهر"
+                android:textAlignment="viewStart"
+                android:textColor="@drawable/textcolor_selector" />
+
+
+        </RadioGroup>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="8dp"
+            android:background="@color/grey" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="تاريخ الاستشارة:"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_date"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/white"
+            android:text="dd/mm/yyyy"
+            android:textAlignment="viewStart"
+            android:textColor="@color/darkgrey"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/date"
+            app:iconGravity="end"
+            app:iconTint="@null"
+            app:strokeColor="@color/darkgrey"
+            app:strokeWidth="1dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="8dp"
+            android:background="@color/grey" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:fontFamily="@font/tajwalbold"
+            android:text="ميعاد الاستشارة:"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_time"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/white"
+            android:text="hh/mm"
+            android:textAlignment="viewStart"
+            android:textColor="@color/darkgrey"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/ttime"
+            app:iconGravity="end"
+            app:iconTint="@null"
+            app:strokeColor="@color/darkgrey"
+            app:strokeWidth="1dp" />
+
+        <Button
+            android:id="@+id/btn_date_send_consultation"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/gradient_button"
+            android:fontFamily="@font/tajwalbold"
+            android:text="إرسال الطلب"
+            app:cornerRadius="15dp" />
+
+    </LinearLayout>
+
+</ScrollView>
