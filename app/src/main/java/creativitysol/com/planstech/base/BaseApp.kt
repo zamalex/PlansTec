@@ -2,6 +2,7 @@ package creativitysol.com.planstech.base
 
 import addToFavouritesModule
 import creativitysol.com.planstech.base.di.appModule
+import creativitysol.com.planstech.conschat.di.chatModule
 import creativitysol.com.planstech.consultation_request_questions.di.requestConsultationModule
 import creativitysol.com.planstech.notifications.di.notificationsModule
 import creativitysol.com.planstech.password.di.forgotPassModule
@@ -31,7 +32,8 @@ class BaseApp : android.app.Application() {
             addToFavouritesModule,
             listFavouritesModule,
             notificationsModule,
-            requestConsultationModule
+            requestConsultationModule,
+            chatModule
         )
     }
 }

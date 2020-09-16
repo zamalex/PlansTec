@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import creativitysol.com.planstech.*
 import creativitysol.com.planstech.about.AboutFragment
-import creativitysol.com.planstech.conschat.ConsChatFragment
+import creativitysol.com.planstech.conschat.presentation.ConsultationChatFragment
 import creativitysol.com.planstech.courses.CoursesFragment
 import creativitysol.com.planstech.favorites.presentation.FavouritesFragment
 import creativitysol.com.planstech.follow.FollowFragment
@@ -214,7 +214,7 @@ class MainActivity : AppCompatActivity(),
                 0 -> fragmentStack.replace(HomeFragment())
                 1 -> fragmentStack.push(FavouritesFragment())
                 2 -> fragmentStack.push(PackagesFragment())
-                3 -> fragmentStack.push(ConsChatFragment())
+                3 -> fragmentStack.push(ConsultationChatFragment())
                 4 -> fragmentStack.push(CoursesFragment())
                 5 -> fragmentStack.push(GladToServeFragment())
                 6 -> fragmentStack.push(AboutFragment())
@@ -227,7 +227,7 @@ class MainActivity : AppCompatActivity(),
                 1 -> fragmentStack.push(FavouritesFragment())
                 2 -> fragmentStack.push(AboutFragment())
                 3 -> fragmentStack.push(PackagesFragment())
-                4 -> fragmentStack.push(ConsChatFragment())
+                4 -> fragmentStack.push(ConsultationChatFragment())
                 5 -> fragmentStack.push(CoursesFragment())
                 6 -> fragmentStack.push(PartnersFragment())
                 7 -> fragmentStack.push(TermsFragment())

@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/back"
-    tools:context=".conschat.ConsChatFragment">
+    android:background="@color/grey"
+    tools:context=".conschat.presentation.ConsultationChatFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chat_rv"
+        android:id="@+id/rec_chat_history"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_chat_with" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -33,7 +34,7 @@
             android:layout_height="match_parent">
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/btn_send_chat_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -47,6 +48,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
+                android:id="@+id/edt_chat_message"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
@@ -56,17 +58,17 @@
                 android:hint="اكتب رسالتك هنا"
                 android:padding="10dp"
                 android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_send_chat_message"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageButton"
-                app:layout_constraintTop_toTopOf="@+id/imageButton" />
+                app:layout_constraintStart_toEndOf="@+id/btn_send_chat_message"
+                app:layout_constraintTop_toTopOf="@+id/btn_send_chat_message" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView29"
+        android:id="@+id/txt_chat_with"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

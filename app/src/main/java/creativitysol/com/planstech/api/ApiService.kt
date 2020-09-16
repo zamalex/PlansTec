@@ -40,16 +40,6 @@ interface ApiService {
     @GET("auth/plans")
     fun getPlans(@Header("Authorization") bearerToken: String): Call<PlanModel>
 
-    @GET("auth/chats")
-    fun getChats(@Header("Authorization") bearerToken: String): Call<ResponseBody>
-
-    @POST("auth/send_message")
-    fun sendChat(
-        @Header("Authorization") bearerToken: String,
-        @Body jsonObject: JsonObject
-    ): Call<ResponseBody>
-
-
     @GET("auth/article_desc/{id}")
     fun getArticle(@Path("id") id: String): Call<SingleArticle>
 
