@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class ChatHistory(
     @SerializedName("sender_id")
-    val senderId: Int?,
+    val senderId: Int,
     @SerializedName("receiver_id")
-    val receiverId: Int?,
+    val receiverId: Int,
     val archived: String,
     val messages: String,
     @SerializedName("created_at")

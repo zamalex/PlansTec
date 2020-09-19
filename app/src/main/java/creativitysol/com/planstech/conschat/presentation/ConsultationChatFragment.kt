@@ -36,21 +36,22 @@ class ConsultationChatFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         consultationChatViewModel.requestChatHistory()
+        btn_send_chat_message.isEnabled = false
 
         btn_send_chat_message.setOnClickListener {
             if (TextUtils.isEmpty(edt_chat_message.text))
-                consultationChatViewModel.sendChatMessage(
-                    SenderBody(
-                        chatHistoryAdapter.getReceiverId()!!,
-                        edt_chat_message.text.toString()
+                    consultationChatViewModel.sendChatMessage(
+                        SenderBody(
+                            chatHistoryAdapter.getReceiverId(),
+                            edt_chat_message.text.toString()
+                        )
                     )
-                )
         }
 
         consultationChatViewModel.getChatHistory.observe(viewLifecycleOwner, {
-            if (it.isNullOrEmpty())
+            if (it.isNullOrEmpty()) {
                 btn_send_chat_message.isEnabled = false
-            else {
+            } else {
                 btn_send_chat_message.isEnabled = true
                 mutableChatItems.clear()
                 mutableChatItems.addAll(it)
