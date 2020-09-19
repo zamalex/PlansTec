@@ -38,25 +38,29 @@ class ConsultationChatFragment : Fragment() {
         consultationChatViewModel.requestChatHistory()
 
         btn_send_chat_message.setOnClickListener {
-            if (TextUtils.isEmpty(edt_chat_message.text)) return@setOnClickListener
-
-            consultationChatViewModel.sendChatMessage(
-                SenderBody(
-                    chatHistoryAdapter.getReceiverId(),
-                    edt_chat_message.text.toString()
+            if (TextUtils.isEmpty(edt_chat_message.text))
+                consultationChatViewModel.sendChatMessage(
+                    SenderBody(
+                        chatHistoryAdapter.getReceiverId()!!,
+                        edt_chat_message.text.toString()
+                    )
                 )
-            )
         }
 
         consultationChatViewModel.getChatHistory.observe(viewLifecycleOwner, {
-            mutableChatItems.clear()
-            mutableChatItems.addAll(it)
-            rec_chat_history.apply {
-                chatHistoryAdapter = ChatHistoryAdapter(mutableChatItems)
-                adapter = chatHistoryAdapter
+            if (it.isNullOrEmpty())
+                btn_send_chat_message.isEnabled = false
+            else {
+                btn_send_chat_message.isEnabled = true
+                mutableChatItems.clear()
+                mutableChatItems.addAll(it)
+                rec_chat_history.apply {
+                    chatHistoryAdapter = ChatHistoryAdapter(mutableChatItems)
+                    adapter = chatHistoryAdapter
+                }
+                chatHistoryAdapter.notifyDataSetChanged()
+                rec_chat_history.scrollToPosition(mutableChatItems.size - 1)
             }
-            chatHistoryAdapter.notifyDataSetChanged()
-            rec_chat_history.scrollToPosition(mutableChatItems.size - 1)
         })
 
         consultationChatViewModel.getStatusSending.observe(viewLifecycleOwner, {
