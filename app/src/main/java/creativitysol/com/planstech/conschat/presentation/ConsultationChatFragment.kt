@@ -42,7 +42,7 @@ class ConsultationChatFragment : Fragment() {
 
             consultationChatViewModel.sendChatMessage(
                 SenderBody(
-                    66,
+                    chatHistoryAdapter.getReceiverId(),
                     edt_chat_message.text.toString()
                 )
             )

@@ -7,7 +7,7 @@
     android:layout_marginTop="8dp">
 
     <com.github.library.bubbleview.BubbleTextView
-        android:id="@+id/txt_sender"
+        android:id="@+id/txt_me"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -36,7 +36,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/txt_sender_time"
+        android:id="@+id/txt_me_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
@@ -45,7 +45,7 @@
         android:text="2020-09-16 02:55:58"
         android:textColor="#AAB5BC"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@id/txt_sender"
-        app:layout_constraintEnd_toEndOf="@id/txt_sender" />
+        app:layout_constraintBottom_toBottomOf="@id/txt_me"
+        app:layout_constraintEnd_toEndOf="@id/txt_me" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

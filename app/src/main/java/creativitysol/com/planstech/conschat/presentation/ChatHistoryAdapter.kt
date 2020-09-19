@@ -6,42 +6,47 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.conschat.data.model.ChatHistory
-import kotlinx.android.synthetic.main.item_receiver_item.view.*
-import kotlinx.android.synthetic.main.item_sender_item.view.*
+import kotlinx.android.synthetic.main.consultant_chat_item.view.*
+import kotlinx.android.synthetic.main.me_chat_item.view.*
 
 class ChatHistoryAdapter(
     private val chatHistoryList: List<ChatHistory>
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    //  first time, sender will be the consultant..
+    private val consultantChatId = chatHistoryList[0].senderId
+    //  first time, receiver will be me..
+    private val meChatId = chatHistoryList[0].receiverId
+
     override fun getItemViewType(position: Int): Int {
-        return if (chatHistoryList[position].receiverId.toInt() == RECEIVER_ID)
-            RECEIVER_VIEW_TYPE
+        return if (chatHistoryList[position].senderId != meChatId)
+            CONSULTANT_VIEW_TYPE
         else
-            SENDER_VIEW_TYPE
+            ME_VIEW_TYPE
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return if (viewType == SENDER_VIEW_TYPE)
-            SenderViewHolder(inflater.inflate(R.layout.item_sender_item, parent, false))
+        return if (viewType == ME_VIEW_TYPE)
+            MeViewHolder(inflater.inflate(R.layout.me_chat_item, parent, false))
         else
-            ReceiverViewHolder(inflater.inflate(R.layout.item_receiver_item, parent, false))
+            ConsultantViewHolder(inflater.inflate(R.layout.consultant_chat_item, parent, false))
     }
 
-    class SenderViewHolder(view: View) : RecyclerView.ViewHolder(view)
-    class ReceiverViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class MeViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class ConsultantViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val chatItem = chatHistoryList[position]
         when (holder) {
-            is SenderViewHolder -> {
-                holder.itemView.txt_sender.text = chatItem.messages
-                holder.itemView.txt_sender_time.text = chatItem.createdAt
+            is MeViewHolder -> {
+                holder.itemView.txt_me.text = chatItem.messages
+                holder.itemView.txt_me_time.text = chatItem.createdAt
             }
-            is ReceiverViewHolder -> {
-                holder.itemView.txt_receiver.text = chatItem.messages
-                holder.itemView.txt_receiver_time.text = chatItem.createdAt
+            is ConsultantViewHolder -> {
+                holder.itemView.txt_consultant.text = chatItem.messages
+                holder.itemView.txt_consultant_time.text = chatItem.createdAt
             }
         }
     }
@@ -50,9 +55,10 @@ class ChatHistoryAdapter(
         return chatHistoryList.size
     }
 
+    fun getReceiverId() = consultantChatId
+
     companion object {
-        const val SENDER_VIEW_TYPE = 1
-        const val RECEIVER_VIEW_TYPE = 2
-        const val RECEIVER_ID = 39
+        const val ME_VIEW_TYPE = 1
+        const val CONSULTANT_VIEW_TYPE = 2
     }
 }
