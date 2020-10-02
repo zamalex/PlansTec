@@ -12,15 +12,22 @@ import retrofit2.Response
 
 class ContactViewModel : ViewModel() {
 
+    var res = MutableLiveData<ResponseBody>()
     var services = MutableLiveData<Services>()
     fun send(jsonObject: JsonObject, token: String) {
 
         Retrofit.Api.leaveMessage(jsonObject, token).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                res.value = null
 
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful)
+                    res.value = response.body()
+                else
+                    res.value = null
+
             }
         })
     }

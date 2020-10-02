@@ -48,7 +48,7 @@ class TRVAdapter(val context: Context, val listener: radioClick, val model: Plan
 
         holder.details.text = model.data[position].goals
         holder.name.text = model.data[position].title
-        holder.price.text = model.data[position].price+(" ريال ")
+        holder.price.text = model.data[position].priceText
 
 
     }

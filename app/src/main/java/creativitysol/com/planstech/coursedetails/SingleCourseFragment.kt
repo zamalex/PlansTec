@@ -15,7 +15,11 @@ import creativitysol.com.planstech.R
 import creativitysol.com.planstech.databinding.FragmentSingleCourseBinding
 import creativitysol.com.planstech.favorites.data.model.TrainingBody
 import creativitysol.com.planstech.favorites.presentation.viewmodel.AddToFavouritesViewModel
+import creativitysol.com.planstech.login.LoginFragment
+import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.main.MainActivity
+import creativitysol.com.planstech.payment.PaymentOptionsFragment
+import io.paperdb.Paper
 import kotlinx.android.synthetic.main.fragment_single_course.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -102,6 +106,17 @@ class SingleCourseFragment : Fragment() {
             Snackbar.make(v.img_add_remove_fav, it.localizedMessage, Snackbar.LENGTH_SHORT).show()
         })
 
+
+
+        v.button.setOnClickListener {
+            val log:LoginModel = Paper.book().read("login", LoginModel())
+
+            if (log.data.token.isEmpty())
+                (requireActivity() as MainActivity).fragmentStack.push(LoginFragment())
+            else
+                (requireActivity() as MainActivity).fragmentStack.push(PaymentOptionsFragment())
+
+        }
 
         return v
     }

@@ -12,7 +12,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import creativitysol.com.planstech.*
+import com.kaopiz.kprogresshud.KProgressHUD
+import creativitysol.com.planstech.CustomizedExceptionHandler
+import creativitysol.com.planstech.R
 import creativitysol.com.planstech.about.AboutFragment
 import creativitysol.com.planstech.conschat.presentation.ConsultationChatFragment
 import creativitysol.com.planstech.courses.CoursesFragment
@@ -26,7 +28,6 @@ import creativitysol.com.planstech.notifications.presentation.NotificationsFragm
 import creativitysol.com.planstech.packages.PackagesFragment
 import creativitysol.com.planstech.partners.PartnersFragment
 import creativitysol.com.planstech.terms.TermsFragment
-import dmax.dialog.SpotsDialog
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity(),
     private lateinit var drawer: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
 
-    lateinit var loading: android.app.AlertDialog
+    lateinit var loading: KProgressHUD
     lateinit var loglist: ArrayList<String>
 
     var isLogged: Boolean = false
@@ -58,7 +59,12 @@ class MainActivity : AppCompatActivity(),
         val nullString: String? = null
         println(nullString.toString())
         setContentView(R.layout.activity_main)
-        loading = SpotsDialog.Builder().setContext(this).build()
+        loading = KProgressHUD.create(this@MainActivity)
+            .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+            .setCancellable(true)
+            .setAnimationSpeed(2)
+            .setDimAmount(0.5f)
+
 
 
 
@@ -96,7 +102,7 @@ class MainActivity : AppCompatActivity(),
 
             this.finish()
 
-            startActivity(Intent(this,SplashScreenActivity::class.java))
+            startActivity(Intent(this, SplashScreenActivity::class.java))
 
         }
 

@@ -127,6 +127,12 @@ class GladToServeFragment : Fragment() {
         }
 
 
+        viewModel.res.observe(requireActivity(), Observer {
+            (requireActivity() as MainActivity).showProgress(false)
+            Toast.makeText(requireActivity(), "تم الارسال", Toast.LENGTH_LONG).show()
+
+        })
+
         viewModel.services.observe(requireActivity(), Observer {
             (requireActivity() as MainActivity).showProgress(false)
 

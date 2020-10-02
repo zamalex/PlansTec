@@ -11,6 +11,7 @@ import creativitysol.com.planstech.home.model.TrainingModel
 import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.packages.model.PlanModel
 import creativitysol.com.planstech.partners.model.PartnerModel
+import creativitysol.com.planstech.password.presentation.VerifyResponse
 import creativitysol.com.planstech.register.model.RegisterModel
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -37,7 +38,7 @@ interface ApiService {
     @GET("auth/reviews")
     fun getAllReviews(): Call<ReviewsModel>
 
-    @GET("auth/plans")
+    @GET("packages")
     fun getPlans(@Header("Authorization") bearerToken: String): Call<PlanModel>
 
     @GET("auth/article_desc/{id}")
@@ -51,6 +52,10 @@ interface ApiService {
 
     @GET("auth/training_desc/{id}")
     fun getTraining(@Path("id") id: String): Call<SingleCourse>
+
+
+    @GET("auth/verify/{code}")
+    fun verifyCode(@Path("code") code: String): Call<VerifyResponse>
 
     @GET("auth/services_types")
     fun getServices(@Header("Authorization") bearerToken: String): Call<Services>

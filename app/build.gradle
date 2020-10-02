@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-kapt'
 
+
+
+
 android {
     compileSdkVersion 30
 
@@ -56,7 +59,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'com.google.android.material:material:1.1.0'
 
     implementation 'com.jbvincey:nestedradiobutton:1.1'
     implementation 'com.github.michaldrabik:classicmaterialtimepicker:1.1.0'
@@ -75,6 +78,9 @@ dependencies {
     implementation 'com.github.lguipeng:BubbleView:1.0.1'
 
     implementation 'com.android.support:multidex:1.0.3'
+
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
+
 
     implementation 'com.github.florent37:expansionpanel:1.2.4'
 

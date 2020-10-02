@@ -19,6 +19,7 @@ import creativitysol.com.planstech.R
 import creativitysol.com.planstech.home.HomeFragment
 import creativitysol.com.planstech.main.MainActivity
 import creativitysol.com.planstech.password.presentation.ForgotPasswordFragment
+import creativitysol.com.planstech.register.RegisterFragment
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.fragment_login.view.*
 
@@ -96,6 +97,11 @@ class LoginFragment : Fragment() {
 
         v.login_btn.setOnClickListener {
             validator.validate()
+        }
+
+        v.textView22.setOnClickListener {
+            (requireActivity() as MainActivity).fragmentStack.push(RegisterFragment())
+
         }
         // Inflate the layout for this fragment
         return v
