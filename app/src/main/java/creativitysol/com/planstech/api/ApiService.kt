@@ -13,6 +13,8 @@ import creativitysol.com.planstech.packages.model.PlanModel
 import creativitysol.com.planstech.partners.model.PartnerModel
 import creativitysol.com.planstech.password.presentation.VerifyResponse
 import creativitysol.com.planstech.register.model.RegisterModel
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -80,6 +82,10 @@ interface ApiService {
 
     @POST("auth/login")
     fun login(@Body body: JsonObject): Call<LoginModel>
+
+    @Multipart
+    @POST("packages/subscribe")
+    fun subscribeToPackage(@Header("Authorization") bearerToken: String, @Part file: MultipartBody.Part, @PartMap() partMap:Map<String,@JvmSuppressWildcards RequestBody> ): Call<SuccessModel>
 
     @POST("auth/leave_messages")
     fun leaveMessage(

@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/trasn_no"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="8dp"
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/exit" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/trans_img"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="8dp"
@@ -59,13 +59,14 @@
         android:layout_marginEnd="16dp"
         android:hint="أرفق صورة الايصال هنا"
         android:padding="10dp"
+        android:editable="false"
         android:fontFamily="@font/tajwal"
 
         android:background="@drawable/edit_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/trasn_no" />
 
     <Button
         android:id="@+id/ssend"
@@ -85,6 +86,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/trans_img" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

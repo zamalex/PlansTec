@@ -12,6 +12,7 @@ import creativitysol.com.planstech.R
 import creativitysol.com.planstech.articles.ArticlesFragment
 import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.main.MainActivity
+import creativitysol.com.planstech.packages.model.PlanModel
 import creativitysol.com.planstech.payment.PaymentOptionsFragment
 import creativitysol.com.planstech.register.model.RegisterModel
 import creativitysol.com.planstech.tradio.TRVAdapter
@@ -27,7 +28,8 @@ class PackagesFragment : Fragment(), TRVAdapter.radioClick {
 
     lateinit var v: View
     lateinit var adapter: TRVAdapter
-
+    lateinit var selectedPlan: PlanModel.Data
+     var selectedID: Int=0
     lateinit var viewModel: PlanViewModel
 
     override fun onCreateView(
@@ -50,7 +52,7 @@ class PackagesFragment : Fragment(), TRVAdapter.radioClick {
         }
 
         viewModel.plans.observe(requireActivity(), Observer {
-            if (isAdded){
+            if (isAdded) {
 
                 (requireActivity() as MainActivity).showProgress(false)
 
@@ -66,7 +68,14 @@ class PackagesFragment : Fragment(), TRVAdapter.radioClick {
 
 
         v.join_now.setOnClickListener {
-            (activity as MainActivity).fragmentStack.push(PaymentOptionsFragment())
+            if (selectedID==0){
+                return@setOnClickListener
+            }
+            val b:Bundle = Bundle()
+            b.putInt("id",selectedID)
+            (activity as MainActivity).fragmentStack.push(PaymentOptionsFragment().apply {
+                arguments = b
+            })
 
         }
 
@@ -78,7 +87,9 @@ class PackagesFragment : Fragment(), TRVAdapter.radioClick {
         (activity as MainActivity).setTitle("الخطة/الاشتراك")
     }
 
-    override fun onRadio(position: Int) {
+    override fun onRadio(position: Int, model: PlanModel.Data) {
+        selectedPlan = model
+        selectedID = model.id
 
     }
 

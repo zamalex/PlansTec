@@ -104,4 +104,8 @@ dependencies {
     implementation "org.koin:koin-android:${KOIN_VERSION}"
     implementation "org.koin:koin-androidx-scope:${KOIN_VERSION}"
     implementation "org.koin:koin-androidx-viewmodel:${KOIN_VERSION}"
+
+    implementation 'com.github.HBiSoft:PickiT:0.1.10'
+    implementation 'com.karumi:dexter:6.2.1'
+
 }

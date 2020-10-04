@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import creativitysol.com.planstech.R
+import creativitysol.com.planstech.packages.model.PlanModel
 import kotlinx.android.synthetic.main.fragment_t_radio.view.*
 
 
@@ -37,7 +38,7 @@ class TRadioFragment : Fragment() ,TRVAdapter.radioClick{
         return v
     }
 
-    override fun onRadio(position: Int) {
+    override fun onRadio(position: Int,model: PlanModel.Data) {
         for (i in 0 until  array.size){
             if (i==position)
                 array[i]=true
