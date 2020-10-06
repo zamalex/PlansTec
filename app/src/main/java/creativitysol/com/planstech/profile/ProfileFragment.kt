@@ -38,6 +38,8 @@ import kotlinx.android.synthetic.main.fragment_profile.view.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Response
 import java.io.File
 
 class ProfileFragment : Fragment() , PickiTCallbacks {
@@ -76,7 +78,7 @@ class ProfileFragment : Fragment() , PickiTCallbacks {
 
     @NotEmpty(message = "enter valid input")
     lateinit var reg_loc: TextInputEditText
-
+    var registerModel:RegisterModel? = null
 
     lateinit var validator: Validator
 
@@ -101,6 +103,40 @@ class ProfileFragment : Fragment() , PickiTCallbacks {
         reg_mail.setText(userModel.data.email)
         reg_city.setText(userModel.data.city)
         reg_loc.setText(userModel.data.district)
+
+
+        if (!loginModel.data.token.isEmpty()){
+            (activity as MainActivity).showProgress(true)
+            creativitysol.com.planstech.api.Retrofit.Api.getProfile("Bearer ${loginModel.data.token}").enqueue(object : retrofit2.Callback<RegisterModel>{
+                override fun onResponse(
+                    call: Call<RegisterModel>,
+                    response: Response<RegisterModel>
+                ) {
+                    (activity as MainActivity).showProgress(false)
+                    registerModel = response.body()
+                    if (response.isSuccessful){
+                        if (registerModel!=null){
+                            Paper.book().write("user", registerModel)
+                            reg_name.setText(registerModel!!.data.name)
+                            reg_mail.setText(registerModel!!.data.email)
+                            reg_city.setText(registerModel!!.data.city)
+                            reg_loc.setText(registerModel!!.data.district)
+                        }
+
+                    }
+                }
+
+                override fun onFailure(call: Call<RegisterModel>, t: Throwable) {
+                    (activity as MainActivity).showProgress(false)
+
+                }
+            })
+
+        }
+
+
+
+
 
         validator = Validator(this)
 

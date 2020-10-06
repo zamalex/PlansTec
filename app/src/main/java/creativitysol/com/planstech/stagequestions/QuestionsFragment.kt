@@ -34,7 +34,9 @@ class QuestionsFragment : Fragment() {
     lateinit var v: View
     lateinit var colorStat: ColorStateList
     lateinit var linearLayout: LinearLayout
-    var arrayList: ArrayList<View> = ArrayList();
+    var arrayList: ArrayList<Question> = ArrayList();
+
+    var hashmap : ArrayList<String> = ArrayList()
     lateinit var typeface: Typeface
     lateinit var typefaceBold: Typeface
     override fun onCreateView(
@@ -65,7 +67,7 @@ class QuestionsFragment : Fragment() {
 
 
         viewModel.getStagesOfPackage(
-            "Bearer ${loginModel.data.token}",1.toString())// arguments!!.getString( "id", null )
+            "Bearer ${loginModel.data.token}",arguments!!.getString( "id", null ))//
 
         viewModel.questionsResopnse.observe(viewLifecycleOwner, Observer {
             if (it!=null){
@@ -146,7 +148,7 @@ class QuestionsFragment : Fragment() {
 
                 linearLayout.addView(textView)
                 linearLayout.addView(radioGroup)
-                arrayList.add(radioGroup)
+                arrayList.add(Question(radioGroup,questionsModel.data[i].questionId))
             }
 
 
@@ -165,6 +167,8 @@ class QuestionsFragment : Fragment() {
                 editText.setBackgroundResource(R.drawable.edit_border)
                 linearLayout.addView(textView)
                 linearLayout.addView(editText)
+
+                arrayList.add(Question(editText,questionsModel.data[i].questionId))
             }
 
 
@@ -193,18 +197,39 @@ class QuestionsFragment : Fragment() {
 
         button.setOnClickListener {
             for (i in 0 until arrayList.size) {
-                if (arrayList[i] is RadioGroup) {
+                if (arrayList[i].view is RadioGroup) {
                     var radioButton =
-                        v.findViewById<MaterialRadioButton>((arrayList[i] as RadioGroup).checkedRadioButtonId)
+                        v.findViewById<MaterialRadioButton>((arrayList[i].view as RadioGroup).checkedRadioButtonId)
 
-                    Log.e(
-                        "answer ${i} is:",
-                        radioButton.text.toString() + " and index is " + (arrayList[i] as RadioGroup).indexOfChild(
-                            radioButton
-                        )
-                    )
+                    if (radioButton!=null){
+                        var s:String = "answers[${i}][text_answer] = ${radioButton.text.toString()}"
+                        var ss:String = "answers[${i}][id] = ${arrayList[i].id.toString()}"
+                        hashmap.add("${s}\n${ss}")
+
+                    }else{
+                        return@setOnClickListener
+                    }
+
+
+                }
+                else if  (arrayList[i].view is EditText) {
+                   if ((arrayList[i].view as EditText).text.isEmpty()){
+                       return@setOnClickListener
+                   }
+
+                    var s:String = "answers[${i}][text_answer] = ${(arrayList[i].view as EditText).text.toString()}"
+                    var ss:String = "answers[${i}][id] = ${arrayList[i].id.toString()}"
+                    hashmap.add("${s}\n${ss}")
+
                 }
             }
+
+
+            for (s in hashmap){
+                println(s)
+                println("---------------------------------------------")
+            }
+
         }
 
 

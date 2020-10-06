@@ -1,5 +1,6 @@
 package creativitysol.com.planstech.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -88,7 +89,9 @@ class LoginFragment : Fragment() {
 
                 if (it != null && !it.data.token.isEmpty()) {
                     Paper.book().write("login", it)
-                    (requireActivity() as MainActivity).fragmentStack.replace(HomeFragment())
+                    //(requireActivity() as MainActivity).fragmentStack.replace(HomeFragment())
+                    requireActivity().finishAffinity()
+                    startActivity(Intent(requireActivity(),MainActivity::class.java))
                 }
             }
         })

@@ -14,6 +14,8 @@ data class StagesModel(
         var canSubscribe: Int = 0,
         @SerializedName("is_passed")
         var isPassed: Int = 0,
+        @SerializedName("passed_questions")
+        var passed_questions: Int = 0,
         @SerializedName("is_subscribed")
         var isSubscribed: Int = 0,
         @SerializedName("package_title")

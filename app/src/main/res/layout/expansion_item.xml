@@ -11,6 +11,7 @@
     android:orientation="vertical">
 
         <com.github.florent37.expansionpanel.ExpansionHeader
+            android:id="@+id/ex_header"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginStart="8dp"
@@ -53,7 +54,6 @@
             android:background="@drawable/solid_border"
             android:layout_marginRight="8dp"
             android:layout_marginLeft="8dp"
-
             app:expansion_expanded="false"
             android:layout_height="wrap_content"
             android:layout_width="match_parent">

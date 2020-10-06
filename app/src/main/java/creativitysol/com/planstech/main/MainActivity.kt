@@ -23,6 +23,7 @@ import creativitysol.com.planstech.follow.FollowFragment
 import creativitysol.com.planstech.gladtoserve.GladToServeFragment
 import creativitysol.com.planstech.helpers.FragmentStack
 import creativitysol.com.planstech.home.HomeFragment
+import creativitysol.com.planstech.login.LoginFragment
 import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.myplans.MyPlansFragment
 import creativitysol.com.planstech.notifications.presentation.NotificationsFragment
@@ -130,31 +131,7 @@ class MainActivity : AppCompatActivity(),
 
 
 
-        var registerModel:RegisterModel?
-        if (!login.data.token.isEmpty()){
-            showProgress(true)
-            creativitysol.com.planstech.api.Retrofit.Api.getProfile("Bearer ${login.data.token}").enqueue(object : retrofit2.Callback<RegisterModel>{
-                override fun onResponse(
-                    call: Call<RegisterModel>,
-                    response: Response<RegisterModel>
-                ) {
-                    showProgress(false)
-                    registerModel = response.body()
-                    if (response.isSuccessful){
-                        if (registerModel!=null){
-                            Paper.book().write("user", registerModel)
-                        }
 
-                    }
-                }
-
-                override fun onFailure(call: Call<RegisterModel>, t: Throwable) {
-                    showProgress(false)
-
-                }
-            })
-
-        }
 
         profile_img.setOnClickListener {
             if (!login.data.token.isEmpty()){
@@ -275,8 +252,8 @@ class MainActivity : AppCompatActivity(),
                 0 -> fragmentStack.replace(HomeFragment())
                 1 -> fragmentStack.push(FavouritesFragment())
                 2 -> fragmentStack.push(AboutFragment())
-                3 -> fragmentStack.push(PackagesFragment())
-                4 -> fragmentStack.push(ConsultationChatFragment())
+                3 -> fragmentStack.push(LoginFragment())
+                4 -> fragmentStack.push(LoginFragment())
                 5 -> fragmentStack.push(CoursesFragment())
                 6 -> fragmentStack.push(PartnersFragment())
                 7 -> fragmentStack.push(TermsFragment())
