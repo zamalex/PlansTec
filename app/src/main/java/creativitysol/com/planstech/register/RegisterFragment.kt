@@ -107,7 +107,7 @@ class RegisterFragment : Fragment() {
             if (it.statusCode==200){
                 Toast.makeText(requireActivity(), "success", Toast.LENGTH_LONG).show()
 
-                Paper.book().write("user", it);
+                Paper.book().write("user", it)
                 (requireActivity() as MainActivity).fragmentStack.replace(LoginFragment())
             }
             else

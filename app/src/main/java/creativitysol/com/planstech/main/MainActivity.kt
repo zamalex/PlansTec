@@ -24,12 +24,18 @@ import creativitysol.com.planstech.gladtoserve.GladToServeFragment
 import creativitysol.com.planstech.helpers.FragmentStack
 import creativitysol.com.planstech.home.HomeFragment
 import creativitysol.com.planstech.login.model.LoginModel
+import creativitysol.com.planstech.myplans.MyPlansFragment
 import creativitysol.com.planstech.notifications.presentation.NotificationsFragment
 import creativitysol.com.planstech.packages.PackagesFragment
 import creativitysol.com.planstech.partners.PartnersFragment
+import creativitysol.com.planstech.profile.ProfileFragment
+import creativitysol.com.planstech.register.model.RegisterModel
 import creativitysol.com.planstech.terms.TermsFragment
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Retrofit
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -107,6 +113,8 @@ class MainActivity : AppCompatActivity(),
         }
 
 
+
+
         var list: ArrayList<String> = ArrayList()
         loglist = ArrayList()
         loglist.add(getString(R.string.main))
@@ -120,6 +128,41 @@ class MainActivity : AppCompatActivity(),
 
         var login: LoginModel = Paper.book().read("login", LoginModel())
 
+
+
+        var registerModel:RegisterModel?
+        if (!login.data.token.isEmpty()){
+            showProgress(true)
+            creativitysol.com.planstech.api.Retrofit.Api.getProfile("Bearer ${login.data.token}").enqueue(object : retrofit2.Callback<RegisterModel>{
+                override fun onResponse(
+                    call: Call<RegisterModel>,
+                    response: Response<RegisterModel>
+                ) {
+                    showProgress(false)
+                    registerModel = response.body()
+                    if (response.isSuccessful){
+                        if (registerModel!=null){
+                            Paper.book().write("user", registerModel)
+                        }
+
+                    }
+                }
+
+                override fun onFailure(call: Call<RegisterModel>, t: Throwable) {
+                    showProgress(false)
+
+                }
+            })
+
+        }
+
+        profile_img.setOnClickListener {
+            if (!login.data.token.isEmpty()){
+                drawer.closeDrawers()
+
+                fragmentStack.push(ProfileFragment())
+            }
+        }
         if (login.data.token.isEmpty()) {
             isLogged = false
             logout.visibility = View.GONE
@@ -219,7 +262,7 @@ class MainActivity : AppCompatActivity(),
             when (position) {
                 0 -> fragmentStack.replace(HomeFragment())
                 1 -> fragmentStack.push(FavouritesFragment())
-                2 -> fragmentStack.push(PackagesFragment())
+                2 -> fragmentStack.push(MyPlansFragment())
                 3 -> fragmentStack.push(ConsultationChatFragment())
                 4 -> fragmentStack.push(CoursesFragment())
                 5 -> fragmentStack.push(GladToServeFragment())

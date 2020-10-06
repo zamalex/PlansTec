@@ -15,13 +15,14 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.PartMap
 
-class PlanViewModel: ViewModel() {
+class PlanViewModel : ViewModel() {
 
     var plans: MutableLiveData<PlanModel> = MutableLiveData()
+    var myplans: MutableLiveData<PlanModel> = MutableLiveData()
     var subscribeResponse: MutableLiveData<SuccessModel> = MutableLiveData()
 
 
-    fun getTrainings(token:String){
+    fun getTrainings(token: String) {
         Retrofit.Api.getPlans(token).enqueue(object : Callback<PlanModel> {
             override fun onFailure(call: Call<PlanModel>, t: Throwable) {
 
@@ -34,22 +35,45 @@ class PlanViewModel: ViewModel() {
         })
     }
 
+    fun getMyPlans(token: String) {
+        Retrofit.Api.getMyPlans(token).enqueue(object : Callback<PlanModel> {
+            override fun onFailure(call: Call<PlanModel>, t: Throwable) {
+                myplans.value = null
 
-
-    fun subscribeToPackage(token:String, file: MultipartBody.Part, partMap:Map<String, RequestBody>){
-        Retrofit.Api.subscribeToPackage(token,file,partMap).enqueue(object : Callback<SuccessModel> {
-            override fun onFailure(call: Call<SuccessModel>, t: Throwable) {
-                subscribeResponse.value=null
             }
 
-            override fun onResponse(call: Call<SuccessModel>, response: Response<SuccessModel>) {
+            override fun onResponse(call: Call<PlanModel>, response: Response<PlanModel>) {
                 if (response.isSuccessful)
-                    subscribeResponse.value = response.body()
-                else
-                    subscribeResponse.value=null
+                    myplans.value = response.body()
+                else myplans.value = null
 
             }
         })
+    }
+
+
+    fun subscribeToPackage(
+        token: String,
+        file: MultipartBody.Part,
+        partMap: Map<String, RequestBody>
+    ) {
+        Retrofit.Api.subscribeToPackage(token, file, partMap)
+            .enqueue(object : Callback<SuccessModel> {
+                override fun onFailure(call: Call<SuccessModel>, t: Throwable) {
+                    subscribeResponse.value = null
+                }
+
+                override fun onResponse(
+                    call: Call<SuccessModel>,
+                    response: Response<SuccessModel>
+                ) {
+                    if (response.isSuccessful)
+                        subscribeResponse.value = response.body()
+                    else
+                        subscribeResponse.value = null
+
+                }
+            })
     }
 
 

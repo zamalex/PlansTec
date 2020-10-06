@@ -13,6 +13,8 @@ import creativitysol.com.planstech.packages.model.PlanModel
 import creativitysol.com.planstech.partners.model.PartnerModel
 import creativitysol.com.planstech.password.presentation.VerifyResponse
 import creativitysol.com.planstech.register.model.RegisterModel
+import creativitysol.com.planstech.stagequestions.model.QuestionsModel
+import creativitysol.com.planstech.stages.model.StagesModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -43,6 +45,11 @@ interface ApiService {
     @GET("packages")
     fun getPlans(@Header("Authorization") bearerToken: String): Call<PlanModel>
 
+    @GET("packages/user-subscriptions")
+    fun getMyPlans(@Header("Authorization") bearerToken: String): Call<PlanModel>
+
+
+
     @GET("auth/article_desc/{id}")
     fun getArticle(@Path("id") id: String): Call<SingleArticle>
 
@@ -61,6 +68,16 @@ interface ApiService {
 
     @GET("auth/services_types")
     fun getServices(@Header("Authorization") bearerToken: String): Call<Services>
+
+    @GET("auth/profile")
+    fun getProfile(@Header("Authorization") bearerToken: String): Call<RegisterModel>
+
+
+    @GET("packages/{id}/stages")
+    fun getStagesOfPackage(@Header("Authorization") bearerToken: String,@Path("id") id: String): Call<StagesModel>
+
+    @GET("stages/{id}/questions")
+    fun getQuestions(@Header("Authorization") bearerToken: String,@Path("id") id: String): Call<QuestionsModel>
 
 
     @GET("auth/my_favorites_trainings/{type}")
@@ -86,6 +103,11 @@ interface ApiService {
     @Multipart
     @POST("packages/subscribe")
     fun subscribeToPackage(@Header("Authorization") bearerToken: String, @Part file: MultipartBody.Part, @PartMap() partMap:Map<String,@JvmSuppressWildcards RequestBody> ): Call<SuccessModel>
+
+
+    @Multipart
+    @POST("auth/update_profile")
+    fun updateProfile(@Header("Authorization") bearerToken: String, @Part file: MultipartBody.Part?, @PartMap() partMap:Map<String,@JvmSuppressWildcards RequestBody> ): Call<ResponseBody>
 
     @POST("auth/leave_messages")
     fun leaveMessage(

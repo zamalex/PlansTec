@@ -14,6 +14,7 @@ import com.google.gson.JsonObject
 import com.mobsandgeeks.saripaar.ValidationError
 import com.mobsandgeeks.saripaar.Validator
 import com.mobsandgeeks.saripaar.annotation.Email
+import com.mobsandgeeks.saripaar.annotation.NotEmpty
 import com.mobsandgeeks.saripaar.annotation.Password
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.home.HomeFragment
@@ -30,7 +31,7 @@ class LoginFragment : Fragment() {
 
     lateinit var v: View
 
-    @Email(message = "enter valid email address")
+    @NotEmpty(message = "enter valid email address")
     lateinit var log_mail: TextInputEditText
 
 

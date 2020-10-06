@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_margin="16dp"
+    android:id="@+id/m_item"
+    android:elevation="4dp"
+    android:background="@drawable/solid_border"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/m_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="الباقة التشخيصية"
+        android:layout_margin="8dp"
+        android:textColor="#1F1F1F"
+        android:fontFamily="@font/tajwalbold"
+
+        />
+
+    <TextView
+        android:id="@+id/m_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="اهي بداية مراحل معالم المستقبل ولها مهمتان، وتتم في خلال 5 أيام، تقديم سلسلة من المراحل لمعرفة الاهداف والمهارات بخطط مدروسة ومتابعة وتطوير، تقديم سلسلة من المراحل لمعرفة الاهداف والمهارات، بخطط مدروسة ومتابعة وتطوير"
+        android:layout_margin="8dp"
+        android:textColor="#1F1F1F"
+        android:fontFamily="@font/tajwalmedium"
+
+        />
+</LinearLayout>
