@@ -31,6 +31,7 @@ import creativitysol.com.planstech.packages.PackagesFragment
 import creativitysol.com.planstech.partners.PartnersFragment
 import creativitysol.com.planstech.profile.ProfileFragment
 import creativitysol.com.planstech.register.model.RegisterModel
+import creativitysol.com.planstech.stagemissions.MissionsFragment
 import creativitysol.com.planstech.terms.TermsFragment
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.activity_main.*
@@ -94,7 +95,7 @@ class MainActivity : AppCompatActivity(),
         )
 
 
-        fragmentStack.replace(HomeFragment())
+        fragmentStack.replace(MissionsFragment())
 
         val dividerItemDecoration = DividerItemDecoration(
             this,

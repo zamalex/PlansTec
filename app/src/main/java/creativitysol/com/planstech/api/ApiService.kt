@@ -1,8 +1,10 @@
 package creativitysol.com.planstech.api
 
 import com.google.gson.JsonObject
+import creativitysol.com.planstech.about.DataResponse
 import creativitysol.com.planstech.articledetails.model.SingleArticle
 import creativitysol.com.planstech.coursedetails.model.SingleCourse
+import creativitysol.com.planstech.gladtoserve.model.ContactData
 import creativitysol.com.planstech.gladtoserve.model.Services
 import creativitysol.com.planstech.home.model.ArticlesModel
 import creativitysol.com.planstech.home.model.ReviewsModel
@@ -13,6 +15,7 @@ import creativitysol.com.planstech.packages.model.PlanModel
 import creativitysol.com.planstech.partners.model.PartnerModel
 import creativitysol.com.planstech.password.presentation.VerifyResponse
 import creativitysol.com.planstech.register.model.RegisterModel
+import creativitysol.com.planstech.stagemissions.model.MissionsModel
 import creativitysol.com.planstech.stagequestions.model.QuestionsModel
 import creativitysol.com.planstech.stages.model.StagesModel
 import okhttp3.MultipartBody
@@ -49,6 +52,17 @@ interface ApiService {
     fun getMyPlans(@Header("Authorization") bearerToken: String): Call<PlanModel>
 
 
+    @GET("pages/contact-us")
+    fun getContactDate(): Call<ContactData>
+
+
+    @GET("pages/about-us")
+    fun aboutUs(): Call<DataResponse>
+
+    @GET("pages/terms")
+    fun terms(): Call<DataResponse>
+
+
 
     @GET("auth/article_desc/{id}")
     fun getArticle(@Path("id") id: String): Call<SingleArticle>
@@ -74,10 +88,14 @@ interface ApiService {
 
 
     @GET("packages/{id}/stages")
-    fun getStagesOfPackage(@Header("Authorization") bearerToken: String,@Path("id") id: String): Call<StagesModel>
+    fun getStagesOfPackage(@Header("Authorization") bearerToken: String, @Path("id") id: String): Call<StagesModel>
 
     @GET("stages/{id}/questions")
-    fun getQuestions(@Header("Authorization") bearerToken: String,@Path("id") id: String): Call<QuestionsModel>
+    fun getQuestions(@Header("Authorization") bearerToken: String, @Path("id") id: String): Call<QuestionsModel>
+
+
+    @GET("stages/{id}/tasks")
+    fun getMissions(@Header("Authorization") bearerToken: String, @Path("id") id: String): Call<MissionsModel>
 
 
     @GET("auth/my_favorites_trainings/{type}")
@@ -102,16 +120,34 @@ interface ApiService {
 
     @Multipart
     @POST("packages/subscribe")
-    fun subscribeToPackage(@Header("Authorization") bearerToken: String, @Part file: MultipartBody.Part, @PartMap() partMap:Map<String,@JvmSuppressWildcards RequestBody> ): Call<SuccessModel>
+    fun subscribeToPackage(
+        @Header("Authorization") bearerToken: String,
+        @Part file: MultipartBody.Part,
+        @PartMap() partMap: Map<String, @JvmSuppressWildcards RequestBody>
+    ): Call<SuccessModel>
 
 
     @Multipart
     @POST("auth/update_profile")
-    fun updateProfile(@Header("Authorization") bearerToken: String, @Part file: MultipartBody.Part?, @PartMap() partMap:Map<String,@JvmSuppressWildcards RequestBody> ): Call<ResponseBody>
+    fun updateProfile(
+        @Header("Authorization") bearerToken: String,
+        @Part file: MultipartBody.Part?,
+        @PartMap() partMap: Map<String, @JvmSuppressWildcards RequestBody>
+    ): Call<ResponseBody>
 
     @POST("auth/leave_messages")
     fun leaveMessage(
         @Body body: JsonObject,
         @Header("Authorization") bearerToken: String
+    ): Call<ResponseBody>
+
+
+    @Multipart
+    @POST("stages/{id}/tasks/set-answers")
+    fun sendMissions(
+                     @Header("Authorization") bearerToken: String,
+                     @Part files: List<MultipartBody.Part?>?,
+                     @Path("id") id: String,
+                     @PartMap partMap: HashMap<String, RequestBody>
     ): Call<ResponseBody>
 }

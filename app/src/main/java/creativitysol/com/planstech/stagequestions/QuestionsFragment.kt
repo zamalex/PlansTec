@@ -139,7 +139,7 @@ class QuestionsFragment : Fragment() {
 
                     }
                     materialRadioButton.typeface = typeface
-
+                    materialRadioButton.tag = ii
                     materialRadioButton.id = ViewCompat.generateViewId()
 
                     radioGroup.addView(materialRadioButton)
@@ -202,9 +202,9 @@ class QuestionsFragment : Fragment() {
                         v.findViewById<MaterialRadioButton>((arrayList[i].view as RadioGroup).checkedRadioButtonId)
 
                     if (radioButton!=null){
-                        var s:String = "answers[${i}][text_answer] = ${radioButton.text.toString()}"
-                        var ss:String = "answers[${i}][id] = ${arrayList[i].id.toString()}"
-                        hashmap.add("${s}\n${ss}")
+                        var s:String = "answers[${arrayList[i].id}][answer] = ${radioButton.text.toString()} and tag is ${radioButton.tag}"
+                    //    var ss:String = "answers[${i}][id] = ${arrayList[i].id.toString()}"
+                        hashmap.add("${s}\n")
 
                     }else{
                         return@setOnClickListener
@@ -217,9 +217,9 @@ class QuestionsFragment : Fragment() {
                        return@setOnClickListener
                    }
 
-                    var s:String = "answers[${i}][text_answer] = ${(arrayList[i].view as EditText).text.toString()}"
-                    var ss:String = "answers[${i}][id] = ${arrayList[i].id.toString()}"
-                    hashmap.add("${s}\n${ss}")
+                    var s:String = "answers[${arrayList[i].id}][answer] = ${(arrayList[i].view as EditText).text.toString()}"
+               //     var ss:String = "answers[${i}][id] = ${arrayList[i].id.toString()}"
+                    hashmap.add("${s}\n")
 
                 }
             }

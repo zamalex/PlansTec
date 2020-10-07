@@ -62,8 +62,10 @@ class GladToServeFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(ContactViewModel::class.java)
 
        // if (!log.data.token.isEmpty())
-            viewModel.getServices("Bearer " + log.data.token)
 
+        (activity as MainActivity).showProgress(true)
+            viewModel.getServices("Bearer " + log.data.token)
+            viewModel.getContactData()
 
         sname = v.findViewById(R.id.sname)
         smail = v.findViewById(R.id.smail)
@@ -127,6 +129,18 @@ class GladToServeFragment : Fragment() {
         }
 
 
+        viewModel.contactData.observe(viewLifecycleOwner, Observer {
+          if  (isAdded){
+              (activity as MainActivity).showProgress(false)
+
+              if (it!=null){
+                  if (it.success){
+                      v.mail.setText(it.data.email)
+                      v.phone.setText(it.data.phone1)
+                  }
+              }
+          }
+        })
         viewModel.res.observe(requireActivity(), Observer {
             (requireActivity() as MainActivity).showProgress(false)
             Toast.makeText(requireActivity(), "تم الارسال", Toast.LENGTH_LONG).show()

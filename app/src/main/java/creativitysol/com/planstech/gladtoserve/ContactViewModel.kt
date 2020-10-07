@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.JsonObject
 import creativitysol.com.planstech.api.Retrofit
+import creativitysol.com.planstech.gladtoserve.model.ContactData
 import creativitysol.com.planstech.gladtoserve.model.Services
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -14,6 +15,7 @@ class ContactViewModel : ViewModel() {
 
     var res = MutableLiveData<ResponseBody>()
     var services = MutableLiveData<Services>()
+    var contactData = MutableLiveData<ContactData>()
     fun send(jsonObject: JsonObject, token: String) {
 
         Retrofit.Api.leaveMessage(jsonObject, token).enqueue(object : Callback<ResponseBody> {
@@ -42,6 +44,21 @@ class ContactViewModel : ViewModel() {
 
             override fun onResponse(call: Call<Services>, response: Response<Services>) {
                 services.value = response.body()
+            }
+        })
+    }
+
+
+    fun getContactData() {
+
+        Retrofit.Api.getContactDate().enqueue(object : Callback<ContactData> {
+            override fun onFailure(call: Call<ContactData>, t: Throwable) {
+                contactData.value=null
+            }
+
+            override fun onResponse(call: Call<ContactData>, response: Response<ContactData>) {
+                if (response.isSuccessful) contactData.value = response.body()
+                else contactData.value=null
             }
         })
     }
