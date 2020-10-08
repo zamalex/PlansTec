@@ -19,17 +19,23 @@ import androidx.core.view.marginLeft
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.radiobutton.MaterialRadioButton
+import com.google.gson.JsonObject
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.login.model.LoginModel
+import creativitysol.com.planstech.main.MainActivity
 import creativitysol.com.planstech.stagequestions.model.QuestionsModel
 import io.paperdb.Paper
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
 
 
 class QuestionsFragment : Fragment() {
     val loginModel by lazy {
         Paper.book().read("login", LoginModel())
     }
-
+    var map: HashMap<String, RequestBody> = HashMap()
+    var mID:Int = 1
+    var jsonObject = JsonObject()
     lateinit var viewModel: QuestionsViewModel
     lateinit var v: View
     lateinit var colorStat: ColorStateList
@@ -56,7 +62,7 @@ class QuestionsFragment : Fragment() {
             ), intArrayOf(Color.parseColor("#AAB5BC"), Color.parseColor("#FFFFFF"))
         )
 
-
+        mID = 1//arguments!!.getString( "id", null )
         linearLayout = v.findViewById(R.id.parents)
         typeface =
             Typeface.createFromAsset(requireActivity().assets, "fonts/tajwalmedium.ttf")
@@ -67,7 +73,7 @@ class QuestionsFragment : Fragment() {
 
 
         viewModel.getStagesOfPackage(
-            "Bearer ${loginModel.data.token}",arguments!!.getString( "id", null ))//
+            "Bearer ${loginModel.data.token}","${mID}")//arguments!!.getString( "id", null )
 
         viewModel.questionsResopnse.observe(viewLifecycleOwner, Observer {
             if (it!=null){
@@ -78,6 +84,16 @@ class QuestionsFragment : Fragment() {
             }
         })
 
+
+        viewModel.submit.observe(viewLifecycleOwner, Observer {
+            if (isAdded){
+                (activity as MainActivity).showProgress(false)
+                if (it!=null){
+                    Toast.makeText(requireActivity(),"submitted successfully",Toast.LENGTH_SHORT).show()
+
+                }
+            }
+        })
 
         // Inflate the layout for this fragment
         return v
@@ -103,12 +119,12 @@ class QuestionsFragment : Fragment() {
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 )
 
-                for (ii in 0 until 4) {
+                for (ii in 0 until questionsModel.data[i].answers.size) {
                     var materialRadioButton: MaterialRadioButton =
                         MaterialRadioButton(requireActivity())
 
 
-                    materialRadioButton.setText("نشاط تجاري وخدمي " + ii)
+                    materialRadioButton.setText(questionsModel.data[i].answers[ii].value)
                     materialRadioButton.setBackgroundResource(R.drawable.tst)
 
                     materialRadioButton.setTextColor(
@@ -139,7 +155,7 @@ class QuestionsFragment : Fragment() {
 
                     }
                     materialRadioButton.typeface = typeface
-                    materialRadioButton.tag = ii
+                    materialRadioButton.tag = questionsModel.data[i].answers[ii].id
                     materialRadioButton.id = ViewCompat.generateViewId()
 
                     radioGroup.addView(materialRadioButton)
@@ -203,27 +219,43 @@ class QuestionsFragment : Fragment() {
 
                     if (radioButton!=null){
                         var s:String = "answers[${arrayList[i].id}][answer] = ${radioButton.text.toString()} and tag is ${radioButton.tag}"
-                    //    var ss:String = "answers[${i}][id] = ${arrayList[i].id.toString()}"
+                        var ss:String = "answers[${i}][id] = ${arrayList[i].id.toString()}"
                         hashmap.add("${s}\n")
+                        map.put(
+                            "answers[${arrayList[i].id}][answer]",
+                            RequestBody.create(("text/plain".toMediaTypeOrNull()), radioButton.tag.toString())
+                        )
+                     //   jsonObject.addProperty("answers[${arrayList[i].id}][answer]",radioButton.tag.toString())
 
                     }else{
-                        return@setOnClickListener
+                       // map.clear()
+
+                      //  return@setOnClickListener
+
                     }
 
 
                 }
                 else if  (arrayList[i].view is EditText) {
                    if ((arrayList[i].view as EditText).text.isEmpty()){
+                       map.clear()
                        return@setOnClickListener
                    }
 
                     var s:String = "answers[${arrayList[i].id}][answer] = ${(arrayList[i].view as EditText).text.toString()}"
                //     var ss:String = "answers[${i}][id] = ${arrayList[i].id.toString()}"
                     hashmap.add("${s}\n")
-
+                  //  jsonObject.addProperty("answers[${arrayList[i].id}][answer]",(arrayList[i].view as EditText).text.toString())
+                    map.put(
+                        "answers[${arrayList[i].id}][answer]",
+                        RequestBody.create(("text/plain".toMediaTypeOrNull()), (arrayList[i].view as EditText).text.toString())
+                    )
                 }
             }
 
+
+            ((activity as MainActivity)).showProgress(true)
+            viewModel.submit("Bearer ${loginModel.data.token}","${mID}",map)
 
             for (s in hashmap){
                 println(s)

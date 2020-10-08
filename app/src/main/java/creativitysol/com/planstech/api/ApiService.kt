@@ -150,4 +150,14 @@ interface ApiService {
                      @Path("id") id: String,
                      @PartMap partMap: HashMap<String, RequestBody>
     ): Call<ResponseBody>
+
+
+    @Multipart
+    @POST("stages/{id}/questions/set-answers")
+    fun sendAnswers(
+                     @Header("Authorization") bearerToken: String,
+                     @PartMap partMap: HashMap<String, RequestBody>,
+                     @Path("id") id: String,
+
+    ): Call<ResponseBody>
 }

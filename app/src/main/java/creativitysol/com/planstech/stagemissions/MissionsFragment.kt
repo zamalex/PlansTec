@@ -34,6 +34,7 @@ import io.paperdb.Paper
 import kotlinx.android.synthetic.main.fragment_missions.view.*
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.parse
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -44,13 +45,13 @@ import java.io.File
 import kotlin.collections.set
 
 
-class MissionsFragment : Fragment() ,MissionsAdapter.MyPickListener, PickiTCallbacks {
+class MissionsFragment : Fragment(), MissionsAdapter.MyPickListener, PickiTCallbacks {
 
-    lateinit var v:View
+    lateinit var v: View
     var pickiT: PickiT? = null
     lateinit var mAdapter: MissionsAdapter
-    var selectedID:Int = 0
-    var arrayList:ArrayList<String> = ArrayList()
+    var selectedID: Int = 0
+    var arrayList: ArrayList<String> = ArrayList()
     var parts: ArrayList<MultipartBody.Part> = ArrayList()
     var map: HashMap<String, RequestBody> = HashMap()
 
@@ -65,12 +66,13 @@ class MissionsFragment : Fragment() ,MissionsAdapter.MyPickListener, PickiTCallb
         savedInstanceState: Bundle?
     ): View? {
 
-        v= inflater.inflate(R.layout.fragment_missions, container, false)
+        v = inflater.inflate(R.layout.fragment_missions, container, false)
         pickiT = PickiT(activity, this)
 
-        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(activity!!.application).create(
-            MissionsViewModel::class.java
-        )
+        viewModel =
+            ViewModelProvider.AndroidViewModelFactory.getInstance(activity!!.application).create(
+                MissionsViewModel::class.java
+            )
 
 
         (activity as MainActivity).showProgress(true)
@@ -105,60 +107,94 @@ class MissionsFragment : Fragment() ,MissionsAdapter.MyPickListener, PickiTCallb
 
 
         v.confirm_answers.setOnClickListener {
-            for (s in mAdapter.list){
+
+
+            for (s in mAdapter.list) {
                 println("${s.task_id} ${s.answer}")
                 println("--------------------------------------")
 
-                if (s.type.equals("other")){
-                    if (s.selectedFile==null){
-                        Toast.makeText(requireActivity(),"complete tasks first",Toast.LENGTH_SHORT).show()
+                if (s.type.equals("other")) {
+                    if (s.selectedFile == null) {
+                        Toast.makeText(
+                            requireActivity(),
+                            "complete file tasks first",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        parts.clear()
+                        map.clear()
                         return@setOnClickListener
+
+                    } else {
+                        val reqFile: RequestBody =
+                            RequestBody.create(
+                                getMimeType(Uri.fromFile(s.selectedFile)).toMediaTypeOrNull(),
+                                s.selectedFile!!
+                            )
+
+                        parts.add(
+                            MultipartBody.Part.createFormData(
+                                "answers[${s.task_id}][file]",
+                                s.selectedFile!!.getName(),
+                                reqFile
+                            )
+                        )
+
+                        map.put(
+                            "answers[${s.task_id}][answer]",
+                            RequestBody.create(("text/plain".toMediaTypeOrNull()), "")
+                        )
+
+                    }
+                } else {
+                    if (s.answer == null || s.answer.isEmpty() || !s.isAnswered) {
+                        Toast.makeText(
+                            requireActivity(),
+                            "complete answers tasks first",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        parts.clear()
+                        map.clear()
+                        return@setOnClickListener
+                    } else {
+                        map.put(
+                            "answers[${s.task_id}][answer]",
+                            RequestBody.create(("text/plain".toMediaTypeOrNull()), s.answer)
+                        )
                     }
                 }
 
-                else{
-                    if (s.answer==null||s.answer.isEmpty()){
-                        Toast.makeText(requireActivity(),"complete tasks first",Toast.LENGTH_SHORT).show()
-                        return@setOnClickListener
-                    }
-                }
-
-                if (s.type.equals("other")){
-                    val reqFile: RequestBody =
-                        RequestBody.create(
-                            getMimeType(Uri.fromFile(s.selectedFile)).toMediaTypeOrNull(),
-                            s.selectedFile!!
-                        )
-                    parts.add(
-                        MultipartBody.Part.createFormData(
-                            "answers[${s.task_id}][file]",
-                            s.selectedFile!!.getName(),
-                            reqFile
-                        )
-                    )
-                }else{
-                    map.put(
-                        "answers[${s.task_id}][answer]",
-                        RequestBody.create(("text/plain".toMediaTypeOrNull()), s.answer)
-                    )
-                }
 
             }
 
+             print("p size is ${parts.size}")
 
-            Retrofit.Api.sendMissions("Bearer ${loginModel.data.token}",parts,"1",map).enqueue(object : retrofit2.Callback<ResponseBody>{
-                override fun onResponse(
-                    call: Call<ResponseBody>,
-                    response: Response<ResponseBody>
-                ) {
+             for (p in parts) {
+                 println(p.body.contentType().toString())
+             }
 
-                }
 
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                }
-            })
+            (activity as MainActivity).showProgress(true)
+
+                Retrofit.Api.sendMissions("Bearer ${loginModel.data.token}",parts,"1",map).enqueue(object : retrofit2.Callback<ResponseBody>{
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        (activity as MainActivity).showProgress(false)
+
+                        if (response.isSuccessful){
+                            Toast.makeText(requireActivity(),"submitted successfully",Toast.LENGTH_SHORT).show()
+                        }else{
+
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        (activity as MainActivity).showProgress(false)
+
+                    }
+                })
         }
-
 
 
         // Inflate the layout for this fragment
@@ -184,9 +220,12 @@ class MissionsFragment : Fragment() ,MissionsAdapter.MyPickListener, PickiTCallb
 
 
     override fun sendTxt(pos: Int, s: String) {
-        selectedID = pos
-       mAdapter.list[pos].isAnswered=true
-        mAdapter.list[pos].answer = s
+        if (!s.isEmpty() && s.length > 0) {
+            selectedID = pos
+            mAdapter.list[pos].isAnswered = true
+            mAdapter.list[pos].answer = s
+
+        }
 
     }
 
@@ -197,7 +236,7 @@ class MissionsFragment : Fragment() ,MissionsAdapter.MyPickListener, PickiTCallb
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode ==555) {
+        if (requestCode == 555) {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
 
@@ -223,12 +262,10 @@ class MissionsFragment : Fragment() ,MissionsAdapter.MyPickListener, PickiTCallb
         val file = File(path)
 
 
-        mAdapter.list[selectedID].isAnswered=true
+        mAdapter.list[selectedID].isAnswered = true
         mAdapter.list[selectedID].selectedFile = file
 
         mAdapter.notifyDataSetChanged()
-
-
 
 
     }
