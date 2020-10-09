@@ -18,7 +18,7 @@
         android:textColor="@color/black"
         android:fontFamily="@font/tajwalbold"
         android:layout_marginEnd="16dp"
-        android:text="إذا كنت تريد استشارة احد خبرائنا، قم بالتسجيل الان"
+        android:text="@string/ifuwantsnow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

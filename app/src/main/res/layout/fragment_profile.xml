@@ -52,7 +52,7 @@
             android:drawableStart="@drawable/acc"
             android:drawablePadding="20dp"
             android:fontFamily="@font/tajwal"
-            android:hint="الاسم"
+            android:hint="@string/name"
             android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -77,7 +77,7 @@
             android:drawableStart="@drawable/mail"
             android:drawablePadding="20dp"
             android:fontFamily="@font/tajwal"
-            android:hint="البريد الاكتروني"
+            android:hint="@string/emailaddress"
 
             android:padding="10dp" />
 
@@ -105,7 +105,7 @@
             android:id="@+id/register_phone"
 
             android:fontFamily="@font/tajwal"
-            android:hint="الجوال"
+            android:hint="@string/phoneno"
 
             android:padding="10dp" />
 
@@ -131,7 +131,7 @@
             android:drawableStart="@drawable/pass"
             android:drawablePadding="20dp"
             android:fontFamily="@font/tajwal"
-            android:hint="كلمة المرور"
+            android:hint="@string/password"
             android:id="@+id/register_pass"
 
             android:inputType="textPassword"
@@ -159,7 +159,7 @@
             android:drawableStart="@drawable/mkan"
             android:drawablePadding="20dp"
             android:fontFamily="@font/tajwal"
-            android:hint="المدينة"
+            android:hint="@string/city"
             android:id="@+id/register_city"
 
             android:padding="10dp" />
@@ -186,7 +186,7 @@
             android:drawableStart="@drawable/mkan"
             android:drawablePadding="20dp"
             android:fontFamily="@font/tajwal"
-            android:hint="الحي"
+            android:hint="@string/district"
             android:id="@+id/register_loc"
 
             android:padding="10dp" />
@@ -204,7 +204,7 @@
         android:background="@drawable/gradient_button"
         android:fontFamily="@font/tajwalbold"
 
-        android:text="حفظ التعديلات"
+        android:text="@string/save_changes"
 
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"

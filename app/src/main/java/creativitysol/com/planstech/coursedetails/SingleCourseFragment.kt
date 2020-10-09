@@ -20,7 +20,9 @@ import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.main.MainActivity
 import creativitysol.com.planstech.payment.PaymentOptionsFragment
 import io.paperdb.Paper
+import kotlinx.android.synthetic.main.fragment_single_article.view.*
 import kotlinx.android.synthetic.main.fragment_single_course.view.*
+import kotlinx.android.synthetic.main.fragment_single_course.view.img_add_remove_fav
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -71,6 +73,12 @@ class SingleCourseFragment : Fragment() {
 
                 (activity as MainActivity).setTitle(it.data.title)
 
+                if (it.data.fav.equals("1"))
+                    v.img_add_remove_fav.setImageResource(R.drawable.saved)
+                else v.img_add_remove_fav.setImageResource(R.drawable.unsaved)
+
+
+
                 var aray: ArrayList<String> = ArrayList()
 
                 for (i in 0 until it.data.imagesGallary.size) {
@@ -97,9 +105,9 @@ class SingleCourseFragment : Fragment() {
         }
         addToFavouritesViewModel.trainingResults.observe(viewLifecycleOwner, {
             Snackbar.make(v.img_add_remove_fav, it.message, Snackbar.LENGTH_SHORT).show()
-            if (it.data.isAdded == 0)
-                v.img_add_remove_fav.setImageResource(R.drawable.unsaved)
-            else v.img_add_remove_fav.setImageResource(R.drawable.saved)
+            if (it.data.fav.equals("1"))
+                v.img_add_remove_fav.setImageResource(R.drawable.saved)
+            else v.img_add_remove_fav.setImageResource(R.drawable.unsaved)
         })
 
         addToFavouritesViewModel.error.observe(viewLifecycleOwner, {

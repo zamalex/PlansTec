@@ -27,7 +27,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/gradient_button"
         android:fontFamily="@font/tajwalbold"
-        android:text="تأكيد الاجابات"
+        android:text="@string/ocnfirmanswers"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

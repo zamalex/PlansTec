@@ -54,6 +54,7 @@ class TRVAdapter(val context: Context, val listener: radioClick, val model: Plan
         holder.price.text = model.data[position].priceText
         if (model.data[position].is_subscribed==1){
             holder.btn.isChecked = true
+            listener.onRadio(position,model.data[position])
         }else
             holder.btn.isChecked = false
 

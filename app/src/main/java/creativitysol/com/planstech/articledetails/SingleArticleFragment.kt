@@ -59,6 +59,12 @@ class SingleArticleFragment : Fragment() {
 
 
             if (isAdded) {
+
+                if (it.data.fav.equals("1"))
+                    v.img_add_remove_fav.setImageResource(R.drawable.saved)
+                else v.img_add_remove_fav.setImageResource(R.drawable.unsaved)
+
+
                 (requireActivity() as MainActivity).showProgress(false)
 
                 if (it!!.data.image != null && !it!!.data.image.isEmpty())
@@ -77,9 +83,9 @@ class SingleArticleFragment : Fragment() {
         }
         addToFavouritesViewModel.trainingResults.observe(viewLifecycleOwner, {
             Snackbar.make(v.img_add_remove_fav, it.message, Snackbar.LENGTH_SHORT).show()
-            if (it.data.isAdded== 0)
-                v.img_add_remove_fav.setImageResource(R.drawable.unsaved)
-            else v.img_add_remove_fav.setImageResource(R.drawable.saved)
+            if (it.data.fav.equals("1"))
+                v.img_add_remove_fav.setImageResource(R.drawable.saved)
+            else v.img_add_remove_fav.setImageResource(R.drawable.unsaved)
         })
 
         addToFavouritesViewModel.error.observe(viewLifecycleOwner, {

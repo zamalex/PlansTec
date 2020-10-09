@@ -18,7 +18,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/tajwalbold"
-            android:text="سياسات الإستخدام"
+            android:text="@string/terns"
             android:textColor="@color/black" />
 
         <TextView

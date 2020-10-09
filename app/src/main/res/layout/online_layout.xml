@@ -27,7 +27,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/tajwalbold"
-        android:text="دفع أونلاين"
+        android:text="@string/onlineoay"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/edit_border"
         android:fontFamily="@font/tajwal"
-        android:hint="رقم البطاقة"
+        android:hint="@string/cardno"
 
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,7 @@
 
         android:backgroundTint="@color/colorPrimary"
         android:fontFamily="@font/tajwalbold"
-        android:text="تأكيد الدفع"
+        android:text="@string/cinfrimpayment"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -39,7 +39,7 @@ class ConsultationChatFragment : Fragment() {
         btn_send_chat_message.isEnabled = false
 
         btn_send_chat_message.setOnClickListener {
-            if (TextUtils.isEmpty(edt_chat_message.text))
+            if (!TextUtils.isEmpty(edt_chat_message.text))
                     consultationChatViewModel.sendChatMessage(
                         SenderBody(
                             chatHistoryAdapter.getReceiverId(),
@@ -100,5 +100,12 @@ class ConsultationChatFragment : Fragment() {
         super.onDestroyView()
         if (!scheduleRequestingHistory().isDisposed)
             scheduleRequestingHistory().dispose()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!scheduleRequestingHistory().isDisposed)
+            scheduleRequestingHistory().dispose()
+
     }
 }

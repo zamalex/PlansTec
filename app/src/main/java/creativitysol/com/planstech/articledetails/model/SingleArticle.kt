@@ -17,6 +17,7 @@ data class SingleArticle(
         var image: String = "",
         var status: String = "",
         var title: String = "",
+        var fav: String = "",
         @SerializedName("updated_at")
         var updatedAt: String = ""
     )

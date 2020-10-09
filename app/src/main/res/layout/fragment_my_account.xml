@@ -46,7 +46,7 @@
             android:drawableStart="@drawable/acc"
             android:drawablePadding="20dp"
             android:fontFamily="@font/tajwal"
-            android:hint="الاسم"
+            android:hint="@string/name"
             android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -69,7 +69,7 @@
             android:drawableStart="@drawable/mail"
             android:drawablePadding="20dp"
             android:fontFamily="@font/tajwal"
-            android:hint="البريد الاكتروني"
+            android:hint="@string/emailaddress"
 
             android:padding="10dp" />
 
@@ -95,7 +95,7 @@
             android:drawableStart="@drawable/phone"
             android:drawablePadding="20dp"
             android:fontFamily="@font/tajwal"
-            android:hint="الجوال"
+            android:hint="@string/phoneno"
 
             android:padding="10dp" />
 
@@ -121,7 +121,7 @@
             android:drawableStart="@drawable/pass"
             android:drawablePadding="20dp"
             android:fontFamily="@font/tajwal"
-            android:hint="كلمة المرور"
+            android:hint="@string/password"
             android:inputType="textPassword"
 
             android:padding="10dp" />
@@ -147,7 +147,7 @@
             android:drawableStart="@drawable/mkan"
             android:drawablePadding="20dp"
             android:fontFamily="@font/tajwal"
-            android:hint="المدينة"
+            android:hint="@string/city"
 
             android:padding="10dp" />
 
@@ -173,7 +173,7 @@
             android:drawableStart="@drawable/mkan"
             android:drawablePadding="20dp"
             android:fontFamily="@font/tajwal"
-            android:hint="الحي"
+            android:hint="@string/district"
 
             android:padding="10dp" />
 

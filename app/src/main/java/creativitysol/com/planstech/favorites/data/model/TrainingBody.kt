@@ -39,7 +39,8 @@ data class Data(
 
 data class AddToFavData(
     @SerializedName("add_fav")
-    val isAdded: Int
+    val isAdded: Int,
+    var fav: String = ""
 )
 
 data class AddToFav(

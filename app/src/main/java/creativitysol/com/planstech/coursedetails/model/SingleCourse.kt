@@ -25,6 +25,7 @@ data class SingleCourse(
         var status: String = "",
         var title: String = "",
         var type: String = "",
+        var fav: String = "",
         @SerializedName("updated_at")
         var updatedAt: String = ""
     ) {

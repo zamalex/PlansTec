@@ -18,6 +18,8 @@ data class PlanModel(
         @SerializedName("price_text")
         var priceText: String = "",
         var title: String = "",
-        var is_subscribed : Int=0
+        var is_subscribed : Int=0,
+        var can_subscribe : Int=0,
+        var try_subscription : Int=0
     )
 }

@@ -39,7 +39,7 @@
         android:layout_marginEnd="8dp"
         android:backgroundTint="@color/white"
         android:padding="15dp"
-        android:text="تويتر"
+        android:text="@string/twitter"
         android:textColor="@color/black"
         app:cornerRadius="10dp"
         app:icon="@drawable/twitter"
@@ -60,7 +60,7 @@
         android:padding="15dp"
         android:fontFamily="@font/tajwalbold"
 
-        android:text="يوتيوب"
+        android:text="@string/toutuve"
         android:textColor="@color/black"
         app:cornerRadius="10dp"
         app:icon="@drawable/youtube"
@@ -80,7 +80,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/white"
         android:padding="15dp"
-        android:text="موقعنا"
+        android:text="@string/website"
         android:textColor="@color/black"
         android:fontFamily="@font/tajwalbold"
 

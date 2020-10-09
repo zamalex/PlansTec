@@ -55,7 +55,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/chat_border_et"
                 android:fontFamily="@font/tajwal"
-                android:hint="اكتب رسالتك هنا"
+                android:hint="@string/writeheremsg"
                 android:padding="10dp"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_send_chat_message"
