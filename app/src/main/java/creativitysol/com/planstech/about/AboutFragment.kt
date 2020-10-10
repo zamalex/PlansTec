@@ -67,6 +67,6 @@ class AboutFragment : Fragment() {
     }
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("عن التطبيق")
+        (activity as MainActivity).setTitle(getString(R.string.abutjav))
     }
 }

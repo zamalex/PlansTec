@@ -22,6 +22,6 @@ class FollowFragment : Fragment() {
     }
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("تابعنا")
+        (activity as MainActivity).setTitle(getString(R.string.followu))
     }
 }

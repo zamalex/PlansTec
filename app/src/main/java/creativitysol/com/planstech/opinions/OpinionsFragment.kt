@@ -58,6 +58,6 @@ class OpinionsFragment : Fragment() {
     }
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("اراء وانطباعات المستخدمين")
+        (activity as MainActivity).setTitle(getString(R.string.reviewa))
     }
 }

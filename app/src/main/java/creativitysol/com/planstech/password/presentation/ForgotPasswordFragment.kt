@@ -140,14 +140,14 @@ class ForgotPasswordFragment : Fragment() {
                                     }
                                 } else Toast.makeText(
                                     requireActivity(),
-                                    "الكود خطأ",
+                                    getString(R.string.wrongcode),
                                     Toast.LENGTH_SHORT
                                 ).show()
 
 
                             } else Toast.makeText(
                                 requireActivity(),
-                                "الكود خطأ",
+                                getString(R.string.wrongcode),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -159,7 +159,7 @@ class ForgotPasswordFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("استعادة كلمة المرور")
+        (activity as MainActivity).setTitle(getString(R.string.resetpass))
     }
 
     override fun onDestroy() {

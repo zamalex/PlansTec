@@ -107,7 +107,7 @@ class ResetPasswordFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("استعادة كلمة المرور")
+        (activity as MainActivity).setTitle(getString(R.string.resetpass))
     }
 
 }

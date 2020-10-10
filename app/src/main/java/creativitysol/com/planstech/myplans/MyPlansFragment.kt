@@ -56,7 +56,7 @@ class MyPlansFragment : Fragment() {
     }
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("خطة اشتراكاتي")
+        (activity as MainActivity).setTitle(getString(R.string.myplans))
     }
 
 }

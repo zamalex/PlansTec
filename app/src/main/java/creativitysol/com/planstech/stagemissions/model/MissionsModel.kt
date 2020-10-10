@@ -12,12 +12,15 @@ data class MissionsModel(
 ) {
     data class Data(
         var task_id: Int,
-        var `file`: Any = Any(),
+        var `file`: File? = null,
         var hint: String = "",
         var title: String = "",
         var type: String = "",
         @SerializedName("user_answer_text")
         var userAnswerText: Any = Any(),
+
+        @SerializedName("file_name")
+        var downlaodFileName: String? = null,
 
         var isAnswered: Boolean = false,
         var answer: String = "",

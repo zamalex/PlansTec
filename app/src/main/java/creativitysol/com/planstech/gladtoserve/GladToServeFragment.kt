@@ -134,7 +134,7 @@ class GladToServeFragment : Fragment() {
               (activity as MainActivity).showProgress(false)
 
               if (it!=null){
-                  if (it.success){
+                  if (it.statusCode==200){
                       v.mail.setText(it.data.email)
                       v.phone.setText(it.data.phone1)
                   }
@@ -143,7 +143,7 @@ class GladToServeFragment : Fragment() {
         })
         viewModel.res.observe(requireActivity(), Observer {
             (requireActivity() as MainActivity).showProgress(false)
-            Toast.makeText(requireActivity(), "تم الارسال", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireActivity(), getString(R.string.sentdone), Toast.LENGTH_LONG).show()
 
         })
 
@@ -160,7 +160,8 @@ class GladToServeFragment : Fragment() {
 
                 println("ssss ${arrayList.size}")
 
-                v.spinner.adapter = HintSpinnerAdapter(requireActivity(), arrayList.toArray(), "نوع الخدمة")
+                v.spinner.adapter = HintSpinnerAdapter(requireActivity(), arrayList.toArray(), getString(
+                                    R.string.servicetype))
 
             }
 
@@ -171,6 +172,6 @@ class GladToServeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("نسعد لخدمتكم")
+        (activity as MainActivity).setTitle(getString(R.string.gladtoserve))
     }
 }

@@ -127,6 +127,6 @@ class RegisterFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("انشاء حساب")
+        (activity as MainActivity).setTitle(getString(R.string.createaccount))
     }
 }

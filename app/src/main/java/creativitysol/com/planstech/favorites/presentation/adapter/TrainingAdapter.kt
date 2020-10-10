@@ -45,6 +45,24 @@ class TrainingAdapter(
                 holder.itemView.c_price.text = "${trainingDataItem?.price} ريال "
                 Picasso.get().load(trainingDataItem?.image).fit().centerCrop()
                     .into(holder.itemView.course_img_full)
+
+                if (trainingDataItem?.status.equals("available")) {
+                    holder.itemView.course_ava_img.setImageResource(R.drawable.status)
+                    holder.itemView.c_ava.text = "متاح"
+                } else if (trainingDataItem?.status.equals("non available")) {
+                    holder.itemView.course_ava_img.setImageResource(R.drawable.red)
+                    holder.itemView.c_ava.text = "غير متاح"
+
+                } else if (trainingDataItem?.status.equals("limited")) {
+                    holder.itemView.course_ava_img.setImageResource(R.drawable.pink)
+                    holder.itemView.c_ava.text = "محدود"
+
+                }
+                else {
+                    holder.itemView.course_ava_img.setImageResource(R.drawable.red)
+                    holder.itemView.c_ava.text = "مكتمل"
+
+                }
             }
         holder.itemView.setOnClickListener {
             trainingResult.data?.get(position)?.id?.let { trainingId ->

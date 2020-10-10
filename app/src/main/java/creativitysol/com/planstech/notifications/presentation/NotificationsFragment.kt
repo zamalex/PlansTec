@@ -26,7 +26,7 @@ class NotificationsFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("الاشعارات")
+        (activity as MainActivity).setTitle(getString(R.string.notifications))
         (activity as MainActivity).showNot(false)
     }
 

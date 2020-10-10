@@ -2,9 +2,11 @@ package creativitysol.com.planstech.main
 
 import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -12,6 +14,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.ktx.Firebase
 import com.kaopiz.kprogresshud.KProgressHUD
 import creativitysol.com.planstech.CustomizedExceptionHandler
 import creativitysol.com.planstech.R
@@ -73,6 +77,33 @@ class MainActivity : AppCompatActivity(),
             .setAnimationSpeed(2)
             .setDimAmount(0.5f)
 
+        Firebase.dynamicLinks
+            .getDynamicLink(intent)
+            .addOnSuccessListener(this) { pendingDynamicLinkData ->
+                // Get deep link from result (may be null if no link is found)
+                var deepLink: Uri? = null
+                if (pendingDynamicLinkData != null) {
+                    deepLink = pendingDynamicLinkData.link
+
+
+
+
+                    Toast.makeText(this,deepLink!!.getQueryParameter("cid")+" and ${deepLink!!.getQueryParameter("aid")}", Toast.LENGTH_LONG).show()
+                    //Toast.makeText(this,deepLink.toString(),Toast.LENGTH_LONG).show()
+
+                    println("ddd${pendingDynamicLinkData.extensions.toString()}")
+                }
+
+                // Handle the deep link. For example, open the linked
+                // content, or apply promotional credit to the user's
+                // account.
+                // ...
+
+                // ...
+            }
+            .addOnFailureListener(this) {
+                println("dlink error")
+            }
 
 
 

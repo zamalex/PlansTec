@@ -25,6 +25,6 @@ class FavouritesFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("مفضلاتي")
+        (activity as MainActivity).setTitle(getString(R.string.favs))
     }
 }

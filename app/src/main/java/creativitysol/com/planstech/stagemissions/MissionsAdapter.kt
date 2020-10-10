@@ -76,6 +76,15 @@ class MissionsAdapter(val context: Context, val listener: MyPickListener,var lis
             if (item.selectedFile!=null){
                 holder.pick.setHint(item.selectedFile!!.name)
             }
+
+            if (item.file!=null){
+                holder.download.visibility = View.VISIBLE
+                holder.img.visibility = View.VISIBLE
+            }else{
+                holder.download.visibility = View.INVISIBLE
+                holder.img.visibility = View.INVISIBLE
+
+            }
         }
 
         holder.pick.setOnClickListener {

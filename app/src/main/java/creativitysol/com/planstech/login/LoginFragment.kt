@@ -113,6 +113,6 @@ class LoginFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("تسجيل دخول")
+        (activity as MainActivity).setTitle(getString(R.string.loginnnn))
     }
 }

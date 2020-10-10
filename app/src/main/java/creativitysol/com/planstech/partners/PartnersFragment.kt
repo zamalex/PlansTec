@@ -51,7 +51,7 @@ class PartnersFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("شركاء نجاح PlansTec")
+        (activity as MainActivity).setTitle(getString(R.string.partners))
     }
 
 }

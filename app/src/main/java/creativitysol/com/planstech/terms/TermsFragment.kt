@@ -52,7 +52,7 @@ class TermsFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("الشروط والاحكام")
+        (activity as MainActivity).setTitle(getString(R.string.terns))
     }
 
 }

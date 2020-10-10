@@ -97,6 +97,6 @@ class SingleArticleFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("عنوان المقال")
+       // (activity as MainActivity).setTitle("مقالات")
     }
 }

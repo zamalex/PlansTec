@@ -61,4 +61,21 @@
     <string name="attachanswer">أرفق تقرير إجابتك هنا</string>
     <string name="cardno">رقم البطاقة</string>
     <string name="enterconfcode">ادخل كود التحقق</string>
+    <string name="abutjav">عن التطبيق</string>
+    <string name="reqcons">طلب استشارة</string>
+    <string name="followu">تابعنا</string>
+    <string name="gladtoserve">نسعد لخدمتكم</string>
+    <string name="mianfragment">الرئيسية</string>
+    <string name="myplans">خطة اشتراكاتي</string>
+    <string name="notifications">الاشعارات</string>
+    <string name="reviewa">اراء وانطباعات المستخدمين</string>
+    <string name="planss">الخطة/الاشتراك</string>
+    <string name="partners">شركاء نجاح PlansTec</string>
+    <string name="resetpass">استعادة كلمة المرور</string>
+    <string name="payoptions">طرق الدفع</string>
+    <string name="createaccount">انشاء حساب</string>
+    <string name="sentdone">تم الارسال</string>
+    <string name="servicetype">نوع الخدمة</string>
+    <string name="loginnnn">تسجيل دخول</string>
+    <string name="wrongcode">الكود خطأ</string>
 </resources>

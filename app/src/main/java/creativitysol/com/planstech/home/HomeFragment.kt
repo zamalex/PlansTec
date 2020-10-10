@@ -192,6 +192,6 @@ class HomeFragment : Fragment(),
 
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("الرئيسية")
+        (activity as MainActivity).setTitle(getString(R.string.mianfragment))
     }
 }

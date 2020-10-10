@@ -166,6 +166,6 @@ class ConsultationRequestFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("طلب استشارة")
+        (activity as MainActivity).setTitle(getString(R.string.reqcons))
     }
 }

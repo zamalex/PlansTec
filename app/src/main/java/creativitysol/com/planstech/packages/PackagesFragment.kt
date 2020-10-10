@@ -91,7 +91,7 @@ class PackagesFragment : Fragment(), TRVAdapter.radioClick {
 
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("الخطة/الاشتراك")
+        (activity as MainActivity).setTitle(getString(R.string.planss))
     }
 
     override fun onRadio(position: Int, model: PlanModel.Data) {

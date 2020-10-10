@@ -66,4 +66,21 @@
     <string name="attachanswer">attach your answer</string>
     <string name="cardno">card number</string>
     <string name="enterconfcode">enter confirmation code</string>
+    <string name="abutjav">About PlansTec</string>
+    <string name="reqcons">request consultation</string>
+    <string name="followu">follow us</string>
+    <string name="gladtoserve">glad to serve</string>
+    <string name="mianfragment">main</string>
+    <string name="myplans">my packages</string>
+    <string name="notifications">notifications</string>
+    <string name="reviewa">reviews</string>
+    <string name="planss">plans/subscribtion</string>
+    <string name="partners">plansTec partners</string>
+    <string name="resetpass">reset password</string>
+    <string name="payoptions">payment options</string>
+    <string name="createaccount">create account</string>
+    <string name="sentdone">sent</string>
+    <string name="servicetype">service type</string>
+    <string name="loginnnn">login</string>
+    <string name="wrongcode">wrong code</string>
 </resources>

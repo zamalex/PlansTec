@@ -50,6 +50,25 @@ class CoursesRV(val context: Context,val listener: CourseListener,val trainingMo
         holder.price.text="${obj.price} ريال "
         holder.ava.text=obj.status
 
+        if (obj.status.equals("available")) {
+            holder.ava_img.setImageResource(R.drawable.status)
+            holder.ava.text = "متاح"
+        } else if (obj.status.equals("non available")) {
+            holder.ava.text = "غير متاح"
+
+            holder.ava_img.setImageResource(R.drawable.red)
+        } else if (obj.status.equals("limited")) {
+            holder.ava.text = "محدود"
+
+            holder.ava_img.setImageResource(R.drawable.pink)
+        } else {
+            holder.ava.text = "مكتمل"
+
+            holder.ava_img.setImageResource(R.drawable.red)
+        }
+
+
+
         if (obj.image!=null&&!obj.image.isEmpty())
             Picasso.get().load(obj.image).fit().centerCrop().into(holder.course_img)
 
