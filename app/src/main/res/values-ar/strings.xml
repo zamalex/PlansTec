@@ -78,4 +78,5 @@
     <string name="servicetype">نوع الخدمة</string>
     <string name="loginnnn">تسجيل دخول</string>
     <string name="wrongcode">الكود خطأ</string>
+    <string name="no_conversation">لا توجد محادثة</string>
 </resources>

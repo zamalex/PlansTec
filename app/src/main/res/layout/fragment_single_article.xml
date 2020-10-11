@@ -51,11 +51,11 @@
             android:padding="20dp"
             android:src='@{model.data.status.equals("1")?@drawable/saved:@drawable/unsaved}'
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView11"
+            app:layout_constraintStart_toEndOf="@+id/sharee"
             app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
         <ImageView
-            android:id="@+id/imageView11"
+            android:id="@+id/sharee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -82,7 +82,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView11"
+            app:layout_constraintTop_toBottomOf="@+id/sharee"
             app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout

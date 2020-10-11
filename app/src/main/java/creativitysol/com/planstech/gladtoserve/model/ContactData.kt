@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class ContactData(
     var `data`: Data = Data(),
+    var msg: String = "",
     @SerializedName("status_code")
-    var statusCode: Int = 0,
-    var success: Boolean = false
+    var statusCode: Int = 0
 ) {
     data class Data(
         var address: String = "",
@@ -33,7 +33,9 @@ data class ContactData(
             var instagram: String = "",
             var linkedin: String = "",
             var twitter: String = "",
-            var whatsapp: String = ""
+            var website: String = "",
+            var whatsapp: String = "",
+            var youtube: String = ""
         )
     }
 }

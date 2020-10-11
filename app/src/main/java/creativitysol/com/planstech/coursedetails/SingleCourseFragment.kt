@@ -21,10 +21,12 @@ import com.google.firebase.dynamiclinks.ktx.navigationInfoParameters
 import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
 import com.google.firebase.ktx.Firebase
 import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.smarteist.autoimageslider.SliderAnimations
 import creativitysol.com.planstech.R
@@ -36,11 +38,8 @@ import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.main.MainActivity
 import creativitysol.com.planstech.payment.PaymentOptionsFragment
 import io.paperdb.Paper
-import kotlinx.android.synthetic.main.fragment_single_article.view.*
 import kotlinx.android.synthetic.main.fragment_single_course.view.*
-import kotlinx.android.synthetic.main.fragment_single_course.view.img_add_remove_fav
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.io.File
 
 
 /**
@@ -68,7 +67,7 @@ class SingleCourseFragment : Fragment() {
         v = binding.root
 
 
-       // checkPermission()
+        // checkPermission()
         binding.lifecycleOwner = this
 
         viewModel = ViewModelProvider(this).get(TrainingViewModel::class.java)
@@ -145,9 +144,12 @@ class SingleCourseFragment : Fragment() {
 
         v.share.setOnClickListener {
 
+            if (viewModel.course.value?.data?.id == 0)
+                return@setOnClickListener
 
-            var cid = 5
-            var aid = 4
+
+            var cid = viewModel.course.value?.data?.id
+            var aid = 0
             val shortLinkTask = Firebase.dynamicLinks.shortLinkAsync {
                 longLink =
                     Uri.parse("https://creativitysol.page.link/?link=https://www.planstec.com/?cid%3D${cid}%26aid%3D${aid}&apn=creativitysol.com.planstech")
@@ -167,7 +169,7 @@ class SingleCourseFragment : Fragment() {
                 shareMessage =
                     """
                         ${shareMessage}
-                        w
+                        
                         
                         """.trimIndent()
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
@@ -188,7 +190,7 @@ class SingleCourseFragment : Fragment() {
         (activity as MainActivity).setTitle("عنوان الدورة")
     }
 
-    private fun downloadFile(fileName : String, desc :String, url : String){
+    private fun downloadFile(fileName: String, desc: String, url: String) {
         // fileName -> fileName with extension
         val request = DownloadManager.Request(Uri.parse(url))
             .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
@@ -197,29 +199,45 @@ class SingleCourseFragment : Fragment() {
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setAllowedOverMetered(true)
             .setAllowedOverRoaming(false)
-            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,fileName)
-        val downloadManager= requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
+        val downloadManager =
+            requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         val downloadID = downloadManager.enqueue(request)
     }
 
     fun checkPermission() {
+
+
         Dexter.withContext(activity)
-            .withPermission(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            .withPermissions(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
             )
-            .withListener(object : PermissionListener {
-                override fun onPermissionGranted(permissionGrantedResponse: PermissionGrantedResponse) {
-                    downloadFile("plansfile.pdf","desc","https://www.cplusplus.com/files/tutorial.pdf")
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                    // check if all permissions are granted
+                    if (report.areAllPermissionsGranted()) {
+                        downloadFile(
+                            "plansfile2.pdf",
+                            "desc",
+                            "https://www.cplusplus.com/files/tutorial.pdf")
+                    }
+
+                    // check for permanent denial of any permission
+                    if (report.isAnyPermissionPermanentlyDenied()) {
+                        // Toast.makeText(getActivity(), "قم بالسماح للتطبيق للوصول الى موقعك من خلال الاعدادات", Toast.LENGTH_LONG).show();
+                    }
                 }
 
-                override fun onPermissionDenied(permissionDeniedResponse: PermissionDeniedResponse) {}
                 override fun onPermissionRationaleShouldBeShown(
-                    permissionRequest: PermissionRequest,
-                    permissionToken: PermissionToken
+                    permissions: List<PermissionRequest?>?,
+                    token: PermissionToken
                 ) {
-                    permissionToken.continuePermissionRequest()
+                    token.continuePermissionRequest()
                 }
-            }).onSameThread().check()
+            })
+            .onSameThread()
+            .check()
     }
 
 }

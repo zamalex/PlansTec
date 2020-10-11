@@ -83,4 +83,5 @@
     <string name="servicetype">service type</string>
     <string name="loginnnn">login</string>
     <string name="wrongcode">wrong code</string>
+    <string name="no_conversation">no conversation</string>
 </resources>

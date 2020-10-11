@@ -20,7 +20,10 @@ import com.kaopiz.kprogresshud.KProgressHUD
 import creativitysol.com.planstech.CustomizedExceptionHandler
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.about.AboutFragment
+import creativitysol.com.planstech.articledetails.SingleArticleFragment
+import creativitysol.com.planstech.articledetails.model.SingleArticle
 import creativitysol.com.planstech.conschat.presentation.ConsultationChatFragment
+import creativitysol.com.planstech.coursedetails.SingleCourseFragment
 import creativitysol.com.planstech.courses.CoursesFragment
 import creativitysol.com.planstech.favorites.presentation.FavouritesFragment
 import creativitysol.com.planstech.follow.FollowFragment
@@ -68,6 +71,11 @@ class MainActivity : AppCompatActivity(),
             )
         )
 
+        fragmentStack = FragmentStack(
+            this, supportFragmentManager,
+            R.id.main_container
+        )
+
         val nullString: String? = null
         println(nullString.toString())
         setContentView(R.layout.activity_main)
@@ -88,7 +96,15 @@ class MainActivity : AppCompatActivity(),
 
 
 
-                    Toast.makeText(this,deepLink!!.getQueryParameter("cid")+" and ${deepLink!!.getQueryParameter("aid")}", Toast.LENGTH_LONG).show()
+                //    Toast.makeText(this,deepLink!!.getQueryParameter("cid")+" and ${deepLink!!.getQueryParameter("aid")}", Toast.LENGTH_LONG).show()
+
+                    if (deepLink!!.getQueryParameter("cid")!!.toInt()==0){
+                        fragmentStack.push(SingleArticleFragment().apply { arguments = Bundle().apply { putString("id",deepLink!!.getQueryParameter("aid")) } })
+                    }
+                    else{
+                        fragmentStack.push(SingleCourseFragment().apply { arguments = Bundle().apply { putString("id",deepLink!!.getQueryParameter("cid")) } })
+
+                    }
                     //Toast.makeText(this,deepLink.toString(),Toast.LENGTH_LONG).show()
 
                     println("ddd${pendingDynamicLinkData.extensions.toString()}")
@@ -120,10 +136,7 @@ class MainActivity : AppCompatActivity(),
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
         //   showToggle(true)
-        fragmentStack = FragmentStack(
-            this, supportFragmentManager,
-            R.id.main_container
-        )
+
 
 
         fragmentStack.replace(MissionsFragment())

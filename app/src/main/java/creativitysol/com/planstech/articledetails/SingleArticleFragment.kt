@@ -1,5 +1,7 @@
 package creativitysol.com.planstech.articledetails
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.dynamiclinks.ktx.navigationInfoParameters
+import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
+import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.databinding.FragmentSingleArticleBinding
@@ -91,6 +97,47 @@ class SingleArticleFragment : Fragment() {
         addToFavouritesViewModel.error.observe(viewLifecycleOwner, {
             Snackbar.make(v.img_add_remove_fav, it.localizedMessage, Snackbar.LENGTH_SHORT).show()
         })
+
+
+        v.sharee.setOnClickListener {
+
+            if (viewModel.article.value?.data?.id==0)
+                return@setOnClickListener
+
+
+            var cid = 0
+            var aid = viewModel.article.value?.data?.id
+            val shortLinkTask = Firebase.dynamicLinks.shortLinkAsync {
+                longLink =
+                    Uri.parse("https://creativitysol.page.link/?link=https://www.planstec.com/?cid%3D${cid}%26aid%3D${aid}&apn=creativitysol.com.planstech")
+
+                navigationInfoParameters {
+                    forcedRedirectEnabled = true
+                }
+
+            }.addOnSuccessListener { result ->
+                // Short link created
+                val shortLink = result.shortLink
+                val flowchartLink = result.previewLink
+                val shareIntent = Intent(Intent.ACTION_SEND)
+                shareIntent.type = "text/plain"
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "My application name")
+                var shareMessage = "\nLet me recommend you this application\n\n${shortLink}"
+                shareMessage =
+                    """
+                        ${shareMessage}
+                        w
+                        
+                        """.trimIndent()
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
+                startActivity(Intent.createChooser(shareIntent, "choose one"))
+            }.addOnFailureListener {
+                // Error
+                // ...
+            }
+
+
+        }
 
         return v
     }

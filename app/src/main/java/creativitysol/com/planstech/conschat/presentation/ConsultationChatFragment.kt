@@ -37,6 +37,7 @@ class ConsultationChatFragment : Fragment() {
 
         consultationChatViewModel.requestChatHistory()
         btn_send_chat_message.isEnabled = false
+        conv_txt.visibility = View.VISIBLE
 
         btn_send_chat_message.setOnClickListener {
             if (!TextUtils.isEmpty(edt_chat_message.text))
@@ -51,7 +52,10 @@ class ConsultationChatFragment : Fragment() {
         consultationChatViewModel.getChatHistory.observe(viewLifecycleOwner, {
             if (it.isNullOrEmpty()) {
                 btn_send_chat_message.isEnabled = false
+                conv_txt.visibility = View.VISIBLE
+
             } else {
+                conv_txt.visibility = View.INVISIBLE
                 btn_send_chat_message.isEnabled = true
                 mutableChatItems.clear()
                 mutableChatItems.addAll(it)
