@@ -45,6 +45,9 @@ class PaymentOptionsFragment : Fragment(), PickiTCallbacks {
     var selectedID: Int = 0
     var pickiT: PickiT? = null
     lateinit var body:MultipartBody.Part
+    var type = "bank"
+
+    var cType :String? = null
 
     lateinit var v: View
 
@@ -70,6 +73,8 @@ class PaymentOptionsFragment : Fragment(), PickiTCallbacks {
         if (arguments != null)
             selectedID = arguments!!.getInt("id")
 
+        cType = arguments!!.getString("type")
+
         bankDialog = BottomSheetDialog(
             requireActivity(),
             R.style.AppBottomSheetDialogTheme
@@ -92,13 +97,40 @@ class PaymentOptionsFragment : Fragment(), PickiTCallbacks {
 
 
         v.bank_button.setOnClickListener {
-
+            type = "bank"
             bankDialog.show()
         }
 
         v.online_button.setOnClickListener {
+            type = "online"
+           // onlineDialog.show()
 
-            onlineDialog.show()
+            val payment_method: RequestBody = RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                "online")
+
+
+            val selected: RequestBody = RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                selectedID.toString())
+
+
+
+
+            map.put("payment_method", payment_method)
+            map.put("item_id", selected)
+
+
+            (activity as MainActivity).showProgress(true)
+
+            if (cType==null){
+                viewModel.subscribeToPackage("Bearer ${loginModel.data.token}",null,map)
+
+            }else if (cType.equals("course")){
+                viewModel.subscribeToCourse("Bearer ${loginModel.data.token}",null,map)
+
+            }
+
         }
 
         bankDialog.exit.setOnClickListener {
@@ -145,7 +177,14 @@ class PaymentOptionsFragment : Fragment(), PickiTCallbacks {
 
 
 
-            viewModel.subscribeToPackage("Bearer ${loginModel.data.token}",body,map)
+            (activity as MainActivity).showProgress(true)
+            if (cType==null){
+                viewModel.subscribeToPackage("Bearer ${loginModel.data.token}",body,map)
+
+            }else if (cType.equals("course")){
+                viewModel.subscribeToCourse("Bearer ${loginModel.data.token}",body,map)
+
+            }
 
 
             // jsonObject.viewModel.subscribeToPackage("Bearer ${loginModel.data.token}",)
@@ -154,9 +193,21 @@ class PaymentOptionsFragment : Fragment(), PickiTCallbacks {
 
 
         viewModel.subscribeResponse.observe(viewLifecycleOwner, Observer {
+            (activity as MainActivity).showProgress(false)
+
             if (it!=null){
-                if (it.success)
-                    Toast.makeText(activity,"subscribed",Toast.LENGTH_SHORT).show()
+                if (it.success) {
+                    if (type.equals("bank"))
+                    Toast.makeText(activity, "subscribed", Toast.LENGTH_SHORT).show()
+
+                    else{
+                        (activity as MainActivity).fragmentStack.push(OnlinePaymentFragment().apply { arguments = Bundle().apply {
+                            putString("html",it.data.paymentUrl)
+                        } })
+                    }
+
+
+                }
             }
         })
 

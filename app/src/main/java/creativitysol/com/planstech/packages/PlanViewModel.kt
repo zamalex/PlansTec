@@ -21,7 +21,6 @@ class PlanViewModel : ViewModel() {
     var myplans: MutableLiveData<PlanModel> = MutableLiveData()
     var subscribeResponse: MutableLiveData<SuccessModel> = MutableLiveData()
 
-
     fun getTrainings(token: String) {
         Retrofit.Api.getPlans(token).enqueue(object : Callback<PlanModel> {
             override fun onFailure(call: Call<PlanModel>, t: Throwable) {
@@ -54,10 +53,34 @@ class PlanViewModel : ViewModel() {
 
     fun subscribeToPackage(
         token: String,
-        file: MultipartBody.Part,
+        file: MultipartBody.Part?,
         partMap: Map<String, RequestBody>
     ) {
         Retrofit.Api.subscribeToPackage(token, file, partMap)
+            .enqueue(object : Callback<SuccessModel> {
+                override fun onFailure(call: Call<SuccessModel>, t: Throwable) {
+                    subscribeResponse.value = null
+                }
+
+                override fun onResponse(
+                    call: Call<SuccessModel>,
+                    response: Response<SuccessModel>
+                ) {
+                    if (response.isSuccessful)
+                        subscribeResponse.value = response.body()
+                    else
+                        subscribeResponse.value = null
+
+                }
+            })
+    }
+
+    fun subscribeToCourse(
+        token: String,
+        file: MultipartBody.Part?,
+        partMap: Map<String, RequestBody>
+    ) {
+        Retrofit.Api.subscribeToCourse(token, file, partMap)
             .enqueue(object : Callback<SuccessModel> {
                 override fun onFailure(call: Call<SuccessModel>, t: Throwable) {
                     subscribeResponse.value = null

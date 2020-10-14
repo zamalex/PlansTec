@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.github.florent37.expansionpanel.ExpansionHeader
 import creativitysol.com.planstech.main.MainActivity
+import creativitysol.com.planstech.stagemissions.MissionsFragment
 import creativitysol.com.planstech.stagequestions.QuestionsFragment
 import creativitysol.com.planstech.stages.model.StagesModel
 import kotlin.math.sin
@@ -42,6 +43,13 @@ class ExpansionAdapter(val context: Context,val stages:ArrayList<StagesModel.Dat
             }
             missions_panel.setOnClickListener {
                 //Toast.makeText(context,"mission ${adapterPosition}",Toast.LENGTH_SHORT).show()
+
+                var b:Bundle = Bundle()
+                b.putString("id",stages[adapterPosition].stageId.toString())
+
+                (context as MainActivity).fragmentStack.push(MissionsFragment().apply {
+                    arguments = b
+                })
             }
         }
 

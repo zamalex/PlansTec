@@ -69,8 +69,6 @@
         android:text="available"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/course_ava_img"
-        app:layout_constraintEnd_toEndOf="@+id/course_ava_img"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.25" />

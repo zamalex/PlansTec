@@ -138,7 +138,8 @@ class SingleCourseFragment : Fragment() {
             if (log.data.token.isEmpty())
                 (requireActivity() as MainActivity).fragmentStack.push(LoginFragment())
             else
-                (requireActivity() as MainActivity).fragmentStack.push(PaymentOptionsFragment())
+                (requireActivity() as MainActivity).fragmentStack.push(PaymentOptionsFragment().apply { arguments = Bundle().apply { putString("type","course")
+                putInt("id",this@SingleCourseFragment.viewModel.course.value?.data?.id!!.toInt())} })
 
         }
 

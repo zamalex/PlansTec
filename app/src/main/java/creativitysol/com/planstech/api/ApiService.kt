@@ -122,7 +122,16 @@ interface ApiService {
     @POST("packages/subscribe")
     fun subscribeToPackage(
         @Header("Authorization") bearerToken: String,
-        @Part file: MultipartBody.Part,
+        @Part file: MultipartBody.Part?,
+        @PartMap() partMap: Map<String, @JvmSuppressWildcards RequestBody>
+    ): Call<SuccessModel>
+
+
+    @Multipart
+    @POST("pay/subscribe-to-courses")
+    fun subscribeToCourse(
+        @Header("Authorization") bearerToken: String,
+        @Part file: MultipartBody.Part?,
         @PartMap() partMap: Map<String, @JvmSuppressWildcards RequestBody>
     ): Call<SuccessModel>
 

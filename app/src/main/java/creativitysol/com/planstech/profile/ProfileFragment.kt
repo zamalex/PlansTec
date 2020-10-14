@@ -27,6 +27,7 @@ import com.mobsandgeeks.saripaar.Validator
 import com.mobsandgeeks.saripaar.annotation.Email
 import com.mobsandgeeks.saripaar.annotation.NotEmpty
 import com.mobsandgeeks.saripaar.annotation.Password
+import com.squareup.picasso.Picasso
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.main.MainActivity
@@ -35,6 +36,7 @@ import creativitysol.com.planstech.register.model.RegisterModel
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.bank_layout.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
+import kotlinx.android.synthetic.main.fragment_single_article.view.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -121,6 +123,13 @@ class ProfileFragment : Fragment() , PickiTCallbacks {
                             reg_mail.setText(registerModel!!.data.email)
                             reg_city.setText(registerModel!!.data.city)
                             reg_loc.setText(registerModel!!.data.district)
+
+                            registerModel!!.data.let {model->
+
+                                if (!model.avatar.isEmpty())
+                                    Picasso.get().load(model.avatar).fit().centerCrop().into(v.user_img)
+
+                            }
                         }
 
                     }

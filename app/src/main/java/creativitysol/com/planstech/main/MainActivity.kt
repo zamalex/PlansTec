@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity(),
 
 
 
-        fragmentStack.replace(MissionsFragment())
+        fragmentStack.replace(HomeFragment())
 
         val dividerItemDecoration = DividerItemDecoration(
             this,
