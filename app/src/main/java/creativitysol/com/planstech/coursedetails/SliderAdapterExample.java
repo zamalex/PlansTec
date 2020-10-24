@@ -20,8 +20,11 @@ public class SliderAdapterExample extends
     private Context context;
     private List<String> mSliderItems = new ArrayList<>();
 
-    public SliderAdapterExample(Context context) {
+    imageInterface imageInterface;
+
+    public SliderAdapterExample(Context context,imageInterface imageInterface) {
         this.context = context;
+        this.imageInterface = imageInterface;
     }
 
     public void renewItems(List<String> sliderItems) {
@@ -55,6 +58,15 @@ public class SliderAdapterExample extends
             Picasso.get().load(sliderItem).fit().centerCrop().into(viewHolder.img);
 
 
+        viewHolder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (sliderItem!=null&&!sliderItem.isEmpty()){
+                    imageInterface.onImgClicked(sliderItem);
+                }
+            }
+        });
+
 
     }
 
@@ -78,4 +90,7 @@ public class SliderAdapterExample extends
         }
     }
 
+    public interface imageInterface{
+        void onImgClicked(String img);
+    }
 }

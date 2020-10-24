@@ -3,6 +3,7 @@ package creativitysol.com.planstech.articledetails
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,7 @@ import creativitysol.com.planstech.favorites.presentation.viewmodel.AddToFavouri
 import creativitysol.com.planstech.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_single_article.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 /**
  * A simple [Fragment] subclass.
@@ -51,6 +53,8 @@ class SingleArticleFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(ArticleViewModel::class.java)
 
         binding.model = viewModel.article
+
+        v.a_desc.movementMethod = ScrollingMovementMethod()
 
 
         if (arguments != null) {

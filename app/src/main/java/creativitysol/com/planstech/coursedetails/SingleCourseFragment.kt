@@ -45,7 +45,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 /**
  * A simple [Fragment] subclass.
  */
-class SingleCourseFragment : Fragment() {
+class SingleCourseFragment : Fragment() ,SliderAdapterExample.imageInterface{
 
     lateinit var binding: FragmentSingleCourseBinding
     lateinit var v: View
@@ -101,7 +101,7 @@ class SingleCourseFragment : Fragment() {
                     aray.add(it.data.imagesGallary[i].image)
                 }
 
-                var adapter: SliderAdapterExample = SliderAdapterExample(requireActivity())
+                var adapter: SliderAdapterExample = SliderAdapterExample(requireActivity(),this)
                 v.flipper_layout.setSliderAdapter(adapter)
                 adapter.renewItems(aray)
 
@@ -239,6 +239,14 @@ class SingleCourseFragment : Fragment() {
             })
             .onSameThread()
             .check()
+    }
+
+    override fun onImgClicked(img: String?) {
+        ((activity as MainActivity)).fragmentStack.push(ImgFragment().apply {
+            arguments = Bundle().apply {
+                putString("img",img)
+            }
+        })
     }
 
 }

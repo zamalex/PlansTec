@@ -1,5 +1,6 @@
 package creativitysol.com.planstech.login
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,8 +19,11 @@ import com.mobsandgeeks.saripaar.annotation.Email
 import com.mobsandgeeks.saripaar.annotation.NotEmpty
 import com.mobsandgeeks.saripaar.annotation.Password
 import creativitysol.com.planstech.R
+import creativitysol.com.planstech.base.BaseApp
+import creativitysol.com.planstech.base.di.appModule
 import creativitysol.com.planstech.home.HomeFragment
 import creativitysol.com.planstech.main.MainActivity
+import creativitysol.com.planstech.main.SplashScreenActivity
 import creativitysol.com.planstech.password.presentation.ForgotPasswordFragment
 import creativitysol.com.planstech.register.RegisterFragment
 import io.paperdb.Paper
@@ -90,8 +94,8 @@ class LoginFragment : Fragment() {
                 if (it != null && !it.data.token.isEmpty()) {
                     Paper.book().write("login", it)
                     //(requireActivity() as MainActivity).fragmentStack.replace(HomeFragment())
-                    requireActivity().finishAffinity()
-                    startActivity(Intent(requireActivity(),MainActivity::class.java))
+                   triggerRestart(requireActivity())
+
                 }
             }
         })
@@ -114,5 +118,15 @@ class LoginFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         (activity as MainActivity).setTitle(getString(R.string.loginnnn))
+    }
+
+    fun triggerRestart(context: Activity) {
+        val intent = Intent(context, SplashScreenActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
+        if (context is Activity) {
+            (context as Activity).finish()
+        }
+
     }
 }
