@@ -55,6 +55,7 @@ class SingleArticleFragment : Fragment() {
         binding.model = viewModel.article
 
         v.a_desc.movementMethod = ScrollingMovementMethod()
+        v.a_desc.setTextIsSelectable(true);
 
 
         if (arguments != null) {
@@ -81,6 +82,8 @@ class SingleArticleFragment : Fragment() {
                     Picasso.get().load(it!!.data.image).fit().centerCrop().into(v.a_img)
                 if (it.data != null && it.data.title != null)
                     (activity as MainActivity).setTitle(it.data.title)
+
+
             }
         })
 

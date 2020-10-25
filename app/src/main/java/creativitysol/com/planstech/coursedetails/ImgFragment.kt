@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler
 import com.squareup.picasso.Picasso
 import creativitysol.com.planstech.R
 import kotlinx.android.synthetic.main.fragment_img.*
@@ -24,6 +25,8 @@ class ImgFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Picasso.get().load(arguments!!.getString("img")).into(f_img)
+
+        f_img.setOnTouchListener(ImageMatrixTouchHandler(requireActivity()))
     }
 
 }

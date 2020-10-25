@@ -108,5 +108,7 @@ dependencies {
     implementation 'com.github.HBiSoft:PickiT:0.1.10'
     implementation 'com.karumi:dexter:6.2.1'
   //  implementation 'com.squareup.okhttp3:okhttp:4.8.0'
+    implementation 'com.bogdwellers:pinchtozoom:0.1'
+
 
 }

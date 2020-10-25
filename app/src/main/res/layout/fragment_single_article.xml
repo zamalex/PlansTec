@@ -106,11 +106,10 @@
                 <TextView
                     android:id="@+id/a_desc"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:inputType="textMultiLine"
                     android:layout_marginBottom="16dp"
                     android:lineSpacingExtra="10dp"
                     android:text="@{model.Data.description}"
