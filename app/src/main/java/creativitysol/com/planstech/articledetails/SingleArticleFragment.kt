@@ -18,6 +18,7 @@ import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import creativitysol.com.planstech.R
+import creativitysol.com.planstech.coursedetails.ImgFragment
 import creativitysol.com.planstech.databinding.FragmentSingleArticleBinding
 import creativitysol.com.planstech.favorites.data.model.TrainingBody
 import creativitysol.com.planstech.favorites.presentation.viewmodel.AddToFavouritesViewModel
@@ -58,6 +59,8 @@ class SingleArticleFragment : Fragment() {
         v.a_desc.setTextIsSelectable(true);
 
 
+
+
         if (arguments != null) {
             (requireActivity() as MainActivity).showProgress(true)
             arguments!!.getString("id").let { articleId ->
@@ -78,8 +81,18 @@ class SingleArticleFragment : Fragment() {
 
                 (requireActivity() as MainActivity).showProgress(false)
 
-                if (it!!.data.image != null && !it!!.data.image.isEmpty())
+                if (it!!.data.image != null && !it!!.data.image.isEmpty()){
                     Picasso.get().load(it!!.data.image).fit().centerCrop().into(v.a_img)
+
+                    val sora = it!!.data.image
+                    v.a_img.setOnClickListener {
+                        ((activity as MainActivity)).fragmentStack.push(ImgFragment().apply {
+                            arguments = Bundle().apply {
+                                putString("img",sora)
+                            }
+                        })
+                    }
+                }
                 if (it.data != null && it.data.title != null)
                     (activity as MainActivity).setTitle(it.data.title)
 
