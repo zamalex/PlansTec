@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp">
 
-    <com.github.library.bubbleview.BubbleTextView
+    <TextView
         android:id="@+id/txt_consultant"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -21,13 +21,7 @@
         tools:text="الحمد لله بخالحمد لله بخير، كان عندي استشارة بخصوص مشروعي من فضلكيالحمد لله بخير، كان عندي استشارة بخصوص مشروعي من فضلكر، كان عندي استشارة بخصوص مشروعي من فضلك"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:angle="8dp"
-        app:arrowCenter="true"
-        app:arrowHeight="10dp"
-        app:arrowLocation="left"
-        app:arrowPosition="14dp"
-        app:arrowWidth="8dp"
-        app:bubbleColor="@color/white"
+     android:background="@drawable/y_bg"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

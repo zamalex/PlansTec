@@ -63,7 +63,6 @@ interface ApiService {
     fun terms(): Call<DataResponse>
 
 
-
     @GET("auth/article_desc/{id}")
     fun getArticle(@Path("id") id: String): Call<SingleArticle>
 
@@ -88,14 +87,23 @@ interface ApiService {
 
 
     @GET("packages/{id}/stages")
-    fun getStagesOfPackage(@Header("Authorization") bearerToken: String, @Path("id") id: String): Call<StagesModel>
+    fun getStagesOfPackage(
+        @Header("Authorization") bearerToken: String,
+        @Path("id") id: String
+    ): Call<StagesModel>
 
     @GET("stages/{id}/questions")
-    fun getQuestions(@Header("Authorization") bearerToken: String, @Path("id") id: String): Call<QuestionsModel>
+    fun getQuestions(
+        @Header("Authorization") bearerToken: String,
+        @Path("id") id: String
+    ): Call<QuestionsModel>
 
 
     @GET("stages/{id}/tasks")
-    fun getMissions(@Header("Authorization") bearerToken: String, @Path("id") id: String): Call<MissionsModel>
+    fun getMissions(
+        @Header("Authorization") bearerToken: String,
+        @Path("id") id: String
+    ): Call<MissionsModel>
 
 
     @GET("auth/my_favorites_trainings/{type}")
@@ -154,19 +162,27 @@ interface ApiService {
     @Multipart
     @POST("stages/{id}/tasks/set-answers")
     fun sendMissions(
-                     @Header("Authorization") bearerToken: String,
-                     @Part files: List<MultipartBody.Part?>?,
-                     @Path("id") id: String,
-                     @PartMap partMap: HashMap<String, RequestBody>
+        @Header("Authorization") bearerToken: String,
+        @Part files: List<MultipartBody.Part?>?,
+        @Path("id") id: String,
+        @PartMap partMap: HashMap<String, RequestBody>
     ): Call<ResponseBody>
 
 
     @Multipart
     @POST("stages/{id}/questions/set-answers")
     fun sendAnswers(
-                     @Header("Authorization") bearerToken: String,
-                     @PartMap partMap: HashMap<String, RequestBody>,
-                     @Path("id") id: String,
+        @Header("Authorization") bearerToken: String,
+        @PartMap partMap: HashMap<String, RequestBody>,
+        @Path("id") id: String,
 
-    ): Call<ResponseBody>
+        ): Call<ResponseBody>
+
+
+    @POST("notifications/subscribe")
+    fun snedNotToken(
+        @Header("Authorization") bearerToken: String,
+        @Body body: JsonObject
+
+        ): Call<ResponseBody>
 }
