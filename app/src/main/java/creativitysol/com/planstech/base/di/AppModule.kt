@@ -29,7 +29,7 @@ val appModule = module {
                 chain.proceed(
                     chain.request().newBuilder()
                         .addHeader("Accept", "application/json")
-                        .addHeader("Authorization", "Bearer ${log.data.token}")
+                       // .addHeader("Authorization", "Bearer ${log.data.token}")
                         .build()
                 )
             }.build()
@@ -53,4 +53,7 @@ val appModule = module {
     factory<Executors> { ExecutorsImp() }
 
     factory { CompositeDisposable() }
+
+
+
 }

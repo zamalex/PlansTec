@@ -62,9 +62,9 @@ class BaseApp : android.app.Application() {
             if (!loginModel.data.token.isEmpty()){
                 var body:JsonObject = JsonObject().apply {
                     addProperty("player_id",userId)
-                    addProperty("device_token",UUID.randomUUID().toString())
+                    addProperty("device_token",initToken())
                 }
-                Retrofit.Api.snedNotToken(loginModel.data.token,body).enqueue(object : retrofit2.Callback<ResponseBody>{
+                Retrofit.Api.snedNotToken("Bearer ${loginModel.data.token}",body).enqueue(object : retrofit2.Callback<ResponseBody>{
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
 
                     }
@@ -98,5 +98,16 @@ class BaseApp : android.app.Application() {
             requestConsultationModule,
             chatModule
         )
+    }
+
+
+    fun initToken():String{
+        var mToken:String = Paper.book().read("device","")
+
+        if(mToken.isEmpty()){
+            mToken = UUID.randomUUID().toString()
+            Paper.book().write("device",mToken)
+        }
+        return  mToken
     }
 }

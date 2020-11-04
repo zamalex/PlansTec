@@ -10,6 +10,8 @@ data class Notifications(
     val title: String,
     @SerializedName("created_at")
     val createdAt: String,
+    @SerializedName("content")
+    val content: String,
     @SerializedName("updated_at")
     val updatedAt: String
 )

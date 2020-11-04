@@ -45,12 +45,9 @@ class OpinionsRV(val context: Context) : RecyclerView.Adapter<OpinionsRV.Holder>
 
         var o:ReviewsModel.Data = reviewsModel!!.data[position]
 
-        holder.name.text = o.name
-        holder.txt.text = o.review
-        if (o.stars.isEmpty())
-        {
-            holder.rate.rating=0f
-        }else
+        holder.name.text = o.userName
+        holder.txt.text = o.content
+
         holder.rate.rating=o.stars.toFloat()
 
         if (o.avatar!=null&&!o.avatar.isEmpty())

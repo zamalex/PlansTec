@@ -185,4 +185,10 @@ interface ApiService {
         @Body body: JsonObject
 
         ): Call<ResponseBody>
+
+
+    @POST("auth/logout")
+    fun logout(
+        @Header("Authorization") bearerToken: String
+    ): Call<ResponseBody>
 }

@@ -59,7 +59,7 @@ class TRVAdapter(val context: Context, val listener: radioClick, val model: Plan
             holder.btn.isChecked = false
 
 
-        if (position==0){
+        if (model.data[position].can_subscribe==1){
             holder.btn.isEnabled=true
             holder.card.strokeColor = Color.parseColor("#96B9FF")
             holder.name.setTextColor(Color.parseColor("#1F1F1F"))

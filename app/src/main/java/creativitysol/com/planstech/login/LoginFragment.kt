@@ -1,5 +1,6 @@
 package creativitysol.com.planstech.login
 
+import addToFavouritesModule
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -21,13 +22,29 @@ import com.mobsandgeeks.saripaar.annotation.Password
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.base.BaseApp
 import creativitysol.com.planstech.base.di.appModule
+import creativitysol.com.planstech.conschat.di.chatModule
+import creativitysol.com.planstech.consultation_request_questions.di.requestConsultationModule
 import creativitysol.com.planstech.home.HomeFragment
+import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.main.MainActivity
 import creativitysol.com.planstech.main.SplashScreenActivity
+import creativitysol.com.planstech.notifications.di.notificationsModule
+import creativitysol.com.planstech.password.di.forgotPassModule
+import creativitysol.com.planstech.password.di.resetPassModule
 import creativitysol.com.planstech.password.presentation.ForgotPasswordFragment
 import creativitysol.com.planstech.register.RegisterFragment
+import creativitysol.com.planstech.util.Constants
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.fragment_login.view.*
+import listFavouritesModule
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
+import org.koin.dsl.koinApplication
+import java.util.concurrent.TimeUnit
 
 /**
  * A simple [Fragment] subclass.
@@ -93,6 +110,9 @@ class LoginFragment : Fragment() {
 
                 if (it != null && !it.data.token.isEmpty()) {
                     Paper.book().write("login", it)
+
+                    activity?.application?.onCreate()
+
                     //(requireActivity() as MainActivity).fragmentStack.replace(HomeFragment())
                    triggerRestart(requireActivity())
 
@@ -127,6 +147,7 @@ class LoginFragment : Fragment() {
         if (context is Activity) {
             (context as Activity).finish()
         }
-
     }
+
+
 }

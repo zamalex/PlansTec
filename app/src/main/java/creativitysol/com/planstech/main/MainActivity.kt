@@ -22,7 +22,10 @@ import creativitysol.com.planstech.R
 import creativitysol.com.planstech.about.AboutFragment
 import creativitysol.com.planstech.articledetails.SingleArticleFragment
 import creativitysol.com.planstech.articledetails.model.SingleArticle
+import creativitysol.com.planstech.base.di.appModule
+import creativitysol.com.planstech.conschat.di.chatModule
 import creativitysol.com.planstech.conschat.presentation.ConsultationChatFragment
+import creativitysol.com.planstech.consultation_request_questions.di.requestConsultationModule
 import creativitysol.com.planstech.coursedetails.SingleCourseFragment
 import creativitysol.com.planstech.courses.CoursesFragment
 import creativitysol.com.planstech.favorites.presentation.FavouritesFragment
@@ -33,15 +36,22 @@ import creativitysol.com.planstech.home.HomeFragment
 import creativitysol.com.planstech.login.LoginFragment
 import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.myplans.MyPlansFragment
+import creativitysol.com.planstech.notifications.di.notificationsModule
 import creativitysol.com.planstech.notifications.presentation.NotificationsFragment
 import creativitysol.com.planstech.packages.PackagesFragment
 import creativitysol.com.planstech.partners.PartnersFragment
+import creativitysol.com.planstech.password.di.forgotPassModule
+import creativitysol.com.planstech.password.di.resetPassModule
 import creativitysol.com.planstech.profile.ProfileFragment
 import creativitysol.com.planstech.register.model.RegisterModel
 import creativitysol.com.planstech.stagemissions.MissionsFragment
 import creativitysol.com.planstech.terms.TermsFragment
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.ResponseBody
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.logger.Level
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -64,6 +74,11 @@ class MainActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setLang("ar")
+
+
+
+
+
         setSupportActionBar(toolbar)
         Thread.setDefaultUncaughtExceptionHandler(
             CustomizedExceptionHandler(
@@ -148,8 +163,22 @@ class MainActivity : AppCompatActivity(),
 
         logout.setOnClickListener {
 
+            creativitysol.com.planstech.api.Retrofit.Api.logout("Bearer ${(Paper.book().read("login",LoginModel())as LoginModel).data.token}")
+                .enqueue(object : retrofit2.Callback<ResponseBody>{
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+
+                    }
+
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                    }
+                })
+
             Paper.book().delete("user")
             Paper.book().delete("login")
+            Paper.book().delete("device")
 
 
             this.finish()

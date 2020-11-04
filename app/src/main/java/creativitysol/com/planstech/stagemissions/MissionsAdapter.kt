@@ -79,12 +79,17 @@ class MissionsAdapter(val context: Context, val listener: MyPickListener,var lis
 
             if (item.file!=null){
                 holder.download.visibility = View.VISIBLE
+                holder.download.setText(item.downlaodFileName)
                 holder.img.visibility = View.VISIBLE
             }else{
                 holder.download.visibility = View.INVISIBLE
                 holder.img.visibility = View.INVISIBLE
 
             }
+        }
+
+        holder.download.setOnClickListener {
+            listener.onDownload(item)
         }
 
         holder.pick.setOnClickListener {
@@ -98,6 +103,7 @@ class MissionsAdapter(val context: Context, val listener: MyPickListener,var lis
     interface MyPickListener{
         fun sendTxt(pos: Int, s: String)
         fun onMyPick(pos: Int)
+        fun onDownload(taskk:MissionsModel.Data)
     }
 
 }

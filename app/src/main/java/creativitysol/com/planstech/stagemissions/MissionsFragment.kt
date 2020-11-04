@@ -2,11 +2,14 @@ package creativitysol.com.planstech.stagemissions
 
 import android.Manifest
 import android.app.Activity
+import android.app.DownloadManager
 import android.content.ContentResolver
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,10 +23,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hbisoft.pickit.PickiT
 import com.hbisoft.pickit.PickiTCallbacks
 import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.api.Retrofit
@@ -42,6 +47,7 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import java.io.File
+import java.lang.IllegalArgumentException
 import kotlin.collections.set
 
 
@@ -110,7 +116,7 @@ class MissionsFragment : Fragment(), MissionsAdapter.MyPickListener, PickiTCallb
 
 
             for (s in mAdapter.list) {
-                println("${s.task_id} ${s.answer}")
+                println("${s.taskId} ${s.answer}")
                 println("--------------------------------------")
 
                 if (s.type.equals("other")) {
@@ -133,14 +139,14 @@ class MissionsFragment : Fragment(), MissionsAdapter.MyPickListener, PickiTCallb
 
                         parts.add(
                             MultipartBody.Part.createFormData(
-                                "answers[${s.task_id}][file]",
+                                "answers[${s.taskId}][file]",
                                 s.selectedFile!!.getName(),
                                 reqFile
                             )
                         )
 
                         map.put(
-                            "answers[${s.task_id}][answer]",
+                            "answers[${s.taskId}][answer]",
                             RequestBody.create(("text/plain".toMediaTypeOrNull()), "")
                         )
 
@@ -157,7 +163,7 @@ class MissionsFragment : Fragment(), MissionsAdapter.MyPickListener, PickiTCallb
                         return@setOnClickListener
                     } else {
                         map.put(
-                            "answers[${s.task_id}][answer]",
+                            "answers[${s.taskId}][answer]",
                             RequestBody.create(("text/plain".toMediaTypeOrNull()), s.answer)
                         )
                     }
@@ -166,25 +172,30 @@ class MissionsFragment : Fragment(), MissionsAdapter.MyPickListener, PickiTCallb
 
             }
 
-             print("p size is ${parts.size}")
+            print("p size is ${parts.size}")
 
-             for (p in parts) {
-                 println(p.body.contentType().toString())
-             }
+            for (p in parts) {
+                println(p.body.contentType().toString())
+            }
 
 
             (activity as MainActivity).showProgress(true)
 
-                Retrofit.Api.sendMissions("Bearer ${loginModel.data.token}",parts,"1",map).enqueue(object : retrofit2.Callback<ResponseBody>{
+            Retrofit.Api.sendMissions("Bearer ${loginModel.data.token}", parts, "1", map)
+                .enqueue(object : retrofit2.Callback<ResponseBody> {
                     override fun onResponse(
                         call: Call<ResponseBody>,
                         response: Response<ResponseBody>
                     ) {
                         (activity as MainActivity).showProgress(false)
 
-                        if (response.isSuccessful){
-                            Toast.makeText(requireActivity(),"submitted successfully",Toast.LENGTH_SHORT).show()
-                        }else{
+                        if (response.isSuccessful) {
+                            Toast.makeText(
+                                requireActivity(),
+                                "submitted successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
 
                         }
                     }
@@ -232,6 +243,11 @@ class MissionsFragment : Fragment(), MissionsAdapter.MyPickListener, PickiTCallb
     override fun onMyPick(pos: Int) {
         selectedID = pos
         checkPermission()
+    }
+
+    override fun onDownload(taskk: MissionsModel.Data) {
+        if (!taskk.file.isEmpty())
+            checkPermissionToDownload(taskk.downlaodFileName!!, "desc", taskk.file)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -295,4 +311,62 @@ class MissionsFragment : Fragment(), MissionsAdapter.MyPickListener, PickiTCallb
                 }
             }).onSameThread().check()
     }
+
+    private fun downloadFile(fileName: String, desc: String, url: String) {
+
+        try {
+            val request = DownloadManager.Request(Uri.parse(url))
+                .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
+                .setTitle(fileName)
+                .setDescription(desc)
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setAllowedOverMetered(true)
+                .setAllowedOverRoaming(false)
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
+            val downloadManager =
+                requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            val downloadID = downloadManager.enqueue(request)
+        }catch (e:IllegalArgumentException){
+            Toast.makeText(activity,"server error",Toast.LENGTH_SHORT).show()
+        }
+        // fileName -> fileName with extension
+
+    }
+
+    fun checkPermissionToDownload(fileName: String, desc: String, url: String) {
+
+
+        Dexter.withContext(activity)
+            .withPermissions(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                    // check if all permissions are granted
+                    if (report.areAllPermissionsGranted()) {
+                        downloadFile(
+                            "${fileName}.pdf",
+                            "desc",
+                            url
+                        )
+                    }
+
+                    // check for permanent denial of any permission
+                    if (report.isAnyPermissionPermanentlyDenied()) {
+                        // Toast.makeText(getActivity(), "قم بالسماح للتطبيق للوصول الى موقعك من خلال الاعدادات", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: List<PermissionRequest?>?,
+                    token: PermissionToken
+                ) {
+                    token.continuePermissionRequest()
+                }
+            })
+            .onSameThread()
+            .check()
+    }
+
 }
