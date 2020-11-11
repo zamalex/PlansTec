@@ -32,6 +32,9 @@ data class MissionsModel(
         var userAnswer: String = "",
 
 
+        @SerializedName("answer_note")
+        var answer_note: String ="",
+
         @SerializedName("file_name")
         var downlaodFileName: String? = null,
 

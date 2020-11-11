@@ -39,9 +39,8 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mission_title"
+        app:layout_constraintTop_toBottomOf="@+id/re_txt"
         app:srcCompat="@drawable/att" />
 
     <Button
@@ -86,4 +85,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/downlaod" />
+
+    <TextView
+        android:textColor="@android:color/holo_red_light"
+        android:id="@+id/re_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintStart_toStartOf="@+id/mission_title"
+        app:layout_constraintTop_toBottomOf="@+id/mission_title" />
 </androidx.constraintlayout.widget.ConstraintLayout>

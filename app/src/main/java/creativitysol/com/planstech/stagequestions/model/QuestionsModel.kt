@@ -17,7 +17,9 @@ data class QuestionsModel(
         var title: String = "",
         var type: String = "",
         @SerializedName("user_answer")
-        var userAnswer: Any = Any()
+        var userAnswer: Any = Any(),
+        @SerializedName("answer_note")
+        var answer_note: String =""
     ) {
         data class Answer(
             var id: Int = 0,

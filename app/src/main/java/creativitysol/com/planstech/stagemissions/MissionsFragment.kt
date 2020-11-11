@@ -85,15 +85,28 @@ class MissionsFragment : Fragment(), MissionsAdapter.MyPickListener, PickiTCallb
         viewModel.getStagesOfPackage("Bearer ${loginModel.data.token}", "1")
 
 
+        var notAnswered = ArrayList<MissionsModel.Data>()
         viewModel.questionsResopnse.observe(viewLifecycleOwner, Observer {
             (activity as MainActivity).showProgress(false)
             if (it != null) {
                 if (it.success) {
+
+                    if (!it.data.isNullOrEmpty()){
+                        for (m in it.data){
+                            if (m.status!=1){
+                                notAnswered.add(m)
+                            }
+                        }
+                    }
                     v.missions_rv.apply {
                         mAdapter = MissionsAdapter(
                             requireActivity(), this@MissionsFragment,
-                            it.data as ArrayList<MissionsModel.Data>
+                            notAnswered
                         )
+                        /*mAdapter = MissionsAdapter(
+                            requireActivity(), this@MissionsFragment,
+                            it.data as ArrayList<MissionsModel.Data>
+                        )*/
                         layoutManager = LinearLayoutManager(requireActivity())
                         adapter = mAdapter
                         val dividerItemDecoration = DividerItemDecoration(

@@ -32,7 +32,7 @@ class SinglePartnerRV(val context: Context,val partner: PartnerModel.Data) : Rec
 
 
 
-        if (!partner.logos[position].logo.isEmpty())
-            Picasso.get().load(partner.logos[position].logo).fit().centerCrop().into(holder.img)
+        if (!partner.logos[position].isEmpty())
+            Picasso.get().load(partner.logos[position]).fit().centerCrop().into(holder.img)
     }
 }

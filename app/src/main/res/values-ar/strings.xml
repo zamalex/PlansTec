@@ -79,4 +79,5 @@
     <string name="loginnnn">تسجيل دخول</string>
     <string name="wrongcode">الكود خطأ</string>
     <string name="no_conversation">لا توجد محادثة</string>
+    <string name="re_enter_the_answer">اعد ادخال الاجابة</string>
 </resources>

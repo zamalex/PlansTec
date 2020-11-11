@@ -5,17 +5,17 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.text.Html
 import android.util.TypedValue
 import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
-import androidx.core.view.marginLeft
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.radiobutton.MaterialRadioButton
@@ -104,6 +104,12 @@ class QuestionsFragment : Fragment() {
         for (i in 0 until questionsModel.data.size) {
             var radioGroup: RadioGroup = RadioGroup(requireActivity())
             var textView: TextView = TextView(requireActivity())
+            var textView2: TextView = TextView(requireActivity())
+
+          /*  val text =
+                "<font color='black'>${questionsModel.data[i].title}</font><font color='red'>اعد السؤال</font>"
+*/
+
             textView.typeface=typefaceBold
             textView.layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -112,6 +118,17 @@ class QuestionsFragment : Fragment() {
                 setMargins(16, 16, 16, 16)
             }
             textView.text = questionsModel.data[i].title
+          //  textView.setText(Html.fromHtml(text), TextView.BufferType.SPANNABLE)
+
+            textView2.typeface=typefaceBold
+            textView2.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                setMargins(16, 16, 16, 16)
+            }
+            textView2.text = "${questionsModel.data[i].answer_note}"
+            textView2.setTextColor(Color.RED)
 
             if (questionsModel.data[i].type.equals("multichoose")){
                 radioGroup.layoutParams = LinearLayout.LayoutParams(
@@ -163,6 +180,7 @@ class QuestionsFragment : Fragment() {
                 }
 
                 linearLayout.addView(textView)
+                linearLayout.addView(textView2)
                 linearLayout.addView(radioGroup)
                 arrayList.add(Question(radioGroup,questionsModel.data[i].questionId))
             }
@@ -182,6 +200,7 @@ class QuestionsFragment : Fragment() {
                 }
                 editText.setBackgroundResource(R.drawable.edit_border)
                 linearLayout.addView(textView)
+                linearLayout.addView(textView2)
                 linearLayout.addView(editText)
 
                 arrayList.add(Question(editText,questionsModel.data[i].questionId))

@@ -14,6 +14,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.stagemissions.model.MissionsModel
+import kotlinx.android.synthetic.main.item_mission.view.*
 
 
 class MissionsAdapter(val context: Context, val listener: MyPickListener,var list:ArrayList<MissionsModel.Data>) : RecyclerView.Adapter<MissionsAdapter.Holder>() {
@@ -54,6 +55,12 @@ class MissionsAdapter(val context: Context, val listener: MyPickListener,var lis
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
         var  item:MissionsModel.Data = list[position]
+
+
+
+            holder.itemView.re_txt.setText(item.answer_note)
+
+
 
         holder.mission_title.text = item.title
         if (item.type.equals("training")){
