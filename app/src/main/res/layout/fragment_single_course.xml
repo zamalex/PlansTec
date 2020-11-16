@@ -273,6 +273,7 @@
                     android:textAlignment="viewStart"
                     android:textColor="@color/black"
                     android:textStyle="bold"
+                    android:textIsSelectable="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

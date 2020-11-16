@@ -1,9 +1,11 @@
 package creativitysol.com.planstech.base
 
 import addToFavouritesModule
+import android.content.res.Configuration
 import android.util.Log
 import com.google.gson.JsonObject
 import com.onesignal.OneSignal
+import com.yariksoffice.lingver.Lingver
 import creativitysol.com.planstech.api.Retrofit
 import creativitysol.com.planstech.base.di.appModule
 import creativitysol.com.planstech.conschat.di.chatModule
@@ -33,6 +35,8 @@ class BaseApp : android.app.Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Lingver.init(this);
+        Lingver.getInstance().setLocale(this, "ar");
         Paper.init(this)
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE)
 
@@ -109,5 +113,11 @@ class BaseApp : android.app.Application() {
             Paper.book().write("device",mToken)
         }
         return  mToken
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        Lingver.getInstance().setLocale(this, "ar")
+
     }
 }

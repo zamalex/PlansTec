@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import com.kaopiz.kprogresshud.KProgressHUD
+import com.yariksoffice.lingver.Lingver
 import creativitysol.com.planstech.CustomizedExceptionHandler
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.about.AboutFragment
@@ -71,9 +72,13 @@ class MainActivity : AppCompatActivity(),
 
     var isLogged: Boolean = false
 
+    override fun onStart() {
+        super.onStart()
+        Lingver.getInstance().setLocale(this, "ar")
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setLang("ar")
 
 
 

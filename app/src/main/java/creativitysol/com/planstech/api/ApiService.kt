@@ -4,6 +4,7 @@ import com.google.gson.JsonObject
 import creativitysol.com.planstech.about.DataResponse
 import creativitysol.com.planstech.articledetails.model.SingleArticle
 import creativitysol.com.planstech.coursedetails.model.SingleCourse
+import creativitysol.com.planstech.follow.FollowReponse
 import creativitysol.com.planstech.gladtoserve.model.ContactData
 import creativitysol.com.planstech.gladtoserve.model.Services
 import creativitysol.com.planstech.home.model.ArticlesModel
@@ -69,7 +70,7 @@ interface ApiService {
     @GET("auth/partners")
     fun getPartners(): Call<PartnerModel>
 
-    @GET("auth/statistics")
+    @GET("statistics")
     fun getStats(): Call<StatModel>
 
     @GET("auth/training_desc/{id}")
@@ -111,6 +112,9 @@ interface ApiService {
         @Header("Authorization") bearerToken: String,
         @Path("type") type: String
     ): Call<ResponseBody>
+
+    @GET("pages/contact-us")
+    fun getFollow(): Call<FollowReponse>
 
 
     @POST("auth/add_to_my_favorites_trainings")

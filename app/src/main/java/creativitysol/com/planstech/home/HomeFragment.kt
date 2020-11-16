@@ -1,14 +1,15 @@
 package creativitysol.com.planstech.home
 
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import creativitysol.com.planstech.*
+import creativitysol.com.planstech.R
 import creativitysol.com.planstech.articledetails.SingleArticleFragment
 import creativitysol.com.planstech.articles.ArticleListener
 import creativitysol.com.planstech.articles.ArticlesFragment
@@ -45,7 +46,22 @@ class HomeFragment : Fragment(),
             v = inflater.inflate(R.layout.fragment_home, container, false)
             var login: LoginModel = Paper.book().read("login", LoginModel())
 
-            if (!login.data.token.isEmpty()){
+
+            val fileName =
+                "android.resource://" + activity!!.getPackageName().toString() + "/raw/vvv"
+
+            val video: Uri = Uri.parse(fileName)
+
+            v!!.vid.setVideoURI(video)
+            v!!.vid.start()
+
+            v!!.vid.setOnClickListener {
+                if (!v!!.vid.isPlaying) {
+                    v!!.vid.start()
+                }
+            }
+
+            if (!login.data.token.isEmpty()) {
                 (requireActivity() as MainActivity).setLogMenu()
             }
 
@@ -129,9 +145,9 @@ class HomeFragment : Fragment(),
 
             viewModel.stats.observe(requireActivity(), Observer {
                 if (isAdded) {
-                    v!!.sclents.text = it.data.clientsCount.toString() + "\nعميل"
-                    v!!.scourses.text = it.data.courcesCount.toString() + "\nدورة"
-                    v!!.splans.text = it.data.plansCount.toString() + "\nخطة"
+                    v!!.sclents.text = it.data.clientsCount.toString() + "\nعملائنا السعداء"
+                    v!!.scourses.text = it.data.teamsCount.toString() + "\nفريقنا"
+                    v!!.splans.text = it.data.programsCount.toString() + "\nبرامجنا"
                 }
 
             })

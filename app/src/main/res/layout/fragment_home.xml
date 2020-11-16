@@ -38,7 +38,17 @@
             app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            app:layout_constraintTop_toTopOf="@+id/imageView">
+            <VideoView
+                android:id="@+id/vid"
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+
+                />
+
+        </androidx.cardview.widget.CardView>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/request_btn"
