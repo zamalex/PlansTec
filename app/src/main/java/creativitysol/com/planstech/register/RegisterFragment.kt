@@ -93,6 +93,7 @@ class RegisterFragment : Fragment() {
                 jsonObject.addProperty("password",reg_pass.text.toString())
                 jsonObject.addProperty("city",reg_city.text.toString())
                 jsonObject.addProperty("district",reg_loc.text.toString())
+                jsonObject.addProperty("phone",reg_phone.text.toString())
                 jsonObject.addProperty("confirm_password",reg_pass.text.toString())
 
                 (requireActivity() as MainActivity).showProgress(true)

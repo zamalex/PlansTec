@@ -13,6 +13,8 @@ data class SingleCourse(
         var address: String = "",
         @SerializedName("created_at")
         var createdAt: String = "",
+        @SerializedName("is_subscribe")
+        var isSubscribed: Boolean = false,
         var description: String = "",
         var duration: String = "",
         var id: Int = 0,

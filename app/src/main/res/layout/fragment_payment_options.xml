@@ -23,6 +23,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bank_button"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="8dp"

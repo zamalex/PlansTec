@@ -27,7 +27,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     MainActivity::class.java))
                 this@SplashScreenActivity.finish()
             }
-        },5000,10000)
+        },3000,10000)
     }
 
     override fun onDestroy() {

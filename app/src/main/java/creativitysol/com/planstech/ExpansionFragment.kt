@@ -37,7 +37,7 @@ class ExpansionFragment : Fragment() {
 
 
         (activity as MainActivity).showProgress(true)
-        viewModel.getStagesOfPackage("Bearer ${loginModel.data.token}","2")
+        viewModel.getStagesOfPackage("Bearer ${loginModel.data.token}",arguments!!.getString("id")!!)
 
 
         viewModel.stagesResponse.observe(viewLifecycleOwner, Observer {

@@ -34,7 +34,7 @@ class QuestionsFragment : Fragment() {
         Paper.book().read("login", LoginModel())
     }
     var map: HashMap<String, RequestBody> = HashMap()
-    var mID:Int = 1
+    var mID: Int = 1
     var jsonObject = JsonObject()
     lateinit var viewModel: QuestionsViewModel
     lateinit var v: View
@@ -42,7 +42,7 @@ class QuestionsFragment : Fragment() {
     lateinit var linearLayout: LinearLayout
     var arrayList: ArrayList<Question> = ArrayList();
 
-    var hashmap : ArrayList<String> = ArrayList()
+    var hashmap: ArrayList<String> = ArrayList()
     lateinit var typeface: Typeface
     lateinit var typefaceBold: Typeface
     override fun onCreateView(
@@ -62,7 +62,7 @@ class QuestionsFragment : Fragment() {
             ), intArrayOf(Color.parseColor("#AAB5BC"), Color.parseColor("#FFFFFF"))
         )
 
-        mID = 1//arguments!!.getString( "id", null )
+        mID = arguments!!.getString( "id", null ).toInt()
         linearLayout = v.findViewById(R.id.parents)
         typeface =
             Typeface.createFromAsset(requireActivity().assets, "fonts/tajwalmedium.ttf")
@@ -73,11 +73,12 @@ class QuestionsFragment : Fragment() {
 
 
         viewModel.getStagesOfPackage(
-            "Bearer ${loginModel.data.token}","${mID}")//arguments!!.getString( "id", null )
+            "Bearer ${loginModel.data.token}", "${mID}"
+        )//arguments!!.getString( "id", null )
 
         viewModel.questionsResopnse.observe(viewLifecycleOwner, Observer {
-            if (it!=null){
-                if (it.success){
+            if (it != null) {
+                if (it.success) {
                     initDynamicLayout(it)
 
                 }
@@ -86,10 +87,11 @@ class QuestionsFragment : Fragment() {
 
 
         viewModel.submit.observe(viewLifecycleOwner, Observer {
-            if (isAdded){
+            if (isAdded) {
                 (activity as MainActivity).showProgress(false)
-                if (it!=null){
-                    Toast.makeText(requireActivity(),"submitted successfully",Toast.LENGTH_SHORT).show()
+                if (it != null) {
+                    Toast.makeText(requireActivity(), "submitted successfully", Toast.LENGTH_SHORT)
+                        .show()
 
                 }
             }
@@ -106,11 +108,11 @@ class QuestionsFragment : Fragment() {
             var textView: TextView = TextView(requireActivity())
             var textView2: TextView = TextView(requireActivity())
 
-          /*  val text =
-                "<font color='black'>${questionsModel.data[i].title}</font><font color='red'>اعد السؤال</font>"
-*/
+            /*  val text =
+                  "<font color='black'>${questionsModel.data[i].title}</font><font color='red'>اعد السؤال</font>"
+  */
 
-            textView.typeface=typefaceBold
+            textView.typeface = typefaceBold
             textView.layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -118,19 +120,20 @@ class QuestionsFragment : Fragment() {
                 setMargins(16, 16, 16, 16)
             }
             textView.text = questionsModel.data[i].title
-          //  textView.setText(Html.fromHtml(text), TextView.BufferType.SPANNABLE)
+            //  textView.setText(Html.fromHtml(text), TextView.BufferType.SPANNABLE)
 
-            textView2.typeface=typefaceBold
+            textView2.typeface = typefaceBold
             textView2.layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).apply {
                 setMargins(16, 16, 16, 16)
             }
-            textView2.text = "${questionsModel.data[i].answer_note}"
+            if (questionsModel.data[i].answer_note != null)
+                textView2.text = "${questionsModel.data[i].answer_note}"
             textView2.setTextColor(Color.RED)
 
-            if (questionsModel.data[i].type.equals("multichoose")){
+            if (questionsModel.data[i].type.equals("multichoose")) {
                 radioGroup.layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
@@ -182,11 +185,8 @@ class QuestionsFragment : Fragment() {
                 linearLayout.addView(textView)
                 linearLayout.addView(textView2)
                 linearLayout.addView(radioGroup)
-                arrayList.add(Question(radioGroup,questionsModel.data[i].questionId))
-            }
-
-
-            else if (questionsModel.data[i].type.equals("written")){
+                arrayList.add(Question(radioGroup, questionsModel.data[i].questionId))
+            } else if (questionsModel.data[i].type.equals("written")) {
                 var editText: EditText = EditText(requireActivity());
 
 
@@ -203,7 +203,7 @@ class QuestionsFragment : Fragment() {
                 linearLayout.addView(textView2)
                 linearLayout.addView(editText)
 
-                arrayList.add(Question(editText,questionsModel.data[i].questionId))
+                arrayList.add(Question(editText, questionsModel.data[i].questionId))
             }
 
 
@@ -224,7 +224,7 @@ class QuestionsFragment : Fragment() {
             // 150f.toDips().toInt()
 
         }
-        button.setPadding(10,5,10,5)
+        button.setPadding(10, 5, 10, 5)
 
         button.setTextColor(Color.WHITE)
 
@@ -236,47 +236,54 @@ class QuestionsFragment : Fragment() {
                     var radioButton =
                         v.findViewById<MaterialRadioButton>((arrayList[i].view as RadioGroup).checkedRadioButtonId)
 
-                    if (radioButton!=null){
-                        var s:String = "answers[${arrayList[i].id}][answer] = ${radioButton.text.toString()} and tag is ${radioButton.tag}"
-                        var ss:String = "answers[${i}][id] = ${arrayList[i].id.toString()}"
+                    if (radioButton != null) {
+                        var s: String =
+                            "answers[${arrayList[i].id}][answer] = ${radioButton.text.toString()} and tag is ${radioButton.tag}"
+                        var ss: String = "answers[${i}][id] = ${arrayList[i].id.toString()}"
                         hashmap.add("${s}\n")
                         map.put(
                             "answers[${arrayList[i].id}][answer]",
-                            RequestBody.create(("text/plain".toMediaTypeOrNull()), radioButton.tag.toString())
+                            RequestBody.create(
+                                ("text/plain".toMediaTypeOrNull()),
+                                radioButton.tag.toString()
+                            )
                         )
-                     //   jsonObject.addProperty("answers[${arrayList[i].id}][answer]",radioButton.tag.toString())
+                        //   jsonObject.addProperty("answers[${arrayList[i].id}][answer]",radioButton.tag.toString())
 
-                    }else{
-                       // map.clear()
+                    } else {
+                        // map.clear()
 
-                      //  return@setOnClickListener
+                        //  return@setOnClickListener
 
                     }
 
 
-                }
-                else if  (arrayList[i].view is EditText) {
-                   if ((arrayList[i].view as EditText).text.isEmpty()){
-                       map.clear()
-                       return@setOnClickListener
-                   }
+                } else if (arrayList[i].view is EditText) {
+                    if ((arrayList[i].view as EditText).text.isEmpty()) {
+                        map.clear()
+                        return@setOnClickListener
+                    }
 
-                    var s:String = "answers[${arrayList[i].id}][answer] = ${(arrayList[i].view as EditText).text.toString()}"
-               //     var ss:String = "answers[${i}][id] = ${arrayList[i].id.toString()}"
+                    var s: String =
+                        "answers[${arrayList[i].id}][answer] = ${(arrayList[i].view as EditText).text.toString()}"
+                    //     var ss:String = "answers[${i}][id] = ${arrayList[i].id.toString()}"
                     hashmap.add("${s}\n")
-                  //  jsonObject.addProperty("answers[${arrayList[i].id}][answer]",(arrayList[i].view as EditText).text.toString())
+                    //  jsonObject.addProperty("answers[${arrayList[i].id}][answer]",(arrayList[i].view as EditText).text.toString())
                     map.put(
                         "answers[${arrayList[i].id}][answer]",
-                        RequestBody.create(("text/plain".toMediaTypeOrNull()), (arrayList[i].view as EditText).text.toString())
+                        RequestBody.create(
+                            ("text/plain".toMediaTypeOrNull()),
+                            (arrayList[i].view as EditText).text.toString()
+                        )
                     )
                 }
             }
 
 
             ((activity as MainActivity)).showProgress(true)
-            viewModel.submit("Bearer ${loginModel.data.token}","${mID}",map)
+            viewModel.submit("Bearer ${loginModel.data.token}", "${mID}", map)
 
-            for (s in hashmap){
+            for (s in hashmap) {
                 println(s)
                 println("---------------------------------------------")
             }
@@ -284,7 +291,7 @@ class QuestionsFragment : Fragment() {
         }
 
 
-         linearLayout.addView(button)
+        linearLayout.addView(button)
 
     }
 

@@ -1,6 +1,8 @@
 package creativitysol.com.planstech.api
 
+import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.util.Constants
+import io.paperdb.Paper
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -8,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object Retrofit {
+    val log =  Paper.book().read("login", LoginModel())
 
     private val logging =
         HttpLoggingInterceptor().apply {
@@ -19,6 +22,14 @@ object Retrofit {
         .addInterceptor(logging)
         .readTimeout(60, TimeUnit.SECONDS)
         .connectTimeout(60, TimeUnit.SECONDS)
+        .addInterceptor { chain ->
+            chain.proceed(
+                chain.request().newBuilder()
+                    .addHeader("Accept", "application/json")
+                     .addHeader("Authorization", "Bearer ${log.data.token}")
+                    .build()
+            )
+        }
         .build()
 
     private val retrofit = Retrofit.Builder()

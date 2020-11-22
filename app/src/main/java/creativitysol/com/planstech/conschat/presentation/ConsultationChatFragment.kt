@@ -5,12 +5,15 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.base.Executors
 import creativitysol.com.planstech.conschat.data.model.ChatHistory
 import creativitysol.com.planstech.conschat.data.model.SenderBody
+import creativitysol.com.planstech.main.MainActivity
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_consultations_chat.*
@@ -49,16 +52,22 @@ class ConsultationChatFragment : Fragment() {
                     )
         }
 
-        consultationChatViewModel.getChatHistory.observe(viewLifecycleOwner, {
-            if (it.isNullOrEmpty()) {
+        consultationChatViewModel.getChatHistory.observe(viewLifecycleOwner,  {
+            if (it.data.isNullOrEmpty()) {
                 btn_send_chat_message.isEnabled = false
                 conv_txt.visibility = View.VISIBLE
 
             } else {
+                //Toast.makeText(activity,it.archived.toString(),Toast.LENGTH_SHORT).show()
+                if (it.archived){
+                    btn_send_chat_message.isEnabled = false
+                }else{
+                    btn_send_chat_message.isEnabled = true
+                }
                 conv_txt.visibility = View.INVISIBLE
                 btn_send_chat_message.isEnabled = true
                 mutableChatItems.clear()
-                mutableChatItems.addAll(it)
+                mutableChatItems.addAll(it.data)
                 rec_chat_history.apply {
                     chatHistoryAdapter = ChatHistoryAdapter(mutableChatItems)
                     adapter = chatHistoryAdapter
@@ -111,5 +120,10 @@ class ConsultationChatFragment : Fragment() {
         if (!scheduleRequestingHistory().isDisposed)
             scheduleRequestingHistory().dispose()
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (activity as MainActivity).setTitle("الاستشارة")
     }
 }

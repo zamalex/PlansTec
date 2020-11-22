@@ -82,7 +82,7 @@ class MissionsFragment : Fragment(), MissionsAdapter.MyPickListener, PickiTCallb
 
 
         (activity as MainActivity).showProgress(true)
-        viewModel.getStagesOfPackage("Bearer ${loginModel.data.token}", "1")
+        viewModel.getStagesOfPackage("Bearer ${loginModel.data.token}", arguments!!.getString("id")!!)
 
 
         var notAnswered = ArrayList<MissionsModel.Data>()
@@ -194,7 +194,7 @@ class MissionsFragment : Fragment(), MissionsAdapter.MyPickListener, PickiTCallb
 
             (activity as MainActivity).showProgress(true)
 
-            Retrofit.Api.sendMissions("Bearer ${loginModel.data.token}", parts, "1", map)
+            Retrofit.Api.sendMissions("Bearer ${loginModel.data.token}", parts, arguments!!.getString("id")!!, map)
                 .enqueue(object : retrofit2.Callback<ResponseBody> {
                     override fun onResponse(
                         call: Call<ResponseBody>,

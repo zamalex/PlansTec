@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import creativitysol.com.planstech.base.Executors
 import creativitysol.com.planstech.base.UseCase
 import creativitysol.com.planstech.conschat.data.model.ChatHistory
+import creativitysol.com.planstech.conschat.data.model.HistoryData
 import creativitysol.com.planstech.conschat.data.repository.ChatHistoryRepo
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
@@ -18,7 +19,7 @@ class ChatHistoryUseCase(
             chatHistoryRepo.getChatHistory()
                 .subscribeOn(executors.getIOThread())
                 .subscribe({
-                    chatHistoryList.postValue(it.data)
+                    chatHistoryList.postValue(it)
                 }, {
                     historyError.postValue(it)
                 })
@@ -31,5 +32,5 @@ class ChatHistoryUseCase(
     }
 
     val historyError = MutableLiveData<Throwable>()
-    val chatHistoryList = MutableLiveData<List<ChatHistory>>()
+    val chatHistoryList = MutableLiveData<HistoryData>()
 }

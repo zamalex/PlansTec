@@ -126,7 +126,7 @@ class ProfileFragment : Fragment() , PickiTCallbacks {
 
                             registerModel!!.data.let {model->
 
-                                if (!model.avatar.isEmpty())
+                                if (model.avatar!=null&&!model.avatar.isEmpty())
                                     Picasso.get().load(model.avatar).fit().centerCrop().into(v.user_img)
 
                             }

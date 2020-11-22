@@ -16,5 +16,7 @@ data class ChatHistory(
 )
 
 data class HistoryData(
-    val data: List<ChatHistory>
+    val data: List<ChatHistory>,
+    @SerializedName("archived")
+    val archived: Boolean = true
 )

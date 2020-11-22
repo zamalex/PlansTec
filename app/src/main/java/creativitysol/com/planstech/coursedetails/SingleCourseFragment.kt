@@ -95,6 +95,12 @@ class SingleCourseFragment : Fragment() ,SliderAdapterExample.imageInterface{
                 else v.img_add_remove_fav.setImageResource(R.drawable.unsaved)
 
 
+                if (it.data.isSubscribed){
+                    v.button.visibility = View.GONE
+                }
+                else
+                    v.button.visibility = View.VISIBLE
+
                 var aray: ArrayList<String> = ArrayList()
 
                 for (i in 0 until it.data.imagesGallary.size) {

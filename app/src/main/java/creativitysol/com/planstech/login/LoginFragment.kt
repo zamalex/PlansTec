@@ -111,7 +111,7 @@ class LoginFragment : Fragment() {
                 if (it != null && !it.data.token.isEmpty()) {
                     Paper.book().write("login", it)
 
-                    activity?.application?.onCreate()
+                  //  activity?.application?.onCreate()
 
                     //(requireActivity() as MainActivity).fragmentStack.replace(HomeFragment())
                    triggerRestart(requireActivity())
