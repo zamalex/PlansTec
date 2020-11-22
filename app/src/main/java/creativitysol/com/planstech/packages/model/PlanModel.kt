@@ -20,6 +20,8 @@ data class PlanModel(
         var title: String = "",
         var is_subscribed : Int=0,
         var can_subscribe : Int=0,
+        @SerializedName("is_free")
+        var is_free : Boolean=false,
         var try_subscription : Int=0
     )
 }

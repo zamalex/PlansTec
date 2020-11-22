@@ -14,6 +14,7 @@ import creativitysol.com.planstech.articles.ArticlesFragment
 import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.main.MainActivity
 import creativitysol.com.planstech.packages.model.PlanModel
+import creativitysol.com.planstech.payment.OnlinePaymentFragment
 import creativitysol.com.planstech.payment.PaymentOptionsFragment
 import creativitysol.com.planstech.register.model.RegisterModel
 import creativitysol.com.planstech.tradio.TRVAdapter
@@ -21,17 +22,25 @@ import io.paperdb.Paper
 import kotlinx.android.synthetic.main.fragment_packages.view.*
 import kotlinx.android.synthetic.main.fragment_packages.view.trv
 import kotlinx.android.synthetic.main.fragment_t_radio.view.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
 
 /**
  * A simple [Fragment] subclass.
  */
 class PackagesFragment : Fragment(), TRVAdapter.radioClick {
+    var map:HashMap<String, RequestBody> = HashMap<String, RequestBody>()
 
     lateinit var v: View
     lateinit var adapter: TRVAdapter
     lateinit var selectedPlan: PlanModel.Data
      var selectedID: Int=0
     lateinit var viewModel: PlanViewModel
+    val loginModel: LoginModel by lazy {
+        Paper.book().read("login", LoginModel())
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,6 +87,32 @@ class PackagesFragment : Fragment(), TRVAdapter.radioClick {
                return@setOnClickListener
 
            }
+            if (selectedPlan.is_free){
+                val payment_method: RequestBody = RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    "online")
+
+
+                val selected: RequestBody = RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    selectedID.toString())
+
+
+
+
+                map.put("payment_method", payment_method)
+                map.put("item_id", selected)
+
+
+                (activity as MainActivity).showProgress(true)
+
+
+                    viewModel.subscribeToPackage("Bearer ${loginModel.data.token}",null,map)
+
+
+                return@setOnClickListener
+            }
+
             val b:Bundle = Bundle()
             b.putInt("id",selectedID)
             (activity as MainActivity).fragmentStack.push(PaymentOptionsFragment().apply {
@@ -85,6 +120,20 @@ class PackagesFragment : Fragment(), TRVAdapter.radioClick {
             })
 
         }
+
+
+        viewModel.subscribeResponse.observe(viewLifecycleOwner, Observer {
+            (activity as MainActivity).showProgress(false)
+
+            if (it!=null){
+                if (it.success) {
+
+                    Toast.makeText(requireActivity()," subscribed", Toast.LENGTH_SHORT).show()
+                    (activity as MainActivity).fragmentStack.pop()
+                }
+            }
+        })
+
 
         return v
     }
