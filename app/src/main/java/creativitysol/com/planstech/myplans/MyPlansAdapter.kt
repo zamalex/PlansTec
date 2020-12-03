@@ -49,8 +49,9 @@ class MyPlansAdapter(val context: Context,val planModel: PlanModel) : RecyclerVi
         return planModel.data.size
     }
 
-    override fun onBindViewHolder(holder: Holder, position: Int) {
-       // holder.mtitle.text = planModel.data[position].title
+    override fun onBindViewHolder(holder: Holder, position: Int
+    ) {
+        holder.mtitle.text = planModel.data[position].title
         holder.details.text = planModel.data[position].goals
 
     }

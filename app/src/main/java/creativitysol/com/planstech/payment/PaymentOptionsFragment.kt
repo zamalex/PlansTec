@@ -21,6 +21,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
+import com.yariksoffice.lingver.Lingver
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.main.MainActivity
@@ -217,6 +218,8 @@ class PaymentOptionsFragment : Fragment(), PickiTCallbacks {
 
     override fun onStart() {
         super.onStart()
+        Lingver.getInstance().setLocale(requireActivity(), "ar")
+
         (activity as MainActivity).setTitle(getString(R.string.payoptions))
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

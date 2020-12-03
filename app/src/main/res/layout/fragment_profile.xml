@@ -113,34 +113,6 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:boxBackgroundMode="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
-        app:passwordToggleEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/edit_border"
-            android:drawableStart="@drawable/pass"
-            android:drawablePadding="20dp"
-            android:fontFamily="@font/tajwal"
-            android:hint="@string/password"
-            android:id="@+id/register_pass"
-
-            android:inputType="textPassword"
-
-            android:padding="10dp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout6"
         android:layout_width="0dp"
         android:layout_height="70dp"
@@ -150,9 +122,10 @@
         app:layout_constraintEnd_toStartOf="@+id/textInputLayout7"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/register_city"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/edit_border"
@@ -160,7 +133,6 @@
             android:drawablePadding="20dp"
             android:fontFamily="@font/tajwal"
             android:hint="@string/city"
-            android:id="@+id/register_city"
 
             android:padding="10dp" />
 

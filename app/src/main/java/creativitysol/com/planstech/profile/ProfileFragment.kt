@@ -3,17 +3,17 @@ package creativitysol.com.planstech.profile
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.icu.number.NumberFormatter.with
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
-import com.google.gson.JsonObject
 import com.hbisoft.pickit.PickiT
 import com.hbisoft.pickit.PickiTCallbacks
 import com.karumi.dexter.Dexter
@@ -26,17 +26,14 @@ import com.mobsandgeeks.saripaar.ValidationError
 import com.mobsandgeeks.saripaar.Validator
 import com.mobsandgeeks.saripaar.annotation.Email
 import com.mobsandgeeks.saripaar.annotation.NotEmpty
-import com.mobsandgeeks.saripaar.annotation.Password
 import com.squareup.picasso.Picasso
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.main.MainActivity
-import creativitysol.com.planstech.register.RegisterViewModel
 import creativitysol.com.planstech.register.model.RegisterModel
 import io.paperdb.Paper
-import kotlinx.android.synthetic.main.bank_layout.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
-import kotlinx.android.synthetic.main.fragment_single_article.view.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -72,8 +69,7 @@ class ProfileFragment : Fragment() , PickiTCallbacks {
     @NotEmpty(message = "enter phone number")
     lateinit var reg_phone: TextInputEditText
 
-    @Password(message = "enter valid input")
-    lateinit var reg_pass: TextInputEditText
+
 
     @NotEmpty(message = "enter valid input")
     lateinit var reg_city: TextInputEditText
@@ -96,7 +92,6 @@ class ProfileFragment : Fragment() , PickiTCallbacks {
         reg_name = v.findViewById(R.id.register_name)
         reg_mail = v.findViewById(R.id.register_mail)
         reg_phone = v.findViewById(R.id.register_phone)
-        reg_pass = v.findViewById(R.id.register_pass)
         reg_city = v.findViewById(R.id.register_city)
         reg_loc = v.findViewById(R.id.register_loc)
 
@@ -123,6 +118,7 @@ class ProfileFragment : Fragment() , PickiTCallbacks {
                             reg_mail.setText(registerModel!!.data.email)
                             reg_city.setText(registerModel!!.data.city)
                             reg_loc.setText(registerModel!!.data.district)
+                            reg_phone.setText(registerModel!!.data.phone)
 
                             registerModel!!.data.let {model->
 
@@ -185,10 +181,23 @@ class ProfileFragment : Fragment() , PickiTCallbacks {
                     "text/plain".toMediaTypeOrNull(),
                     reg_loc.text.toString())
 
+                val mail: RequestBody = RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    reg_mail.text.toString())
+
+                val mob: RequestBody = RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    reg_phone.text.toString())
+
+
+
 
                 map.put("name", name)
                 map.put("city", city)
                 map.put("district", district)
+                map.put("email", mail)
+                map.put("mobile", mob)
+                map.put("phone", mob)
 
 
 
@@ -207,8 +216,15 @@ class ProfileFragment : Fragment() , PickiTCallbacks {
         viewModel.updateResponse.observe(viewLifecycleOwner, Observer {
             if (isAdded){
                 (requireActivity() as MainActivity).showProgress(false)
+                if (it!=null&&it.statusCode==200)
+                {
+                    if (!it.data.avatar.isNullOrEmpty()){
+                        Picasso.get().load(it.data.avatar).placeholder(R.drawable.menulogo).error(R.drawable.menulogo)
+                            .centerCrop().fit()
+                            .into(activity!!.profile_img)
+                    }
 
-
+                }
 
             }
         })
@@ -227,6 +243,10 @@ class ProfileFragment : Fragment() , PickiTCallbacks {
                 if (data != null) {
 
                     val uri = data.data
+
+                    Picasso.get().load(uri).placeholder(R.drawable.menulogo).error(R.drawable.menulogo)
+                        .centerCrop().fit()
+                        .into(v.user_img)
                     pickiT!!.getPath(uri, Build.VERSION.SDK_INT)
                 }
             } else if (resultCode == Activity.RESULT_CANCELED) {

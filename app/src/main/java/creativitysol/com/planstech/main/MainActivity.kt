@@ -204,6 +204,8 @@ class MainActivity : AppCompatActivity(),
         loglist.add(getString(R.string.candshops))
         loglist.add(getString(R.string.happy))
         loglist.add(getString(R.string.about))
+        loglist.add(getString(R.string.successsh))
+        loglist.add(getString(R.string.terms))
 
 
         var login: LoginModel = Paper.book().read("login", LoginModel())
@@ -243,6 +245,9 @@ class MainActivity : AppCompatActivity(),
             list.add(getString(R.string.candshops))
             list.add(getString(R.string.happy))
             list.add(getString(R.string.about))
+            list.add(getString(R.string.successsh))
+            list.add(getString(R.string.terms))
+
         }
 
         drawer_rv.apply {
@@ -323,6 +328,8 @@ class MainActivity : AppCompatActivity(),
                 4 -> fragmentStack.push(CoursesFragment())
                 5 -> fragmentStack.push(GladToServeFragment())
                 6 -> fragmentStack.push(AboutFragment())
+                7 -> fragmentStack.push(PartnersFragment())
+                8 -> fragmentStack.push(TermsFragment())
 
 
             }

@@ -12,16 +12,16 @@ import retrofit2.Response
 class ProfileViewModel : ViewModel(){
 
 
-    var updateResponse = MutableLiveData<ResponseBody>()
+    var updateResponse = MutableLiveData<ProfileResponse>()
 
 
         fun updateProfile(token: String,
                           file: MultipartBody.Part?,
                           partMap: Map<String, RequestBody>){
-            Retrofit.Api.updateProfile(token,file,partMap).enqueue(object : retrofit2.Callback<ResponseBody>{
+            Retrofit.Api.updateProfile(token,file,partMap).enqueue(object : retrofit2.Callback<ProfileResponse>{
                 override fun onResponse(
-                    call: Call<ResponseBody>,
-                    response: Response<ResponseBody>
+                    call: Call<ProfileResponse>,
+                    response: Response<ProfileResponse>
                 ) {
                     if (response.isSuccessful){
                         updateResponse.value = response.body()
@@ -29,7 +29,7 @@ class ProfileViewModel : ViewModel(){
                         updateResponse.value = null
                 }
 
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
                     updateResponse.value = null
                 }
             })

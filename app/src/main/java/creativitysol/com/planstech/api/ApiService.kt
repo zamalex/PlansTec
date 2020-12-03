@@ -15,6 +15,7 @@ import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.packages.model.PlanModel
 import creativitysol.com.planstech.partners.model.PartnerModel
 import creativitysol.com.planstech.password.presentation.VerifyResponse
+import creativitysol.com.planstech.profile.ProfileResponse
 import creativitysol.com.planstech.register.model.RegisterModel
 import creativitysol.com.planstech.stagemissions.model.MissionsModel
 import creativitysol.com.planstech.stagequestions.model.QuestionsModel
@@ -154,7 +155,7 @@ interface ApiService {
         @Header("Authorization") bearerToken: String,
         @Part file: MultipartBody.Part?,
         @PartMap() partMap: Map<String, @JvmSuppressWildcards RequestBody>
-    ): Call<ResponseBody>
+    ): Call<ProfileResponse>
 
     @POST("auth/leave_messages")
     fun leaveMessage(

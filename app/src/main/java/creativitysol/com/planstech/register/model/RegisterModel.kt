@@ -23,6 +23,8 @@ data class RegisterModel(
         var is_verified: String = "",
         var subscription_plans: String = "",
         @SerializedName("updated_at")
-        var updatedAt: String = ""
+        var updatedAt: String = "",
+        @SerializedName("phone")
+        var phone: String = ""
     )
 }
