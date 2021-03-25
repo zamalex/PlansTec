@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import com.kaopiz.kprogresshud.KProgressHUD
+import com.squareup.picasso.Picasso
 import com.yariksoffice.lingver.Lingver
 import creativitysol.com.planstech.CustomizedExceptionHandler
 import creativitysol.com.planstech.R
@@ -44,11 +45,13 @@ import creativitysol.com.planstech.partners.PartnersFragment
 import creativitysol.com.planstech.password.di.forgotPassModule
 import creativitysol.com.planstech.password.di.resetPassModule
 import creativitysol.com.planstech.profile.ProfileFragment
+import creativitysol.com.planstech.profile.ProfileResponse
 import creativitysol.com.planstech.register.model.RegisterModel
 import creativitysol.com.planstech.stagemissions.MissionsFragment
 import creativitysol.com.planstech.terms.TermsFragment
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_profile.view.*
 import okhttp3.ResponseBody
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -81,6 +84,7 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
 
 
+        var profileResponse = Paper.book().read("pro",ProfileResponse())
 
 
 
@@ -184,6 +188,7 @@ class MainActivity : AppCompatActivity(),
             Paper.book().delete("user")
             Paper.book().delete("login")
             Paper.book().delete("device")
+            Paper.book().delete("pro")
 
 
             this.finish()
@@ -193,6 +198,33 @@ class MainActivity : AppCompatActivity(),
         }
 
 
+        if (!profileResponse.data.avatar.isNullOrEmpty()){
+            Picasso.get().load(profileResponse.data.avatar).placeholder(R.drawable.menulogo).error(R.drawable.menulogo)
+                .centerCrop().fit()
+                .into(profile_img)
+        }
+
+        var loginModel = Paper.book().read("login",LoginModel())
+        if (!loginModel.data.token.isEmpty()){
+            creativitysol.com.planstech.api.Retrofit.Api.getProfile("Bearer ${loginModel.data.token}").enqueue(object : retrofit2.Callback<RegisterModel>{
+                override fun onResponse(
+                    call: Call<RegisterModel>,
+                    response: Response<RegisterModel>
+                ) {
+                    if (response.isSuccessful){
+                        Picasso.get().load(response.body()!!.data.avatar).placeholder(R.drawable.menulogo).error(R.drawable.menulogo)
+                            .centerCrop().fit()
+                            .into(profile_img)
+
+                    }
+                }
+
+                override fun onFailure(call: Call<RegisterModel>, t: Throwable) {
+
+                }
+            })
+
+        }
 
 
         var list: ArrayList<String> = ArrayList()

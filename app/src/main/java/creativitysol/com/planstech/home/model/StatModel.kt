@@ -13,10 +13,10 @@ data class StatModel(
 ) {
     data class Data(
         @SerializedName("clients_count")
-        var clientsCount: Int = 0,
+        var clientsCount: String = "",
         @SerializedName("programs_count")
-        var programsCount: Int = 0,
+        var programsCount: String = "",
         @SerializedName("teams_count")
-        var teamsCount: Int = 0
+        var teamsCount: String = ""
     )
 }

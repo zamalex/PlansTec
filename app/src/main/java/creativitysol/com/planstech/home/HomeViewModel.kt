@@ -4,10 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.JsonObject
 import creativitysol.com.planstech.api.Retrofit
-import creativitysol.com.planstech.home.model.ArticlesModel
-import creativitysol.com.planstech.home.model.ReviewsModel
-import creativitysol.com.planstech.home.model.StatModel
-import creativitysol.com.planstech.home.model.TrainingModel
+import creativitysol.com.planstech.home.model.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,6 +17,25 @@ class HomeViewModel: ViewModel(){
     var articles:MutableLiveData<ArticlesModel> = MutableLiveData()
     var reviews:MutableLiveData<ReviewsModel> = MutableLiveData()
     var stats:MutableLiveData<StatModel> = MutableLiveData()
+    var videoLink:MutableLiveData<VideoResponse> = MutableLiveData<VideoResponse>()
+
+
+    fun getSliderVideo(){
+        Retrofit.Api.getSliderVideo().enqueue(object :retrofit2.Callback<VideoResponse>{
+            override fun onFailure(call: Call<VideoResponse>, t: Throwable) {
+                videoLink.value = null
+            }
+
+            override fun onResponse(call: Call<VideoResponse>, response: Response<VideoResponse>) {
+                if (response.isSuccessful){
+                    videoLink.value = response.body()
+
+                }else
+                    videoLink.value = null
+
+            }
+        })
+    }
 
     fun getTrainings(){
         Retrofit.Api.getHomeTrainings().enqueue(object : Callback<TrainingModel>{

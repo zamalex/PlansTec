@@ -14,7 +14,7 @@ data class PlanModel(
         var completedDays: Int = 0,
         var goals: String = "",
         var id: Int = 0,
-        var price: Int = 0,
+        var price: Float = 0f,
         @SerializedName("price_text")
         var priceText: String = "",
         var title: String = "",

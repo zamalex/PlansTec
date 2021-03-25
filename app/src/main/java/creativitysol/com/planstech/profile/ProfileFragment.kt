@@ -219,6 +219,7 @@ class ProfileFragment : Fragment() , PickiTCallbacks {
                 if (it!=null&&it.statusCode==200)
                 {
                     if (!it.data.avatar.isNullOrEmpty()){
+                        Paper.book().write("pro",it)
                         Picasso.get().load(it.data.avatar).placeholder(R.drawable.menulogo).error(R.drawable.menulogo)
                             .centerCrop().fit()
                             .into(activity!!.profile_img)

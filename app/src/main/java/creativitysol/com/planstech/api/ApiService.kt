@@ -7,10 +7,7 @@ import creativitysol.com.planstech.coursedetails.model.SingleCourse
 import creativitysol.com.planstech.follow.FollowReponse
 import creativitysol.com.planstech.gladtoserve.model.ContactData
 import creativitysol.com.planstech.gladtoserve.model.Services
-import creativitysol.com.planstech.home.model.ArticlesModel
-import creativitysol.com.planstech.home.model.ReviewsModel
-import creativitysol.com.planstech.home.model.StatModel
-import creativitysol.com.planstech.home.model.TrainingModel
+import creativitysol.com.planstech.home.model.*
 import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.packages.model.PlanModel
 import creativitysol.com.planstech.partners.model.PartnerModel
@@ -66,7 +63,7 @@ interface ApiService {
 
 
     @GET("auth/article_desc/{id}")
-    fun getArticle(@Path("id") id: String): Call<SingleArticle>
+    fun getArticle(@Path("id") id: String,@Header("Authorization") bearerToken: String): Call<SingleArticle>
 
     @GET("auth/partners")
     fun getPartners(): Call<PartnerModel>
@@ -75,7 +72,7 @@ interface ApiService {
     fun getStats(): Call<StatModel>
 
     @GET("auth/training_desc/{id}")
-    fun getTraining(@Path("id") id: String): Call<SingleCourse>
+    fun getTraining(@Path("id") id: String,@Header("Authorization") bearerToken: String): Call<SingleCourse>
 
 
     @GET("auth/verify/{code}")
@@ -196,4 +193,10 @@ interface ApiService {
     fun logout(
         @Header("Authorization") bearerToken: String
     ): Call<ResponseBody>
+
+
+    @GET("intro-video-link")
+    fun getSliderVideo(
+
+    ): Call<VideoResponse>
 }

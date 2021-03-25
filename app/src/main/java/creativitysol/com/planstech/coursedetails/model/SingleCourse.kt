@@ -23,7 +23,7 @@ data class SingleCourse(
         var imagesGallary: List<ImagesGallary> = listOf(),
         @SerializedName("num_seats")
         var numSeats: String = "",
-        var price: Int = 0,
+        var price: Float = 0f,
         var status: String = "",
         var title: String = "",
         var type: String = "",

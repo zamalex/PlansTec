@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.MediaController
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -49,19 +50,16 @@ class HomeFragment : Fragment(),
             var login: LoginModel = Paper.book().read("login", LoginModel())
 
 
-            val fileName =
+           /* val fileName =
                 "android.resource://" + activity!!.getPackageName().toString() + "/raw/vvv"
 
             val video: Uri = Uri.parse(fileName)
+*/
+            val mediaController = MediaController(activity)
+            mediaController.setAnchorView(v!!.vid)
+            v!!.vid.setMediaController(mediaController)
 
-            v!!.vid.setVideoURI(video)
-            v!!.vid.start()
 
-            v!!.vid.setOnClickListener {
-                if (!v!!.vid.isPlaying) {
-                    v!!.vid.start()
-                }
-            }
 
             if (!login.data.token.isEmpty()) {
                 (requireActivity() as MainActivity).setLogMenu()
@@ -70,6 +68,8 @@ class HomeFragment : Fragment(),
             viewModel =
                 ViewModelProvider(this).get(HomeViewModel::class.java)
 
+
+            viewModel.getSliderVideo()
             viewModel.getTrainings()
             viewModel.getArticles()
             viewModel.getReviews()
@@ -79,6 +79,19 @@ class HomeFragment : Fragment(),
             var user: RegisterModel = Paper.book().read("user", RegisterModel())
 
 
+
+            viewModel.videoLink.observe(viewLifecycleOwner, Observer {
+                if (it!=null&&it.statusCode==200&&!it.data.url.isNullOrEmpty()){
+                    v!!.vid.setVideoURI(Uri.parse(it.data.url))
+                    v!!.vid.start()
+
+                    v!!.vid.setOnClickListener {
+                       /* if (!v!!.vid.isPlaying) {
+                            v!!.vid.start()
+                        }*/
+                    }
+                }
+            })
 
             viewModel.trainings.observe(requireActivity(), object : Observer<TrainingModel> {
                 override fun onChanged(t: TrainingModel?) {
@@ -146,7 +159,7 @@ class HomeFragment : Fragment(),
 
 
             viewModel.stats.observe(requireActivity(), Observer {
-                if (isAdded) {
+                if (isAdded&&it!=null&&it.statusCode==200) {
                     v!!.sclents.text = it.data.clientsCount.toString() + "\nعملائنا السعداء"
                     v!!.scourses.text = it.data.teamsCount.toString() + "\nفريقنا"
                     v!!.splans.text = it.data.programsCount.toString() + "\nبرامجنا"
