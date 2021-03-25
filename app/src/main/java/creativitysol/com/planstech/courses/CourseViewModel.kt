@@ -12,9 +12,9 @@ class CourseViewModel:ViewModel() {
 
     var trainings: MutableLiveData<TrainingModel> = MutableLiveData()
 
-    fun getArticles(){
+    fun getArticles(page:Int){
 
-        Retrofit.Api.getAllTrainings().enqueue(object : Callback<TrainingModel> {
+        Retrofit.Api.getAllTrainings(page).enqueue(object : Callback<TrainingModel> {
             override fun onFailure(call: Call<TrainingModel>, t: Throwable) {
 
             }

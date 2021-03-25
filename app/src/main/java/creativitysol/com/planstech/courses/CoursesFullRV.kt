@@ -16,7 +16,7 @@ import org.koin.ext.quoted
 class CoursesFullRV(val context: Context, val listener: CourseListener) :
     RecyclerView.Adapter<CoursesFullRV.Holder>() {
 
-    var trainingModel: TrainingModel? = null
+    var trainingModel: ArrayList<TrainingModel.Data.Training> = ArrayList()
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var img: ImageView = itemView.findViewById(R.id.course_img_full)
@@ -30,14 +30,14 @@ class CoursesFullRV(val context: Context, val listener: CourseListener) :
 
         init {
             course_card.setOnClickListener {
-                listener.onCourseClick(trainingModel!!.data[adapterPosition].id.toString())
+                listener.onCourseClick(trainingModel[adapterPosition].id.toString())
             }
         }
 
     }
 
-    fun setList(trainingModel: TrainingModel) {
-        this.trainingModel = trainingModel
+    fun setList(trainingModel: ArrayList<TrainingModel.Data.Training>) {
+        this.trainingModel.addAll(trainingModel)
 
         notifyDataSetChanged()
     }
@@ -51,7 +51,7 @@ class CoursesFullRV(val context: Context, val listener: CourseListener) :
     override fun getItemCount(): Int {
         if (trainingModel == null)
             return 0
-        return trainingModel!!.data.size
+        return trainingModel.size
     }
 
 
@@ -75,7 +75,7 @@ class CoursesFullRV(val context: Context, val listener: CourseListener) :
             holder.img.getLayoutParams().height = pixels.toInt()
         }
 
-        var o: TrainingModel.Data = trainingModel!!.data[position]
+        var o: TrainingModel.Data.Training = trainingModel[position]
 
         holder.title.text = o.title
         holder.price.text = "${o.price} ريال "

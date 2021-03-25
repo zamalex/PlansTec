@@ -15,7 +15,7 @@ import creativitysol.com.planstech.home.model.ArticlesModel
 
 class ArticleFullRV(val context: Context,val listener: ArticleListener) : RecyclerView.Adapter<ArticleFullRV.Holder>() {
 
-    var articlesModel: ArticlesModel? = null
+    var articlesModel: ArrayList<ArticlesModel.Data.Article> = ArrayList()
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var img :ImageView = itemView.findViewById(R.id.img_article)
         var title : TextView = itemView.findViewById(R.id.title_full)
@@ -23,7 +23,7 @@ class ArticleFullRV(val context: Context,val listener: ArticleListener) : Recycl
 
         init {
             article_card.setOnClickListener {
-                listener.onArticleClick(articlesModel!!.data[adapterPosition].id.toString())
+                listener.onArticleClick(articlesModel[adapterPosition].id.toString())
             }
         }
 
@@ -35,14 +35,14 @@ class ArticleFullRV(val context: Context,val listener: ArticleListener) : Recycl
         )
     }
 
-    fun setArtiocles(articlesModel: ArticlesModel){
-        this.articlesModel = articlesModel
+    fun setArtiocles(articlesModel: ArrayList<ArticlesModel.Data.Article>){
+        this.articlesModel.addAll(articlesModel)
         notifyDataSetChanged()
     }
     override fun getItemCount(): Int {
         if (articlesModel==null)
             return 0
-        return articlesModel!!.data.size
+        return articlesModel!!.size
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
@@ -65,7 +65,7 @@ class ArticleFullRV(val context: Context,val listener: ArticleListener) : Recycl
             holder.img.getLayoutParams().height = pixels.toInt()
         }
 
-        var o:ArticlesModel.Data = articlesModel!!.data[position]
+        var o:ArticlesModel.Data.Article = articlesModel[position]
 
         holder.title.text = o.title
         if (o.image!=null&&!o.image.isEmpty())

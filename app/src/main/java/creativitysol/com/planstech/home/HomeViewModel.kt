@@ -1,5 +1,6 @@
 package creativitysol.com.planstech.home
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.JsonObject
@@ -67,7 +68,7 @@ class HomeViewModel: ViewModel(){
     fun getReviews(){
         Retrofit.Api.getHomeReviews().enqueue(object : Callback<ReviewsModel>{
             override fun onFailure(call: Call<ReviewsModel>, t: Throwable) {
-
+                Log.e("eroris",t.localizedMessage)
             }
 
             override fun onResponse(call: Call<ReviewsModel>, response: Response<ReviewsModel>) {

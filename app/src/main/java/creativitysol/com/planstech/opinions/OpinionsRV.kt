@@ -15,7 +15,7 @@ import creativitysol.com.planstech.home.model.ReviewsModel
 
 class OpinionsRV(val context: Context) : RecyclerView.Adapter<OpinionsRV.Holder>() {
 
-    var reviewsModel: ReviewsModel? = null
+    var reviewsModel: ArrayList<ReviewsModel.Data.Review>? = ArrayList()
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var name:TextView = itemView.findViewById(R.id.rev_name)
         var txt:TextView = itemView.findViewById(R.id.rev_txt)
@@ -30,20 +30,20 @@ class OpinionsRV(val context: Context) : RecyclerView.Adapter<OpinionsRV.Holder>
         )
     }
 
-    fun setReviews(reviewsModel: ReviewsModel){
-        this.reviewsModel = reviewsModel
+    fun setReviews(reviewsModel: ArrayList<ReviewsModel.Data.Review>){
+        this.reviewsModel!!.addAll(reviewsModel)
         notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
         if (reviewsModel== null)
             return 0
-        return reviewsModel!!.data.size
+        return reviewsModel!!.size
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
-        var o:ReviewsModel.Data = reviewsModel!!.data[position]
+        var o:ReviewsModel.Data.Review = reviewsModel!![position]
 
         holder.name.text = o.userName
         holder.txt.text = o.content

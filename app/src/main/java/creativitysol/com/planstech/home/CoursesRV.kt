@@ -14,7 +14,7 @@ import creativitysol.com.planstech.courses.CourseListener
 import creativitysol.com.planstech.home.model.TrainingModel
 
 
-class CoursesRV(val context: Context,val listener: CourseListener,val trainingModel: TrainingModel) : RecyclerView.Adapter<CoursesRV.Holder>() {
+class CoursesRV(val context: Context,val listener: CourseListener,val trainingModel: ArrayList<TrainingModel.Data.Training>) : RecyclerView.Adapter<CoursesRV.Holder>() {
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var course_card:CardView = itemView.findViewById(R.id.course_card)
@@ -27,7 +27,7 @@ class CoursesRV(val context: Context,val listener: CourseListener,val trainingMo
 
         init {
             course_card.setOnClickListener {
-                listener.onCourseClick(trainingModel.data[adapterPosition].id.toString())
+                listener.onCourseClick(trainingModel[adapterPosition].id.toString())
             }
         }
 
@@ -40,11 +40,11 @@ class CoursesRV(val context: Context,val listener: CourseListener,val trainingMo
     }
 
     override fun getItemCount(): Int {
-        return trainingModel.data.size
+        return trainingModel.size
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        var obj:TrainingModel.Data = trainingModel.data[position]
+        var obj:TrainingModel.Data.Training = trainingModel[position]
 
         holder.title.text=obj.title
         holder.price.text="${obj.price} ريال "

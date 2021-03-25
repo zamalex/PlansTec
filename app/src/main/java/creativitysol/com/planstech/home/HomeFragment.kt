@@ -20,6 +20,7 @@ import creativitysol.com.planstech.coursedetails.SingleCourseFragment
 import creativitysol.com.planstech.courses.CourseListener
 import creativitysol.com.planstech.courses.CoursesFragment
 import creativitysol.com.planstech.home.model.ArticlesModel
+import creativitysol.com.planstech.home.model.ReviewsModel
 import creativitysol.com.planstech.home.model.TrainingModel
 import creativitysol.com.planstech.login.LoginFragment
 import creativitysol.com.planstech.login.model.LoginModel
@@ -81,8 +82,8 @@ class HomeFragment : Fragment(),
 
 
             viewModel.videoLink.observe(viewLifecycleOwner, Observer {
-                if (it!=null&&it.statusCode==200&&!it.data.url.isNullOrEmpty()){
-                    v!!.vid.setVideoURI(Uri.parse(it.data.url))
+                if (it!=null&&it.statusCode==200&&!it.data.isNullOrEmpty()){
+                    v!!.vid.setVideoURI(Uri.parse(it.data))
                     v!!.vid.start()
 
                     v!!.vid.setOnClickListener {
@@ -107,7 +108,7 @@ class HomeFragment : Fragment(),
                             adapter = CoursesRV(
                                 requireActivity(),
                                 this@HomeFragment,
-                                t!!
+                                t!!.data.trainings as ArrayList<TrainingModel.Data.Training>
                             )
                         }
                     }
@@ -130,7 +131,7 @@ class HomeFragment : Fragment(),
                             adapter = ArticlesRV(
                                 requireActivity(),
                                 this@HomeFragment,
-                                t!!
+                                t!!.data.articles as ArrayList<ArticlesModel.Data.Article>
                             )
                         }
                     }
@@ -149,7 +150,7 @@ class HomeFragment : Fragment(),
                                 false
                             )
                         adapter =
-                            OpinionsRV(requireActivity()).apply { setReviews(it) }
+                            OpinionsRV(requireActivity()).apply { setReviews(it.data.reviews as ArrayList<ReviewsModel.Data.Review>) }
 
 
                     }

@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -95,16 +96,18 @@ class SingleCourseFragment : Fragment() ,SliderAdapterExample.imageInterface{
                 else v.img_add_remove_fav.setImageResource(R.drawable.unsaved)
 
 
-                if (it.data.isSubscribed){
+                if (it.data.isSubscribe){
                     v.button.visibility = View.GONE
                 }
                 else
                     v.button.visibility = View.VISIBLE
 
                 var aray: ArrayList<String> = ArrayList()
+                Log.e("imgs",it.data.imagesGallery.size.toString())
 
-                for (i in 0 until it.data.imagesGallary.size) {
-                    aray.add(it.data.imagesGallary[i].image)
+                for (i in 0 until it.data.imagesGallery.size) {
+                    aray.add(it.data.imagesGallery[i].image)
+                    Log.e("img"+i,it.data.imagesGallery[i].image)
                 }
 
                 var adapter: SliderAdapterExample = SliderAdapterExample(requireActivity(),this)

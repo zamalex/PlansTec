@@ -1,5 +1,6 @@
 package creativitysol.com.planstech.opinions
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import creativitysol.com.planstech.api.Retrofit
@@ -13,11 +14,11 @@ class ReviewsViewModel:ViewModel(){
 
     var reviews: MutableLiveData<ReviewsModel> = MutableLiveData()
 
-    fun getReviews(){
+    fun getReviews(page:Int){
 
-        Retrofit.Api.getAllReviews().enqueue(object : Callback<ReviewsModel> {
+        Retrofit.Api.getAllReviews(page,null).enqueue(object : Callback<ReviewsModel> {
             override fun onFailure(call: Call<ReviewsModel>, t: Throwable) {
-
+                Log.e("errorrrr",t.localizedMessage)
             }
 
             override fun onResponse(call: Call<ReviewsModel>, response: Response<ReviewsModel>) {

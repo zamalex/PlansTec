@@ -11,9 +11,9 @@ import retrofit2.Response
 class ArticlesViewModel:ViewModel() {
     var articles: MutableLiveData<ArticlesModel> = MutableLiveData()
 
-    fun getArticles(){
+    fun getArticles(page:Int){
 
-        Retrofit.Api.getAllArticles().enqueue(object : Callback<ArticlesModel>{
+        Retrofit.Api.getAllArticles(page).enqueue(object : Callback<ArticlesModel>{
             override fun onFailure(call: Call<ArticlesModel>, t: Throwable) {
 
             }

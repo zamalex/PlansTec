@@ -13,7 +13,7 @@ import creativitysol.com.planstech.R
 import creativitysol.com.planstech.articles.ArticleListener
 import creativitysol.com.planstech.home.model.ArticlesModel
 
-class ArticlesRV(val context: Context,val listener: ArticleListener,val articlesModel: ArticlesModel) : RecyclerView.Adapter<ArticlesRV.Holder>() {
+class ArticlesRV(val context: Context,val listener: ArticleListener,val articlesModel: ArrayList<ArticlesModel.Data.Article>) : RecyclerView.Adapter<ArticlesRV.Holder>() {
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var contain : CardView = itemView.findViewById(R.id.article_card)
@@ -22,7 +22,7 @@ class ArticlesRV(val context: Context,val listener: ArticleListener,val articles
 
         init {
             contain.setOnClickListener {
-                listener.onArticleClick(articlesModel.data[adapterPosition].id.toString())
+                listener.onArticleClick(articlesModel[adapterPosition].id.toString())
             }
         }
 
@@ -35,11 +35,11 @@ class ArticlesRV(val context: Context,val listener: ArticleListener,val articles
     }
 
     override fun getItemCount(): Int {
-        return articlesModel.data.size
+        return articlesModel.size
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        var o:ArticlesModel.Data = articlesModel.data[position]
+        var o:ArticlesModel.Data.Article = articlesModel[position]
 
         holder.title.text = o.title
         if (o.image!=null&&!o.image.isEmpty())

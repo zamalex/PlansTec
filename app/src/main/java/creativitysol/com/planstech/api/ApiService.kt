@@ -25,24 +25,24 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    @GET("auth/trainings_limit")
+    @GET("auth/trainings?limit=5")
     fun getHomeTrainings(): Call<TrainingModel>
 
-    @GET("auth/articles_limit")
+    @GET("auth/articles?limit=5")
     fun getHomeArticles(): Call<ArticlesModel>
 
-    @GET("auth/reviews_limit")
+    @GET("auth/reviews?limit=5")
     fun getHomeReviews(): Call<ReviewsModel>
 
 
     @GET("auth/articles")
-    fun getAllArticles(): Call<ArticlesModel>
+    fun getAllArticles(@Query("page")page:Int): Call<ArticlesModel>
 
     @GET("auth/trainings")
-    fun getAllTrainings(): Call<TrainingModel>
+    fun getAllTrainings(@Query("page") page:Int?): Call<TrainingModel>
 
     @GET("auth/reviews")
-    fun getAllReviews(): Call<ReviewsModel>
+    fun getAllReviews(@Query("page") page:Int?,@Query("limit") limit:Int?): Call<ReviewsModel>
 
     @GET("packages")
     fun getPlans(@Header("Authorization") bearerToken: String): Call<PlanModel>
