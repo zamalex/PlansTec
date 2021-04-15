@@ -7,7 +7,7 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface SendChatAPI {
-    @POST("auth/send_message")
+    @POST("messages/send")
     fun sendChatMessage(
         @Body senderBody: SenderBody,
         @Header("Authorization")token:String

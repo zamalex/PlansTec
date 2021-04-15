@@ -5,22 +5,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import creativitysol.com.planstech.R
-import creativitysol.com.planstech.conschat.data.model.ChatHistory
+import creativitysol.com.planstech.conschat.data.model.ChatMessages
 import kotlinx.android.synthetic.main.consultant_chat_item.view.*
 import kotlinx.android.synthetic.main.me_chat_item.view.*
 
 class ChatHistoryAdapter(
-    private val chatHistoryList: List<ChatHistory>
+    private val chatHistoryList: ChatMessages
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     //  first time, sender will be the consultant..
-    private val consultantChatId = chatHistoryList[0].senderId
+    private val consultantChatId = chatHistoryList.data.otherUser.id
+    var messages = ArrayList<ChatMessages.Data.Message>()
+
+    fun addMessages(messages: ArrayList<ChatMessages.Data.Message>){
+        this.messages.addAll(messages)
+        notifyDataSetChanged()
+    }
     //  first time, receiver will be me..
-    private val meChatId = chatHistoryList[0].receiverId
 
     override fun getItemViewType(position: Int): Int {
-        return if (chatHistoryList[position].senderId != meChatId)
+        return if (messages[position].sender.id == consultantChatId)
             CONSULTANT_VIEW_TYPE
         else
             ME_VIEW_TYPE
@@ -38,21 +43,21 @@ class ChatHistoryAdapter(
     class ConsultantViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val chatItem = chatHistoryList[position]
+        val chatItem = messages[position]
         when (holder) {
             is MeViewHolder -> {
-                holder.itemView.txt_me.text = chatItem.messages
+                holder.itemView.txt_me.text = chatItem.message
                 holder.itemView.txt_me_time.text = chatItem.createdAt
             }
             is ConsultantViewHolder -> {
-                holder.itemView.txt_consultant.text = chatItem.messages
+                holder.itemView.txt_consultant.text = chatItem.message
                 holder.itemView.txt_consultant_time.text = chatItem.createdAt
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return chatHistoryList.size
+        return messages.size
     }
 
     fun getReceiverId() = consultantChatId

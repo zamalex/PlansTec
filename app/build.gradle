@@ -133,5 +133,7 @@ dependencies {
 
     implementation 'com.onesignal:OneSignal:3.15.4'
     implementation "com.github.YarikSOffice:lingver:1.2.2"
+    implementation 'com.pusher:pusher-java-client:2.2.5'
+
 
 }
