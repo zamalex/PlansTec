@@ -49,7 +49,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/boeder_bg"
             android:padding="20dp"
-            android:src='@{model.data.status.equals("1")?@drawable/saved:@drawable/unsaved}'
+            android:src='@{model.data.fav.equals("1")?@drawable/saved:@drawable/unsaved}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/sharee"
             app:layout_constraintTop_toBottomOf="@+id/imageView9" />

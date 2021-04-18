@@ -21,7 +21,7 @@ data class SingleCourse(
         @SerializedName("duration")
         var duration: String = "",
         @SerializedName("fav")
-        var fav: Int = 0,
+        var fav: String = "",
         @SerializedName("id")
         var id: Int = 0,
         @SerializedName("image")

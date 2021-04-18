@@ -128,14 +128,14 @@ class SingleCourseFragment : Fragment() ,SliderAdapterExample.imageInterface{
                 )
             )
         }
-        addToFavouritesViewModel.trainingResults.observe(viewLifecycleOwner, {
+        addToFavouritesViewModel.trainingResults.observe(viewLifecycleOwner, Observer {
             Snackbar.make(v.img_add_remove_fav, it.message, Snackbar.LENGTH_SHORT).show()
             if (it.data.fav.equals("1"))
                 v.img_add_remove_fav.setImageResource(R.drawable.saved)
             else v.img_add_remove_fav.setImageResource(R.drawable.unsaved)
         })
 
-        addToFavouritesViewModel.error.observe(viewLifecycleOwner, {
+        addToFavouritesViewModel.error.observe(viewLifecycleOwner, Observer{
             Snackbar.make(v.img_add_remove_fav, it.localizedMessage, Snackbar.LENGTH_SHORT).show()
         })
 
