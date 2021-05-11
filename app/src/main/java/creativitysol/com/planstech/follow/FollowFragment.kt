@@ -61,7 +61,13 @@ class FollowFragment : Fragment() {
                         intent.setData(Uri.parse(i.social.website))
                         requireActivity().startActivity(intent)
                     }
-                    instagram.setOnClickListener { }
+                    instagram.setOnClickListener {
+                        if (i.social.instagram.isEmpty())
+                            return@setOnClickListener
+                        intent = Intent(Intent.ACTION_VIEW)
+                        intent.setData(Uri.parse(i.social.instagram))
+                        requireActivity().startActivity(intent)
+                    }
                     whatsapp.setOnClickListener {
                         if (i.social.whatsapp.isEmpty())
                             return@setOnClickListener
@@ -89,8 +95,8 @@ class FollowFragment : Fragment() {
                         val uri: String = java.lang.String.format(
                             Locale.ENGLISH,
                             "geo:%f,%f",
-                            -31.083332,
-                            150.916672
+                            i.map.lat,
+                            i.map.long
                         )
                         intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
                         requireActivity().startActivity(intent)

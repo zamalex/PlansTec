@@ -66,6 +66,7 @@
             android:fontFamily="@font/tajwal"
             android:padding="20dp"
             android:text="@string/join"
+
             android:textStyle="bold"
             app:cornerRadius="10dp"
             app:layout_constraintEnd_toStartOf="@+id/img_add_remove_fav"

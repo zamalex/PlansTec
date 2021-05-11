@@ -1,10 +1,15 @@
 package creativitysol.com.planstech.packages
 
+import android.app.ActionBar
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -22,6 +27,7 @@ import io.paperdb.Paper
 import kotlinx.android.synthetic.main.fragment_packages.view.*
 import kotlinx.android.synthetic.main.fragment_packages.view.trv
 import kotlinx.android.synthetic.main.fragment_t_radio.view.*
+import kotlinx.android.synthetic.main.start_dialog.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 
@@ -31,6 +37,7 @@ import okhttp3.RequestBody
 class PackagesFragment : Fragment(), TRVAdapter.radioClick {
     var map:HashMap<String, RequestBody> = HashMap<String, RequestBody>()
 
+    lateinit var dialog : Dialog
     lateinit var v: View
     lateinit var adapter: TRVAdapter
     lateinit var selectedPlan: PlanModel.Data
@@ -52,6 +59,11 @@ class PackagesFragment : Fragment(), TRVAdapter.radioClick {
 
         var log: LoginModel = Paper.book().read("login", LoginModel())
 
+        dialog = Dialog(requireActivity())
+        dialog.setContentView(R.layout.start_dialog)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val window: Window? = dialog.getWindow()
+        window?.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT)
 
         viewModel = ViewModelProvider(this).get(PlanViewModel::class.java)
 
@@ -84,40 +96,48 @@ class PackagesFragment : Fragment(), TRVAdapter.radioClick {
            if (selectedPlan.is_subscribed==1){
                Toast.makeText(requireActivity(),"already subscribed", Toast.LENGTH_SHORT).show()
 
-               return@setOnClickListener
+              return@setOnClickListener
 
            }
-            if (selectedPlan.is_free){
-                val payment_method: RequestBody = RequestBody.create(
-                    "text/plain".toMediaTypeOrNull(),
-                    "online")
+
+            dialog.show()
+
+            dialog.done.setOnClickListener {
+                dialog.dismiss()
+                if (selectedPlan.is_free){
+                    val payment_method: RequestBody = RequestBody.create(
+                        "text/plain".toMediaTypeOrNull(),
+                        "online")
 
 
-                val selected: RequestBody = RequestBody.create(
-                    "text/plain".toMediaTypeOrNull(),
-                    selectedID.toString())
+                    val selected: RequestBody = RequestBody.create(
+                        "text/plain".toMediaTypeOrNull(),
+                        selectedID.toString())
 
 
 
 
-                map.put("payment_method", payment_method)
-                map.put("item_id", selected)
+                    map.put("payment_method", payment_method)
+                    map.put("item_id", selected)
 
 
-                (activity as MainActivity).showProgress(true)
+                    (activity as MainActivity).showProgress(true)
 
 
                     viewModel.subscribeToPackage("Bearer ${loginModel.data.token}",null,map)
 
 
-                return@setOnClickListener
+                    return@setOnClickListener
+                }
+
+                val b:Bundle = Bundle()
+                b.putInt("id",selectedID)
+                (activity as MainActivity).fragmentStack.push(PaymentOptionsFragment().apply {
+                    arguments = b
+                })
             }
 
-            val b:Bundle = Bundle()
-            b.putInt("id",selectedID)
-            (activity as MainActivity).fragmentStack.push(PaymentOptionsFragment().apply {
-                arguments = b
-            })
+
 
         }
 

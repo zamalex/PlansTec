@@ -238,6 +238,7 @@ class MainActivity : AppCompatActivity(),
         loglist.add(getString(R.string.about))
         loglist.add(getString(R.string.successsh))
         loglist.add(getString(R.string.terms))
+        loglist.add(getString(R.string.follow))
 
 
         var login: LoginModel = Paper.book().read("login", LoginModel())
@@ -279,6 +280,8 @@ class MainActivity : AppCompatActivity(),
             list.add(getString(R.string.about))
             list.add(getString(R.string.successsh))
             list.add(getString(R.string.terms))
+            list.add(getString(R.string.follow))
+
 
         }
 
@@ -362,6 +365,8 @@ class MainActivity : AppCompatActivity(),
                 6 -> fragmentStack.push(AboutFragment())
                 7 -> fragmentStack.push(PartnersFragment())
                 8 -> fragmentStack.push(TermsFragment())
+                9 -> fragmentStack.push(FollowFragment())
+
 
 
             }

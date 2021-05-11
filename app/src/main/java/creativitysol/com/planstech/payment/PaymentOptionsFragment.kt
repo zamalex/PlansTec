@@ -202,9 +202,15 @@ class PaymentOptionsFragment : Fragment(), PickiTCallbacks {
                     Toast.makeText(activity, "subscribed", Toast.LENGTH_SHORT).show()
 
                     else{
-                        (activity as MainActivity).fragmentStack.push(OnlinePaymentFragment().apply { arguments = Bundle().apply {
-                            putString("html",it.data.paymentUrl)
-                        } })
+                        if (it.data.paymentUrl.isEmpty()){
+                            Toast.makeText(activity,"Subscribed successfully",Toast.LENGTH_SHORT).show()
+                            (activity as MainActivity).fragmentStack.pop()
+                        }else{
+                            (activity as MainActivity).fragmentStack.push(OnlinePaymentFragment().apply { arguments = Bundle().apply {
+                                putString("html",it.data.paymentUrl)
+                            } })
+                        }
+
                     }
 
 

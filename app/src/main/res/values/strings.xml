@@ -85,4 +85,5 @@
     <string name="wrongcode">wrong code</string>
     <string name="no_conversation">no conversation</string>
     <string name="re_enter_the_answer">re enter the answer</string>
+    <string name="strt">start now</string>
 </resources>

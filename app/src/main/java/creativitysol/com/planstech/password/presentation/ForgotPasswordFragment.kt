@@ -1,11 +1,12 @@
 package creativitysol.com.planstech.password.presentation
 
+import android.app.ActionBar
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN
+import android.view.Window
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -22,10 +23,6 @@ import creativitysol.com.planstech.main.MainActivity
 import creativitysol.com.planstech.util.Constants
 import kotlinx.android.synthetic.main.fragment_forget_password.*
 import kotlinx.android.synthetic.main.verify_dialog.*
-import okhttp3.Callback
-import okhttp3.ResponseBody
-import org.json.JSONException
-import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.Call
 import retrofit2.Response
@@ -52,15 +49,18 @@ class ForgotPasswordFragment : Fragment() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+
         super.onActivityCreated(savedInstanceState)
 
         val validator = Validator(this)
 
-        dialog = Dialog(requireActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen)
+        dialog = Dialog(requireActivity())
 
 
         dialog.setContentView(R.layout.verify_dialog)
 
+        val window: Window? = dialog.getWindow()
+        window?.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT)
 
         validator.setValidationListener(object : Validator.ValidationListener {
             override fun onValidationFailed(errors: MutableList<ValidationError>?) {

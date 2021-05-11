@@ -101,11 +101,12 @@ class GladToServeFragment : Fragment() {
                 jsonObject.addProperty("mobile", sphone.text.toString())
                 jsonObject.addProperty("message", smsg.text.toString())
 
-                if (!log.data.token.isEmpty()) {
+
                     (requireActivity() as MainActivity).showProgress(true)
 
                     viewModel.send(jsonObject, "Bearer " + log.data.token)
-                }
+
+
             }
         })
 

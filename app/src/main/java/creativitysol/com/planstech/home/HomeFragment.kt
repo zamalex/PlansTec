@@ -5,12 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.MediaController
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.esotericsoftware.kryo.util.Util
+import com.google.android.exoplayer2.ExoPlayerFactory
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.source.MediaSource
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.upstream.DataSource
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
+import com.google.android.exoplayer2.util.Util.getUserAgent
 import creativitysol.com.planstech.R
 import creativitysol.com.planstech.articledetails.SingleArticleFragment
 import creativitysol.com.planstech.articles.ArticleListener
@@ -32,12 +39,15 @@ import creativitysol.com.planstech.register.model.RegisterModel
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
+
 /**
  * A simple [Fragment] subclass.
  */
 class HomeFragment : Fragment(),
     ArticleListener, CourseListener {
+     lateinit var player:SimpleExoPlayer
 
+    lateinit var dataSourceFactory: DataSource.Factory
     lateinit var viewModel: HomeViewModel
 
     var v: View? = null
@@ -51,14 +61,19 @@ class HomeFragment : Fragment(),
             var login: LoginModel = Paper.book().read("login", LoginModel())
 
 
+            player = ExoPlayerFactory.newSimpleInstance(activity)
+            dataSourceFactory  = DefaultDataSourceFactory(
+                    activity,
+            "plansTec"
+            )
+            v!!.vid.setPlayer(player)
+
            /* val fileName =
                 "android.resource://" + activity!!.getPackageName().toString() + "/raw/vvv"
 
             val video: Uri = Uri.parse(fileName)
 */
-            val mediaController = MediaController(activity)
-            mediaController.setAnchorView(v!!.vid)
-            v!!.vid.setMediaController(mediaController)
+
 
 
 
@@ -82,8 +97,8 @@ class HomeFragment : Fragment(),
 
 
             viewModel.videoLink.observe(viewLifecycleOwner, Observer {
-                if (it!=null&&it.statusCode==200&&!it.data.isNullOrEmpty()){
-                    v!!.vid.setVideoURI(Uri.parse(it.data))
+                if (it!=null&&it.statusCode==200&&!it.data.url.isNullOrEmpty()){
+                  /*  v!!.vid.setVideoURI(Uri.parse(it.data))
                     v!!.vid.start()
 
                     v!!.vid.setOnClickListener {
@@ -91,6 +106,14 @@ class HomeFragment : Fragment(),
                             v!!.vid.start()
                         }*/
                     }
+*/
+
+
+                    val videoSource: MediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+                        .createMediaSource(Uri.parse(it.data.url))
+
+                    player.prepare(videoSource)
+                    player.playWhenReady = true
                 }
             })
 
@@ -211,6 +234,12 @@ class HomeFragment : Fragment(),
         return v
     }
 
+    override fun onStop() {
+        super.onStop()
+      //  player.stop(true)
+        player.playWhenReady = false
+
+    }
     override fun onArticleClick(id: String) {
         var arg: Bundle = Bundle().apply {
             putString("id", id)
@@ -237,5 +266,7 @@ class HomeFragment : Fragment(),
     override fun onStart() {
         super.onStart()
         (activity as MainActivity).setTitle(getString(R.string.mianfragment))
+
+
     }
 }

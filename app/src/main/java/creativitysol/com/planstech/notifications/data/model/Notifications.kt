@@ -5,8 +5,7 @@ import java.util.stream.IntStream
 
 data class Notifications(
     val id: Int,
-    @SerializedName("user_id")
-    val userId: Int,
+
     val title: String,
     @SerializedName("created_at")
     val createdAt: String,
@@ -19,3 +18,4 @@ data class Notifications(
 data class NotificationData(
     val data: List<Notifications>
 )
+

@@ -8,6 +8,7 @@ import creativitysol.com.planstech.notifications.presentation.NotificationsViewM
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
+import java.util.concurrent.Executors
 
 val notificationsModule = module {
     single { get<Retrofit>().create(NotificationsAPI::class.java) }
@@ -19,5 +20,6 @@ val notificationsModule = module {
             notificationsRepo = get()
         )
     }
-    viewModel { NotificationsViewModel(get()) }
+    viewModel { NotificationsViewModel(get(), executors = get(),
+        notificationsRepo = get()) }
 }

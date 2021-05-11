@@ -3,6 +3,7 @@ package creativitysol.com.planstech.api
 import com.google.gson.JsonObject
 import creativitysol.com.planstech.about.DataResponse
 import creativitysol.com.planstech.articledetails.model.SingleArticle
+import creativitysol.com.planstech.consultation_request_questions.data.model.TimesModel
 import creativitysol.com.planstech.coursedetails.model.SingleCourse
 import creativitysol.com.planstech.follow.FollowReponse
 import creativitysol.com.planstech.gladtoserve.model.ContactData
@@ -33,6 +34,9 @@ interface ApiService {
 
     @GET("auth/reviews?limit=5")
     fun getHomeReviews(): Call<ReviewsModel>
+
+    @GET("auth/check-available-consultations-times")
+    fun getAvailableTimes(@Query("date")date:String,@Header("Authorization") bearerToken: String): Call<TimesModel>
 
 
     @GET("auth/articles")

@@ -120,7 +120,7 @@ class ConsultationChatFragment : Fragment() {
         consultationChatViewModel.errorChatHistory.observe(viewLifecycleOwner, Observer {
             val error = if (it is UnknownHostException)
                 getString(R.string.no_interet_connection)
-            else getString(R.string.general_issue)
+            else "No conversation found"
             Snackbar.make(rec_chat_history, error, Snackbar.LENGTH_SHORT).show()
         })
 

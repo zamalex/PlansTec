@@ -22,4 +22,7 @@ data class RequestConsultationBody(
     val date: String,
     @SerializedName("consultation_time")
     val time: String,
+
+    @SerializedName("slot_time_id")
+    val slot: Int,
     )

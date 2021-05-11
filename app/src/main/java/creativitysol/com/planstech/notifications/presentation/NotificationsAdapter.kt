@@ -4,15 +4,22 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import creativitysol.com.planstech.R
+import creativitysol.com.planstech.notifications.data.model.NotificationResponse
 import creativitysol.com.planstech.notifications.data.model.Notifications
 import kotlinx.android.synthetic.main.item_notification.view.*
 
 
 class NotificationsAdapter(
-    private val notificationList: List<Notifications>,
-    private val onItemClick: (Notifications) -> Unit
+
+    private val onItemClick: (NotificationResponse.Data.NotificationContent) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    var notificationList: ArrayList<NotificationResponse.Data.NotificationContent> = ArrayList()
+
+    fun addNotifications( notificationList: List<NotificationResponse.Data.NotificationContent>){
+        this.notificationList.addAll(notificationList)
+        notifyDataSetChanged()
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val rootView =
             LayoutInflater.from(parent.context).inflate(R.layout.item_notification, parent, false)

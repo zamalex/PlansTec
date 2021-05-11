@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -37,9 +38,13 @@ import creativitysol.com.planstech.favorites.presentation.viewmodel.AddToFavouri
 import creativitysol.com.planstech.login.LoginFragment
 import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.main.MainActivity
+import creativitysol.com.planstech.packages.PlanViewModel
+import creativitysol.com.planstech.payment.OnlinePaymentFragment
 import creativitysol.com.planstech.payment.PaymentOptionsFragment
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.fragment_single_course.view.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -51,9 +56,11 @@ class SingleCourseFragment : Fragment() ,SliderAdapterExample.imageInterface{
     lateinit var binding: FragmentSingleCourseBinding
     lateinit var v: View
     lateinit var viewModel: TrainingViewModel
+    var map:HashMap<String,RequestBody> = HashMap<String,RequestBody>()
 
     private lateinit var trainingId: String
     private val addToFavouritesViewModel by viewModel<AddToFavouritesViewModel>()
+    lateinit var pViewModel: PlanViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,6 +79,7 @@ class SingleCourseFragment : Fragment() ,SliderAdapterExample.imageInterface{
         binding.lifecycleOwner = this
 
         viewModel = ViewModelProvider(this).get(TrainingViewModel::class.java)
+        pViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(PlanViewModel::class.java)
 
 
         binding.model = viewModel.course
@@ -97,7 +105,9 @@ class SingleCourseFragment : Fragment() ,SliderAdapterExample.imageInterface{
 
 
                 if (it.data.isSubscribe){
-                    v.button.visibility = View.GONE
+                    v.button.visibility = View.VISIBLE
+                    v.button.isEnabled = false
+                    v.button.alpha = 0.5f
                 }
                 else
                     v.button.visibility = View.VISIBLE
@@ -139,6 +149,27 @@ class SingleCourseFragment : Fragment() ,SliderAdapterExample.imageInterface{
             Snackbar.make(v.img_add_remove_fav, it.localizedMessage, Snackbar.LENGTH_SHORT).show()
         })
 
+        pViewModel.subscribeResponse.observe(viewLifecycleOwner, Observer {
+            (activity as MainActivity).showProgress(false)
+
+            if (it!=null){
+                if (it.success) {
+
+                        if (it.data.paymentUrl.isEmpty()){
+                            Toast.makeText(activity,"Subscribed successfully", Toast.LENGTH_SHORT).show()
+                            (activity as MainActivity).fragmentStack.pop()
+                        }else{
+                            (activity as MainActivity).fragmentStack.push(OnlinePaymentFragment().apply { arguments = Bundle().apply {
+                                putString("html",it.data.paymentUrl)
+                            } })
+                        }
+
+
+
+                }
+            }
+        })
+
 
 
         v.button.setOnClickListener {
@@ -146,9 +177,38 @@ class SingleCourseFragment : Fragment() ,SliderAdapterExample.imageInterface{
 
             if (log.data.token.isEmpty())
                 (requireActivity() as MainActivity).fragmentStack.push(LoginFragment())
-            else
-                (requireActivity() as MainActivity).fragmentStack.push(PaymentOptionsFragment().apply { arguments = Bundle().apply { putString("type","course")
-                putInt("id",this@SingleCourseFragment.viewModel.course.value?.data?.id!!.toInt())} })
+            else{
+                if (viewModel.course.value?.data?.isFree!!){
+
+
+            val payment_method: RequestBody = RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                "online")
+
+
+            val selected: RequestBody = RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                viewModel.course.value?.data?.id!!.toInt().toString())
+
+
+
+
+            map.put("payment_method", payment_method)
+            map.put("item_id", selected)
+
+
+            (activity as MainActivity).showProgress(true)
+
+                pViewModel.subscribeToCourse("Bearer ${log.data.token}",null,map)
+
+
+                }
+                else{
+                    (requireActivity() as MainActivity).fragmentStack.push(PaymentOptionsFragment().apply { arguments = Bundle().apply { putString("type","course")
+                        putInt("id",this@SingleCourseFragment.viewModel.course.value?.data?.id!!.toInt())} })
+                }
+
+            }
 
         }
 

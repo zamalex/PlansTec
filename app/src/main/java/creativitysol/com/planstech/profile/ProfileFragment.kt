@@ -232,6 +232,7 @@ class ProfileFragment : Fragment() , PickiTCallbacks {
 
         v.user_img.setOnClickListener {
             checkPermission()
+
         }
 
         return v
