@@ -103,5 +103,10 @@ class ArticlesFragment : Fragment(),
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        (activity as MainActivity).setTitle(getString(R.string.articles))
+
+    }
 
 }

@@ -161,6 +161,7 @@ class MainActivity : AppCompatActivity(),
         supportActionBar?.setHomeButtonEnabled(true)
         //   showToggle(true)
 
+        //badge.visibility=View.VISIBLE
 
 
         fragmentStack.replace(HomeFragment())
@@ -231,7 +232,7 @@ class MainActivity : AppCompatActivity(),
         loglist = ArrayList()
         loglist.add(getString(R.string.main))
         loglist.add(getString(R.string.favs))
-        loglist.add(getString(R.string.plan))
+        loglist.add(getString(R.string.myplans))
         loglist.add(getString(R.string.consults))
         loglist.add(getString(R.string.candshops))
         loglist.add(getString(R.string.happy))
@@ -260,7 +261,7 @@ class MainActivity : AppCompatActivity(),
             list.add(getString(R.string.main))
             list.add(getString(R.string.favs))
             list.add(getString(R.string.about))
-            list.add(getString(R.string.plan))
+            list.add(getString(R.string.myplans))
             list.add(getString(R.string.consults))
             list.add(getString(R.string.candshops))
             list.add(getString(R.string.successsh))
@@ -273,7 +274,7 @@ class MainActivity : AppCompatActivity(),
             isLogged = true
             list.add(getString(R.string.main))
             list.add(getString(R.string.favs))
-            list.add(getString(R.string.plan))
+            list.add(getString(R.string.myplans))
             list.add(getString(R.string.consults))
             list.add(getString(R.string.candshops))
             list.add(getString(R.string.happy))

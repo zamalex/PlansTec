@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -41,50 +42,69 @@ class FollowFragment : Fragment() {
 
                 it.data.let { i ->
                     twitter.setOnClickListener {
-                        if (i.social.twitter.isEmpty())
+                        if (i.social.twitter.isEmpty()){
+                            Toast.makeText(requireActivity(),"Not available",Toast.LENGTH_SHORT).show()
                             return@setOnClickListener
+                        }
                         intent = Intent(Intent.ACTION_VIEW)
                         intent.setData(Uri.parse(i.social.twitter))
                         requireActivity().startActivity(intent)
                     }
                     youtube.setOnClickListener {
-                        if (i.social.youtube.isEmpty())
-                            return@setOnClickListener
+                        if (i.social.youtube.isEmpty()){
+                            Toast.makeText(requireActivity(),"Not available",Toast.LENGTH_SHORT).show()
+
+                            return@setOnClickListener}
                         intent = Intent(Intent.ACTION_VIEW)
                         intent.setData(Uri.parse(i.social.youtube))
                         requireActivity().startActivity(intent)
                     }
                     website.setOnClickListener {
-                        if (i.social.website.isEmpty())
+                        if (i.social.website.isEmpty()){
+                            Toast.makeText(requireActivity(),"Not available",Toast.LENGTH_SHORT).show()
+
                             return@setOnClickListener
+                        }
                         intent = Intent(Intent.ACTION_VIEW)
                         intent.setData(Uri.parse(i.social.website))
                         requireActivity().startActivity(intent)
                     }
                     instagram.setOnClickListener {
-                        if (i.social.instagram.isEmpty())
+                        if (i.social.instagram.isEmpty()){
+                            Toast.makeText(requireActivity(),"Not available",Toast.LENGTH_SHORT).show()
+
                             return@setOnClickListener
+                        }
                         intent = Intent(Intent.ACTION_VIEW)
                         intent.setData(Uri.parse(i.social.instagram))
                         requireActivity().startActivity(intent)
                     }
                     whatsapp.setOnClickListener {
-                        if (i.social.whatsapp.isEmpty())
+                        if (i.social.whatsapp.isEmpty()){
+                            Toast.makeText(requireActivity(),"Not available",Toast.LENGTH_SHORT).show()
+
                             return@setOnClickListener
+                        }
                         intent = Intent(Intent.ACTION_VIEW)
                         intent.setData(Uri.parse(i.social.whatsapp))
                         requireActivity().startActivity(intent)
                     }
                     linkedin.setOnClickListener {
-                        if (i.social.linkedin.isEmpty())
+                        if (i.social.linkedin.isEmpty()){
+                            Toast.makeText(requireActivity(),"Not available",Toast.LENGTH_SHORT).show()
+
                             return@setOnClickListener
+                        }
                         intent = Intent(Intent.ACTION_VIEW)
                         intent.setData(Uri.parse(i.social.linkedin))
                         requireActivity().startActivity(intent)
                     }
                     facebook.setOnClickListener {
-                        if (i.social.facebook.isEmpty())
+                        if (i.social.facebook.isEmpty()){
+                            Toast.makeText(requireActivity(),"Not available",Toast.LENGTH_SHORT).show()
+
                             return@setOnClickListener
+                        }
                         intent = Intent(Intent.ACTION_VIEW)
                         intent.setData(Uri.parse(i.social.facebook))
                         requireActivity().startActivity(intent)

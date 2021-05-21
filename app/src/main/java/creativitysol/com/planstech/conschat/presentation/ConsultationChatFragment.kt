@@ -129,7 +129,7 @@ class ConsultationChatFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as MainActivity).setTitle("الاستشارة")
+        (activity as MainActivity).setTitle("الاستشارات")
     }
 
     fun connectPusher(chanel_id: String?) {

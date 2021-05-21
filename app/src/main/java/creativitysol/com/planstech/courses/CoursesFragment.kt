@@ -101,7 +101,9 @@ class CoursesFragment : Fragment(),
 
     override fun onStart() {
         super.onStart()
-      //  (activity as MainActivity).setTitle("دورات/ورش عمل")
+        (activity as MainActivity).setTitle(getString(R.string.candshops))
+
+        //  (activity as MainActivity).setTitle("دورات/ورش عمل")
     }
 
 }
