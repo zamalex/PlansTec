@@ -1,5 +1,7 @@
 package creativitysol.com.planstech.gladtoserve
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -130,6 +132,18 @@ class GladToServeFragment : Fragment() {
         }
 
 
+        v.phone.setOnClickListener {
+            if (v.phone.text.isNullOrEmpty()){
+
+                    Toast.makeText(requireActivity(),"Not available",Toast.LENGTH_SHORT).show()
+
+                    return@setOnClickListener
+                }
+               var intent = Intent(Intent.ACTION_VIEW)
+                intent.setData(Uri.parse("https://api.whatsapp.com/send?phone="+v.phone.text.toString()))
+                requireActivity().startActivity(intent)
+
+        }
         viewModel.contactData.observe(viewLifecycleOwner, Observer {
           if  (isAdded){
               (activity as MainActivity).showProgress(false)

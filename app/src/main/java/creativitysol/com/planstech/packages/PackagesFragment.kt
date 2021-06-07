@@ -18,6 +18,7 @@ import creativitysol.com.planstech.R
 import creativitysol.com.planstech.articles.ArticlesFragment
 import creativitysol.com.planstech.login.model.LoginModel
 import creativitysol.com.planstech.main.MainActivity
+import creativitysol.com.planstech.myplans.MyPlansFragment
 import creativitysol.com.planstech.packages.model.PlanModel
 import creativitysol.com.planstech.payment.OnlinePaymentFragment
 import creativitysol.com.planstech.payment.PaymentOptionsFragment
@@ -149,7 +150,7 @@ class PackagesFragment : Fragment(), TRVAdapter.radioClick {
                 if (it.success) {
 
                     Toast.makeText(requireActivity()," subscribed", Toast.LENGTH_SHORT).show()
-                    (activity as MainActivity).fragmentStack.pop()
+                    (activity as MainActivity).fragmentStack.replace(MyPlansFragment())
                 }
             }
         })

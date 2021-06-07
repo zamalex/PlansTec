@@ -44,6 +44,11 @@ class ExpansionAdapter(val context: Context,val stages:ArrayList<StagesModel.Dat
             missions_panel.setOnClickListener {
                 //Toast.makeText(context,"mission ${adapterPosition}",Toast.LENGTH_SHORT).show()
 
+                if (stages[adapterPosition].passed_questions==0){
+                    Toast.makeText(context,"لم يتم تأكيد الاجابات",Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+
+                }
                 var b:Bundle = Bundle()
                 b.putString("id",stages[adapterPosition].stageId.toString())
 
@@ -86,6 +91,13 @@ class ExpansionAdapter(val context: Context,val stages:ArrayList<StagesModel.Dat
                 holder.m_status.setImageResource(R.drawable.arr)
             }
 
+
+        }
+        if (single.passed_questions==1){
+            holder.m_status.setImageResource(R.drawable.arr)
+        }else
+        {
+            holder.m_status.setImageResource(R.drawable.lock)
 
         }
 

@@ -36,13 +36,15 @@
 
         <TextView
             android:id="@+id/p_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="4dp"
             android:fontFamily="@font/tajwalbold"
-            android:text="الباقة التشخيصية"
+            android:text=" التشخيصية"
             android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/p_price"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,22 +65,18 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/p_price"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:background="#B7E85A"
+            android:gravity="center_vertical"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="مجانية"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/p_name"
             app:layout_constraintEnd_toStartOf="@+id/radioButton"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/p_name"
-            app:layout_constraintTop_toTopOf="@+id/p_name"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="@+id/p_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

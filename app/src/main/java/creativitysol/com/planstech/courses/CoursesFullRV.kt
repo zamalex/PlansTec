@@ -81,7 +81,7 @@ class CoursesFullRV(val context: Context, val listener: CourseListener) :
         holder.price.text = "${o.price} ريال "
 
         if (o.image != null && !o.image.isEmpty())
-            Picasso.get().load(o.image).fit().centerCrop().into(holder.img)
+            Picasso.get().load(o.image).fit().into(holder.img)
 
 
         if (o.status.equals("available")) {
