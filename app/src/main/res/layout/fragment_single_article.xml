@@ -33,7 +33,6 @@
                 android:id="@+id/a_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/coursess"
                 android:scaleType="centerCrop"
 
                 />
@@ -115,6 +114,8 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:lineSpacingExtra="10dp"
+                    android:autoLink="web"
+                    android:linksClickable="true"
                     android:text="@{model.Data.description}"
                     android:textAlignment="viewStart"
                     android:textColor="@color/black"

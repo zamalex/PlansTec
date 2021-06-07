@@ -43,7 +43,7 @@ class TrainingAdapter(
             .let { trainingDataItem ->
                 holder.itemView.c_title.text = trainingDataItem?.title
                 holder.itemView.c_price.text = "${trainingDataItem?.price} ريال "
-                Picasso.get().load(trainingDataItem?.image).fit().centerCrop()
+                Picasso.get().load(trainingDataItem?.image).fit()
                     .into(holder.itemView.course_img_full)
 
                 if (trainingDataItem?.status.equals("available")) {
